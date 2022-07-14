@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
+// Importing route controllers
+const { createOrUpdateUser } = require("../controllers/auth");
 
-router.get("/create-or-update-user", (req, res) => {
-    res.json({ data: "Hi 👋 from create-or-updata user api" });
-});
+router.get("/create-or-update-user", createOrUpdateUser);
 
 module.exports = router;

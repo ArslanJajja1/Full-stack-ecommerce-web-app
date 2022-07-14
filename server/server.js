@@ -3,9 +3,8 @@ const mongoose = require("mongoose");
 const morgan = require("morgan");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const fs = require("fs");
 require("dotenv").config();
-// Importing Routes
-const authRoutes = require("./routes/auth");
 
 const app = express();
 mongoose
@@ -20,13 +19,10 @@ mongoose
 app.use(morgan("dev"));
 app.use(bodyParser.json({ limit: "2mb" }));
 app.use(cors());
-// Routes Middlewares
-app.use("/api", authRoutes);
-app.get("/api", (req, res) => {
-    res.json({
-        data: "Response from nodejs api",
-    });
-});
+// Route Middlewares
+fs.readdirSync("./routes").map((r) =>
+    app.use("/api", require("./routes/" + r))
+);
 // Port
 const port = process.env.PORT || 8000;
 app.listen(port, () => {
