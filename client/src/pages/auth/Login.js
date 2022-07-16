@@ -17,11 +17,20 @@ const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { user } = useSelector((state) => ({ ...state }));
+    // Role based redirect function
+    const roleBasedRedirect = (res) => {
+        if (res.data.role === "admin") {
+            navigate("/admin/dashboard");
+        } else {
+            navigate("/user/history");
+        }
+    };
     useEffect(() => {
         if (user && user.token) {
             navigate("/");
         }
     }, [user, navigate]);
+    // Google login
     const googleLogin = async () => {
         await signInWithPopup(auth, googleAuthprovider)
             .then(async (result) => {
@@ -40,9 +49,9 @@ const Login = () => {
                                 _id,
                             },
                         });
+                        roleBasedRedirect(res);
                     })
                     .catch((error) => console.log(error));
-                navigate("/");
             })
             .catch((error) => {
                 console.log(error);
@@ -74,9 +83,9 @@ const Login = () => {
                             _id,
                         },
                     });
+                    roleBasedRedirect(res);
                 })
                 .catch((error) => console.log(error));
-            navigate("/");
         } catch (error) {
             console.log(error);
             toast.error(error.message);
