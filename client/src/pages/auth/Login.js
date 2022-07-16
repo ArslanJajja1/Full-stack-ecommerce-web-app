@@ -7,6 +7,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { auth, googleAuthprovider } from "../../firebase";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import { createOrUpdateUser } from "../../functions/auth";
+
 const Login = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -24,13 +27,21 @@ const Login = () => {
             .then(async (result) => {
                 const { user } = result;
                 const idTokenResult = await user.getIdTokenResult();
-                dispatch({
-                    type: "LOGGED_IN_USER",
-                    payload: {
-                        email: user.email,
-                        token: idTokenResult.token,
-                    },
-                });
+                createOrUpdateUser(idTokenResult.token)
+                    .then((res) => {
+                        const { name, email, role, _id } = res.data;
+                        dispatch({
+                            type: "LOGGED_IN_USER",
+                            payload: {
+                                name,
+                                email,
+                                token: idTokenResult.token,
+                                role,
+                                _id,
+                            },
+                        });
+                    })
+                    .catch((error) => console.log(error));
                 navigate("/");
             })
             .catch((error) => {
@@ -50,13 +61,21 @@ const Login = () => {
             console.log(result);
             const { user } = result;
             const idTokenResult = await user.getIdTokenResult();
-            dispatch({
-                type: "LOGGED_IN_USER",
-                payload: {
-                    email: user.email,
-                    token: idTokenResult.token,
-                },
-            });
+            createOrUpdateUser(idTokenResult.token)
+                .then((res) => {
+                    const { name, email, role, _id } = res.data;
+                    dispatch({
+                        type: "LOGGED_IN_USER",
+                        payload: {
+                            name,
+                            email,
+                            token: idTokenResult.token,
+                            role,
+                            _id,
+                        },
+                    });
+                })
+                .catch((error) => console.log(error));
             navigate("/");
         } catch (error) {
             console.log(error);
