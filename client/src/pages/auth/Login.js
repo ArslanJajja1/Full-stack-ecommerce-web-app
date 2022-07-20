@@ -25,11 +25,7 @@ const Login = () => {
             navigate("/user/history");
         }
     };
-    useEffect(() => {
-        if (user && user.token) {
-            navigate("/");
-        }
-    }, [user, navigate]);
+
     // Google login
     const googleLogin = async () => {
         await signInWithPopup(auth, googleAuthprovider)
@@ -92,6 +88,11 @@ const Login = () => {
             setLoading(false);
         }
     };
+    useEffect(() => {
+        if (user && user.token) {
+            navigate("/");
+        }
+    }, [user, navigate]);
     const loginForm = () => (
         <form onSubmit={handleSubmit}>
             <input
