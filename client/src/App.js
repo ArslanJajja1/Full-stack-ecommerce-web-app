@@ -12,7 +12,9 @@ import { useDispatch } from "react-redux";
 import ForgotPassword from "./pages/auth/ForgotPassword";
 import { currentUser } from "./functions/auth";
 import History from "./pages/user/History";
-import UserRoute from "./components/nav/routes/UserRoute";
+import UserRoute from "./components/routes/UserRoute";
+import Password from "./pages/user/Password";
+import Wishlist from "./pages/user/Wishlist";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -36,7 +38,7 @@ const App = () => {
             }
         });
         return () => unsubscribe;
-    }, []);
+    }, [dispatch]);
     return (
         <>
             <Header />
@@ -55,6 +57,22 @@ const App = () => {
                     element={
                         <UserRoute>
                             <History />
+                        </UserRoute>
+                    }
+                />
+                <Route
+                    path="/user/password"
+                    element={
+                        <UserRoute>
+                            <Password />
+                        </UserRoute>
+                    }
+                />
+                <Route
+                    path="/user/wishlist"
+                    element={
+                        <UserRoute>
+                            <Wishlist />
                         </UserRoute>
                     }
                 />
