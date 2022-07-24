@@ -10,12 +10,22 @@ import {
     removeCategory,
 } from "../../../functions/category";
 import CategoryForm from "../../../components/forms/CategoryForm";
+import LocalSearch from "../../../components/forms/LocalSearch";
 
 const CategoryCreate = () => {
     const [name, setName] = useState("");
     const [categories, setCategories] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [keyword, setKeyword] = useState("");
     const { user } = useSelector((state) => ({ ...state }));
+    //Another way to filter categories
+    // const filterCategories = categories.filter((item) => {
+    //     if (keyword === "") {
+    //         return item;
+    //     } else {
+    //         return item.name.toLowerCase().includes(keyword);
+    //     }
+    // });
     useEffect(() => {
         loadCategories();
     }, []);
@@ -57,6 +67,14 @@ const CategoryCreate = () => {
         }
     };
 
+    // One way to filter => const searchedCategories = (keyword) => {
+
+    const searchedCategories = (keyword) => {
+        return (c) => {
+            console.log("c ", c);
+            return c.name.toLowerCase().includes(keyword);
+        };
+    };
     return (
         <div className="container-fluid">
             <div className="row">
@@ -71,28 +89,29 @@ const CategoryCreate = () => {
                         handleSubmit={handleSubmit}
                         loading={loading}
                     />
-
-                    <hr />
-                    {categories.map((category) => (
-                        <div
-                            key={category._id}
-                            className="alert alert-secondary"
-                        >
-                            {category.name}
-                            <span
-                                onClick={(e) => handleRemove(category.slug)}
-                                className="btn btn-sm float-right"
+                    <LocalSearch keyword={keyword} setKeyword={setKeyword} />
+                    {categories
+                        .filter(searchedCategories(keyword))
+                        .map((category) => (
+                            <div
+                                key={category._id}
+                                className="alert alert-secondary"
                             >
-                                <DeleteOutlined className="text-danger" />
-                            </span>
-
-                            <Link to={`/admin/category/${category.slug}`}>
-                                <span className="btn btn-sm float-right">
-                                    <EditOutlined className="text-warning" />
+                                {category.name}
+                                <span
+                                    onClick={(e) => handleRemove(category.slug)}
+                                    className="btn btn-sm float-right"
+                                >
+                                    <DeleteOutlined className="text-danger" />
                                 </span>
-                            </Link>
-                        </div>
-                    ))}
+
+                                <Link to={`/admin/category/${category.slug}`}>
+                                    <span className="btn btn-sm float-right">
+                                        <EditOutlined className="text-warning" />
+                                    </span>
+                                </Link>
+                            </div>
+                        ))}
                 </div>
             </div>
         </div>
