@@ -9,6 +9,7 @@ import {
     getCategories,
     removeCategory,
 } from "../../../functions/category";
+import CategoryForm from "../../../components/forms/CategoryForm";
 
 const CategoryCreate = () => {
     const [name, setName] = useState("");
@@ -55,28 +56,6 @@ const CategoryCreate = () => {
                 });
         }
     };
-    const categoryForm = () => (
-        <>
-            <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="name">Name</label>
-                    <input
-                        type="text"
-                        className="form-control"
-                        id="name"
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        autoFocus
-                        required
-                    />
-                    <br />
-                    <button type="submit" className="btn btn-outline-primary">
-                        {loading ? "Loading..." : "Save"}
-                    </button>
-                </div>
-            </form>
-        </>
-    );
 
     return (
         <div className="container-fluid">
@@ -86,7 +65,13 @@ const CategoryCreate = () => {
                 </div>
                 <div className="col">
                     <h4>Create Category</h4>
-                    {categoryForm()}
+                    <CategoryForm
+                        name={name}
+                        setName={setName}
+                        handleSubmit={handleSubmit}
+                        loading={loading}
+                    />
+
                     <hr />
                     {categories.map((category) => (
                         <div
