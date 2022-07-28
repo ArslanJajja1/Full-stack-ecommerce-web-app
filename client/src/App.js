@@ -19,6 +19,7 @@ import AdminRoute from "./components/routes/AdminRoute";
 import AdminDashboard from "./pages/admin/AdminDashboard";
 import CategoryCreate from "./pages/admin/category/CategoryCreate";
 import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
+import SubCategoryCreate from "./pages/admin/subCategory/SubCategoryCreate";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -101,6 +102,14 @@ const App = () => {
                     element={
                         <AdminRoute>
                             <CategoryUpdate />
+                        </AdminRoute>
+                    }
+                />
+                <Route
+                    path="/admin/subcategory"
+                    element={
+                        <AdminRoute>
+                            <SubCategoryCreate />
                         </AdminRoute>
                     }
                 />
