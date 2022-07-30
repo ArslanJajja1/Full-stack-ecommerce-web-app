@@ -17,7 +17,7 @@ const AdminNav = () => {
                 </li>
                 <li className="nav-item">
                     <Link to="/admin/products" className="nav-link">
-                        Product
+                        Products
                     </Link>
                 </li>
                 <li className="nav-item">
