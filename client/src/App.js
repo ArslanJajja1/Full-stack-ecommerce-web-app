@@ -21,6 +21,7 @@ import CategoryCreate from "./pages/admin/category/CategoryCreate";
 import CategoryUpdate from "./pages/admin/category/CategoryUpdate";
 import SubCategoryCreate from "./pages/admin/subCategory/SubCategoryCreate";
 import SubCategoryUpdate from "./pages/admin/subCategory/SubCategoryUpdate";
+import ProductCreate from "./pages/admin/product/ProductCreate";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -119,6 +120,14 @@ const App = () => {
                     element={
                         <AdminRoute>
                             <SubCategoryUpdate />
+                        </AdminRoute>
+                    }
+                />
+                <Route
+                    path="/admin/product"
+                    element={
+                        <AdminRoute>
+                            <ProductCreate />
                         </AdminRoute>
                     }
                 />
