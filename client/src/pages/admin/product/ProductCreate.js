@@ -46,12 +46,12 @@ const ProductCreate = () => {
             .then((res) => {
                 console.log("Product res...", res);
                 setLoading(false);
+                window.location.reload();
                 toast.success(`Product created successfully`);
             })
             .catch((error) => {
                 console.log(error);
-                if (error.response.status === 400)
-                    toast.error(error.response.data);
+                toast.error(error.response.data.error);
                 setLoading(false);
             });
     };
@@ -66,7 +66,6 @@ const ProductCreate = () => {
                 </div>
                 <div className="col-md-10">
                     <h4>Product Create</h4>
-                    {JSON.stringify(values)}
                     <hr />
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
