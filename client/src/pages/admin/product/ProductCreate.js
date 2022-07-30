@@ -21,6 +21,8 @@ const initialState = {
     brand: "",
 };
 const ProductCreate = () => {
+    const { user } = useSelector((state) => ({ ...state }));
+    const [loading, setLoading] = useState(false);
     const [values, setValues] = useState(initialState);
     const {
         title,
@@ -39,8 +41,23 @@ const ProductCreate = () => {
     } = values;
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
+        createProduct(values, user.token)
+            .then((res) => {
+                console.log("Product res...", res);
+                setLoading(false);
+                toast.success(`Product created successfully`);
+            })
+            .catch((error) => {
+                console.log(error);
+                if (error.response.status === 400)
+                    toast.error(error.response.data);
+                setLoading(false);
+            });
     };
-    const handleChange = (e) => {};
+    const handleChange = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value });
+    };
     return (
         <div className="container-fluid">
             <div className="row">
@@ -49,6 +66,7 @@ const ProductCreate = () => {
                 </div>
                 <div className="col-md-10">
                     <h4>Product Create</h4>
+                    {JSON.stringify(values)}
                     <hr />
                     <form onSubmit={handleSubmit}>
                         <div className="form-group">
@@ -139,7 +157,9 @@ const ProductCreate = () => {
                                 ))}
                             </select>
                         </div>
-                        <button className="btn btn-outline-info">Save</button>
+                        <button className="btn btn-outline-info">
+                            {loading ? "Loading..." : "Save"}
+                        </button>
                     </form>
                 </div>
             </div>
