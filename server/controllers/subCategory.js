@@ -1,9 +1,9 @@
-const subCategory = require("../models/subCategory");
+const SubCategory = require("../models/SubCategory");
 const slugify = require("slugify");
 exports.create = async (req, res) => {
     try {
         const { name, parent } = req.body;
-        const sub = await new subCategory({
+        const sub = await new SubCategory({
             name,
             parent,
             slug: slugify(name),
@@ -15,17 +15,17 @@ exports.create = async (req, res) => {
     }
 };
 exports.list = async (req, res) => {
-    const subs = await subCategory.find({}).sort({ createdAt: -1 }).exec();
+    const subs = await SubCategory.find({}).sort({ createdAt: -1 }).exec();
     res.json(subs);
 };
 exports.read = async (req, res) => {
-    const sub = await subCategory.findOne({ slug: req.params.slug }).exec();
+    const sub = await SubCategory.findOne({ slug: req.params.slug }).exec();
     res.json(sub);
 };
 exports.update = async (req, res) => {
     const { name, parent } = req.body;
     try {
-        const updatedSub = await subCategory.findOneAndUpdate(
+        const updatedSub = await SubCategory.findOneAndUpdate(
             { slug: req.params.slug },
             { name, parent, slug: slugify(name) },
             { new: true }
@@ -37,7 +37,7 @@ exports.update = async (req, res) => {
 };
 exports.remove = async (req, res) => {
     try {
-        const deleted = await subCategory.findOneAndDelete({
+        const deleted = await SubCategory.findOneAndDelete({
             slug: req.params.slug,
         });
         res.json({ deleted, message: "Sub-Category deleted" });
