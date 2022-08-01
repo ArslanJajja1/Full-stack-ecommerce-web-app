@@ -4,7 +4,8 @@ import AdminNav from "../../../components/nav/AdminNav";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import { createProduct } from "../../../functions/product";
-
+import ProductCreateForm from "../../../components/forms/ProductCreateForm";
+import { getCategories, getCategorySubs } from "../../../functions/category";
 const initialState = {
     title: "",
     description: "",
@@ -24,21 +25,15 @@ const ProductCreate = () => {
     const { user } = useSelector((state) => ({ ...state }));
     const [loading, setLoading] = useState(false);
     const [values, setValues] = useState(initialState);
-    const {
-        title,
-        description,
-        price,
-        categories,
-        category,
-        subs,
-        shipping,
-        quantity,
-        images,
-        colors,
-        brands,
-        color,
-        brand,
-    } = values;
+    const [subOptions, setSubOptions] = useState([]);
+    const loadCategories = () => {
+        getCategories().then((c) =>
+            setValues({ ...values, categories: c.data })
+        );
+    };
+    useEffect(() => {
+        loadCategories();
+    }, []);
     const handleSubmit = (e) => {
         e.preventDefault();
         setLoading(true);
@@ -58,6 +53,17 @@ const ProductCreate = () => {
     const handleChange = (e) => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
+    const handleCategoryChange = (e) => {
+        e.preventDefault();
+        console.log("Category clicked ... ", e.target.value);
+        setValues({ ...values, cateory: e.target.value });
+        getCategorySubs(e.target.value)
+            .then((res) => {
+                setSubOptions(res.data);
+                console.log("getCategorySubs response...", res);
+            })
+            .catch((error) => console.log(error));
+    };
     return (
         <div className="container-fluid">
             <div className="row">
@@ -67,99 +73,13 @@ const ProductCreate = () => {
                 <div className="col-md-10">
                     <h4>Product Create</h4>
                     <hr />
-                    <form onSubmit={handleSubmit}>
-                        <div className="form-group">
-                            <label htmlFor="title">Title</label>
-                            <input
-                                type="text"
-                                name="title"
-                                id="title"
-                                className="form-control"
-                                value={title}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="description">Description</label>
-                            <input
-                                type="text"
-                                name="description"
-                                id="description"
-                                className="form-control"
-                                value={description}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="price">Price</label>
-                            <input
-                                type="number"
-                                name="price"
-                                id="price"
-                                className="form-control"
-                                value={price}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="shipping">Shipping</label>
-                            <select
-                                name="shipping"
-                                id="shipping"
-                                className="form-control"
-                                onChange={handleChange}
-                            >
-                                <option value="No">No</option>
-                                <option value="Yes">Yes</option>
-                            </select>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="quantity">Quantity</label>
-                            <input
-                                type="number"
-                                name="quantity"
-                                id="quantity"
-                                className="form-control"
-                                value={quantity}
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="color">Color</label>
-                            <select
-                                name="color"
-                                id="color"
-                                className="form-control"
-                                onChange={handleChange}
-                            >
-                                <option>Please Select</option>
-                                {colors.map((c) => (
-                                    <option key={c} value={c}>
-                                        {c}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="brand">Brand</label>
-                            <select
-                                name="brand"
-                                id="brand"
-                                className="form-control"
-                                onChange={handleChange}
-                            >
-                                <option>Please Select</option>
-                                {brands.map((b) => (
-                                    <option key={b} value={b}>
-                                        {b}
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
-                        <button className="btn btn-outline-info">
-                            {loading ? "Loading..." : "Save"}
-                        </button>
-                    </form>
+                    <ProductCreateForm
+                        handleSubmit={handleSubmit}
+                        handleChange={handleChange}
+                        values={values}
+                        loading={loading}
+                        handleCategoryChange={handleCategoryChange}
+                    />
                 </div>
             </div>
         </div>
