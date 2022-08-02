@@ -26,6 +26,7 @@ const ProductCreate = () => {
     const [loading, setLoading] = useState(false);
     const [values, setValues] = useState(initialState);
     const [subOptions, setSubOptions] = useState([]);
+    const [showSub, setShowSub] = useState(false);
     const loadCategories = () => {
         getCategories().then((c) =>
             setValues({ ...values, categories: c.data })
@@ -56,13 +57,14 @@ const ProductCreate = () => {
     const handleCategoryChange = (e) => {
         e.preventDefault();
         console.log("Category clicked ... ", e.target.value);
-        setValues({ ...values, cateory: e.target.value });
+        setValues({ ...values, subs: [], category: e.target.value });
         getCategorySubs(e.target.value)
             .then((res) => {
                 setSubOptions(res.data);
                 console.log("getCategorySubs response...", res);
             })
             .catch((error) => console.log(error));
+        setShowSub(true);
     };
     return (
         <div className="container-fluid">
@@ -79,6 +81,9 @@ const ProductCreate = () => {
                         values={values}
                         loading={loading}
                         handleCategoryChange={handleCategoryChange}
+                        subOptions={subOptions}
+                        showSub={showSub}
+                        setValues={setValues}
                     />
                 </div>
             </div>
