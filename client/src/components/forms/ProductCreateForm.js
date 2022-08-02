@@ -28,7 +28,6 @@ const ProductCreateForm = ({
     } = values;
     return (
         <form onSubmit={handleSubmit}>
-            {subOptions.length}
             <div className="form-group">
                 <label htmlFor="title">Title</label>
                 <input
