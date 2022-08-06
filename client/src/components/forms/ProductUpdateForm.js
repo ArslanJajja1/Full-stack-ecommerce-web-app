@@ -9,6 +9,8 @@ const ProductUpdateForm = ({
     handleCategoryChange,
     categories,
     subOptions,
+    arrayOfSubs,
+    setArrayOfSubs,
 }) => {
     const {
         title,
@@ -136,27 +138,26 @@ const ProductUpdateForm = ({
                         ))}
                 </select>
             </div>
-            {/* 
-                <div>
-                    <label htmlFor="subs">Sub Category</label>
-                    <Select
-                        mode="multiple"
-                        style={{ width: "100%" }}
-                        placeholder="Please select"
-                        value={subs}
-                        onChange={(value) =>
-                            setValues({ ...values, subs: value })
-                        }
-                    >
-                        {subOptions.length &&
-                            subOptions.map((s) => (
-                                <Option key={s._id} value={s._id}>
-                                    {s.name}
-                                </Option>
-                            ))}
-                    </Select>
-                </div>
-             */}
+
+            <div>
+                <label htmlFor="subs">Sub Category</label>
+                <Select
+                    mode="multiple"
+                    style={{ width: "100%" }}
+                    placeholder="Please select"
+                    // value={subs}
+                    value={arrayOfSubs}
+                    onChange={(value) => setArrayOfSubs(value)}
+                >
+                    {subOptions.length &&
+                        subOptions.map((s) => (
+                            <Option key={s._id} value={s._id}>
+                                {s.name}
+                            </Option>
+                        ))}
+                </Select>
+            </div>
+
             <br />
             <button className="btn btn-outline-info">
                 {/* {loading ? "Loading..." : "Save"} */}Save

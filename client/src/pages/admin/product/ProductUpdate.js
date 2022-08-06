@@ -29,6 +29,7 @@ const ProductUpdate = (props) => {
     const [values, setValues] = useState(initialState);
     const [subOptions, setSubOptions] = useState([]);
     const [categories, setCategories] = useState([]);
+    const [arrayOfSubs, setArrayOfSubs] = useState([]);
     const param = useParams();
     useEffect(() => {
         loadProduct();
@@ -37,7 +38,18 @@ const ProductUpdate = (props) => {
     const loadProduct = () => {
         getProduct(param.slug)
             .then((p) => {
+                // load single product
                 setValues({ ...values, ...p.data });
+                // load single product category subs
+                getCategorySubs(p.data.category._id).then((res) => {
+                    setSubOptions(res.data); // show default subs of product
+                });
+                // prepare array of sub ids to show as default sub values
+                let arr = [];
+                p.data.subs.map((s) => {
+                    arr.push(s._id);
+                });
+                setArrayOfSubs((prev) => arr); // required for the ant design select to work
             })
             .catch((err) => {
                 console.log(err);
@@ -76,6 +88,8 @@ const ProductUpdate = (props) => {
                         handleCategoryChange={handleCategoryChange}
                         categories={categories}
                         subOptions={subOptions}
+                        arrayOfSubs={arrayOfSubs}
+                        setArrayOfSubs={setArrayOfSubs}
                     />
                 </div>
             </div>
