@@ -7,6 +7,7 @@ import { getProduct } from "../../../functions/product";
 import { getCategories, getCategorySubs } from "../../../functions/category";
 import FileUpload from "../../../components/forms/FileUpload";
 import { LoadingOutlined } from "@ant-design/icons";
+import ProductUpdateForm from "../../../components/forms/ProductUpdateForm";
 
 const initialState = {
     title: "",
@@ -30,7 +31,7 @@ const ProductUpdate = (props) => {
     const param = useParams();
     useEffect(() => {
         loadProduct();
-    });
+    }, []);
     const loadProduct = () => {
         getProduct(param.slug)
             .then((p) => {
@@ -40,6 +41,8 @@ const ProductUpdate = (props) => {
                 console.log(err);
             });
     };
+    const handleSubmit = (e) => {};
+    const handleChange = (e) => {};
     return (
         <div className="container-fluid">
             <div className="row">
@@ -49,7 +52,12 @@ const ProductUpdate = (props) => {
                 <div className="col-md-10">
                     <h4>Product Update</h4>
                     <hr />
-                    {JSON.stringify(values)}
+                    <ProductUpdateForm
+                        handleSubmit={handleSubmit}
+                        handleChange={handleChange}
+                        values={values}
+                        setValues={setValues}
+                    />
                 </div>
             </div>
         </div>
