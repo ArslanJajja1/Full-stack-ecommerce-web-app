@@ -6,12 +6,14 @@ const ProductUpdateForm = ({
     handleSubmit,
     values,
     setValues,
+    handleCategoryChange,
+    categories,
+    subOptions,
 }) => {
     const {
         title,
         description,
         price,
-        categories,
         category,
         subs,
         shipping,
@@ -63,6 +65,7 @@ const ProductUpdateForm = ({
                     name="shipping"
                     id="shipping"
                     className="form-control"
+                    value={shipping}
                     onChange={handleChange}
                 >
                     <option value="No">No</option>
@@ -114,7 +117,7 @@ const ProductUpdateForm = ({
                     ))}
                 </select>
             </div>
-            {/* <div className="form-group">
+            <div className="form-group">
                 <label htmlFor="category">Category</label>
                 <select
                     name="category"
@@ -122,7 +125,9 @@ const ProductUpdateForm = ({
                     className="form-control"
                     onChange={handleCategoryChange}
                 >
-                    <option>Please select</option>
+                    <option>
+                        {category ? category.name : "Please Select"}
+                    </option>
                     {categories.length > 0 &&
                         categories.map((c) => (
                             <option key={c._id} value={c._id}>
@@ -131,7 +136,7 @@ const ProductUpdateForm = ({
                         ))}
                 </select>
             </div>
-            {showSub && (
+            {/* 
                 <div>
                     <label htmlFor="subs">Sub Category</label>
                     <Select
@@ -151,7 +156,7 @@ const ProductUpdateForm = ({
                             ))}
                     </Select>
                 </div>
-            )} */}
+             */}
             <br />
             <button className="btn btn-outline-info">
                 {/* {loading ? "Loading..." : "Save"} */}Save
