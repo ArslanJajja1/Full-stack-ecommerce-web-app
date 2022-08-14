@@ -48,3 +48,21 @@ exports.read = async (req, res) => {
         .populate("subs");
     res.json(product);
 };
+exports.update = async (req, res) => {
+    try {
+        if (req.body.title) {
+            req.body.slug = slugify(req.body.title);
+        }
+        const updated = await Product.findOneAndUpdate(
+            { slug: req.params.slug },
+            req.body,
+            {
+                new: true,
+            }
+        );
+        res.json(updated);
+    } catch (error) {
+        console.log("Product update error", error);
+        return res.status(400).send("Product update failed");
+    }
+};
