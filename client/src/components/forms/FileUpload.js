@@ -106,7 +106,7 @@ const FileUpload = ({ values, setValues, setImageLoading }) => {
                     ))}
             </div>
             <div className="row">
-                <label className="btn btn-primary">
+                <label className="btn btn-primary btn-raised">
                     Choose file
                     <input
                         type="file"

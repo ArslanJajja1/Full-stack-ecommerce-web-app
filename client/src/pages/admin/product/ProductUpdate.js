@@ -27,9 +27,11 @@ const initialState = {
 const ProductUpdate = (props) => {
     const { user } = useSelector((state) => ({ ...state }));
     const [values, setValues] = useState(initialState);
+    const [imageLoading, setImageLoading] = useState(false);
     const [subOptions, setSubOptions] = useState([]);
     const [categories, setCategories] = useState([]);
     const [arrayOfSubs, setArrayOfSubs] = useState([]);
+    const [selectedCategory, setSelectedCategory] = useState("");
     const param = useParams();
     useEffect(() => {
         loadProduct();
@@ -61,15 +63,22 @@ const ProductUpdate = (props) => {
     const handleCategoryChange = (e) => {
         e.preventDefault();
         console.log("Category clicked ... ", e.target.value);
-        setValues({ ...values, subs: [], category: e.target.value });
+        setValues({ ...values, subs: [] });
+        setSelectedCategory(e.target.value);
         getCategorySubs(e.target.value)
             .then((res) => {
                 setSubOptions(res.data);
                 console.log("getCategorySubs response...", res);
             })
             .catch((error) => console.log(error));
+        if (values.category._id === e.target.value) {
+            loadProduct();
+        }
+        setArrayOfSubs([]);
     };
-    const handleSubmit = (e) => {};
+    const handleSubmit = (e) => {
+        e.preventDefault();
+    };
     const handleChange = (e) => {};
     return (
         <div className="container-fluid">
@@ -78,8 +87,19 @@ const ProductUpdate = (props) => {
                     <AdminNav />
                 </div>
                 <div className="col-md-10">
-                    <h4>Product Update</h4>
+                    {imageLoading ? (
+                        <LoadingOutlined className="text-danger h1" />
+                    ) : (
+                        <h4>Product Update</h4>
+                    )}
                     <hr />
+                    <div className="p-3">
+                        <FileUpload
+                            values={values}
+                            setValues={setValues}
+                            setImageLoading={setImageLoading}
+                        />
+                    </div>
                     <ProductUpdateForm
                         handleSubmit={handleSubmit}
                         handleChange={handleChange}
@@ -90,6 +110,7 @@ const ProductUpdate = (props) => {
                         subOptions={subOptions}
                         arrayOfSubs={arrayOfSubs}
                         setArrayOfSubs={setArrayOfSubs}
+                        selectedCategory={selectedCategory}
                     />
                 </div>
             </div>
