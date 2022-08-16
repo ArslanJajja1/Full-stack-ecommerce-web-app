@@ -12,6 +12,7 @@ const ProductUpdateForm = ({
     arrayOfSubs,
     setArrayOfSubs,
     selectedCategory,
+    loading,
 }) => {
     const {
         title,
@@ -159,7 +160,7 @@ const ProductUpdateForm = ({
 
             <br />
             <button className="btn btn-outline-info">
-                {/* {loading ? "Loading..." : "Save"} */}Save
+                {loading ? "Loading..." : "Save"}
             </button>
         </form>
     );

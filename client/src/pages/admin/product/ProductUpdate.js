@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import AdminNav from "../../../components/nav/AdminNav";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
-import { getProduct } from "../../../functions/product";
+import { getProduct, updateProduct } from "../../../functions/product";
 import { getCategories, getCategorySubs } from "../../../functions/category";
 import FileUpload from "../../../components/forms/FileUpload";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -28,10 +28,12 @@ const ProductUpdate = (props) => {
     const { user } = useSelector((state) => ({ ...state }));
     const [values, setValues] = useState(initialState);
     const [imageLoading, setImageLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [subOptions, setSubOptions] = useState([]);
     const [categories, setCategories] = useState([]);
     const [arrayOfSubs, setArrayOfSubs] = useState([]);
     const [selectedCategory, setSelectedCategory] = useState("");
+    const navigate = useNavigate();
     const param = useParams();
     useEffect(() => {
         loadProduct();
@@ -78,8 +80,25 @@ const ProductUpdate = (props) => {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
+        setLoading(true);
+        values.subs = arrayOfSubs;
+        values.category = selectedCategory ? selectedCategory : values.category;
+        updateProduct(param.slug, values, user.token)
+            .then((res) => {
+                setLoading(false);
+                console.log("res...", res);
+                toast.success(`${res.data.title} updated sucessfully`);
+                navigate("/admin/products");
+            })
+            .catch((error) => {
+                console.log("Error msg ", error);
+                toast.error(error.response.data.error);
+                setLoading(false);
+            });
     };
-    const handleChange = (e) => {};
+    const handleChange = (e) => {
+        setValues({ ...values, [e.target.name]: e.target.value });
+    };
     return (
         <div className="container-fluid">
             <div className="row">
@@ -111,6 +130,7 @@ const ProductUpdate = (props) => {
                         arrayOfSubs={arrayOfSubs}
                         setArrayOfSubs={setArrayOfSubs}
                         selectedCategory={selectedCategory}
+                        loading={loading}
                     />
                 </div>
             </div>
