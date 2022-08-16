@@ -81,3 +81,7 @@ exports.list = async (req, res) => {
         console.log(error);
     }
 };
+exports.productsCount = async (req, res) => {
+    let total = await Product.find({}).estimatedDocumentCount();
+    res.json(total);
+};
