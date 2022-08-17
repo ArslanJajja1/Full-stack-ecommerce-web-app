@@ -24,6 +24,7 @@ import SubCategoryUpdate from "./pages/admin/subCategory/SubCategoryUpdate";
 import ProductCreate from "./pages/admin/product/ProductCreate";
 import AllProducts from "./pages/admin/product/AllProducts";
 import ProductUpdate from "./pages/admin/product/ProductUpdate";
+import Product from "./pages/Product";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -149,6 +150,7 @@ const App = () => {
                         </AdminRoute>
                     }
                 />
+                <Route path="/product/:slug" element={<Product />} />
             </Routes>
         </>
     );
