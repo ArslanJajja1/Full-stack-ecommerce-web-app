@@ -9,6 +9,7 @@ const ProductCard = ({ product }) => {
     const { images, title, description, slug } = product;
     return (
         <Card
+            style={{ minHeight: 300 }}
             cover={
                 <img
                     src={images && images.length ? images[0].url : laptop}
@@ -30,8 +31,8 @@ const ProductCard = ({ product }) => {
             <Meta
                 title={title}
                 description={
-                    description.length > 70
-                        ? `${description.substring(0, 70)}...`
+                    description.length > 40
+                        ? `${description.substring(0, 40)}...`
                         : description
                 }
             />
