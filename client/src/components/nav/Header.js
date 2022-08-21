@@ -9,7 +9,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
 import { useDispatch, useSelector } from "react-redux";
-
+import Search from "../forms/Search";
 const { SubMenu, Item } = Menu;
 
 const Header = () => {
@@ -41,7 +41,7 @@ const Header = () => {
                     <Item
                         key="register"
                         icon={<UserAddOutlined />}
-                        style={{ marginLeft: "auto" }}
+                        // style={{ marginLeft: "auto" }}
                     >
                         <Link to="/register">Register</Link>
                     </Item>
@@ -58,7 +58,7 @@ const Header = () => {
                         icon={<SettingOutlined />}
                         title={user.email && user.email.split("@")[0]}
                         key={"#" + subMenuKey++}
-                        style={{ marginLeft: "auto" }}
+                        // style={{ marginLeft: "auto" }}
                     >
                         {user && user.role === "subscriber" && (
                             <Link to="/user/history">
@@ -76,6 +76,9 @@ const Header = () => {
                     </SubMenu>
                 </>
             )}
+            <span className=" p-1" style={{ marginLeft: "auto" }}>
+                <Search />
+            </span>
         </Menu>
     );
 };
