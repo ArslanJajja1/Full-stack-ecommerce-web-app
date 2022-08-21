@@ -5,6 +5,8 @@ import {
     SettingOutlined,
     UserOutlined,
     UserAddOutlined,
+    ShopOutlined,
+    ShoppingOutlined,
 } from "@ant-design/icons";
 import { Link, useNavigate } from "react-router-dom";
 import { auth } from "../../firebase";
@@ -35,7 +37,12 @@ const Header = () => {
             <Item key="home" icon={<AppstoreOutlined />}>
                 <Link to="/">Home</Link>
             </Item>
-
+            <Item key="shop" icon={<ShoppingOutlined />}>
+                <Link to="/shop">Shop</Link>
+            </Item>
+            <Item className=" p-1" style={{ marginLeft: "auto" }}>
+                <Search />
+            </Item>
             {!user && (
                 <>
                     <Item
@@ -55,6 +62,7 @@ const Header = () => {
             {user && (
                 <>
                     <SubMenu
+                        className="float-end"
                         icon={<SettingOutlined />}
                         title={user.email && user.email.split("@")[0]}
                         key={"#" + subMenuKey++}
@@ -76,9 +84,6 @@ const Header = () => {
                     </SubMenu>
                 </>
             )}
-            <span className=" p-1" style={{ marginLeft: "auto" }}>
-                <Search />
-            </span>
         </Menu>
     );
 };
