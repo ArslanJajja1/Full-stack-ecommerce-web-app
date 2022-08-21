@@ -26,6 +26,7 @@ import AllProducts from "./pages/admin/product/AllProducts";
 import ProductUpdate from "./pages/admin/product/ProductUpdate";
 import Product from "./pages/Product";
 import CategoryHome from "./pages/category/CategoryHome";
+import SubHome from "./pages/sub/SubHome";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -153,6 +154,7 @@ const App = () => {
                 />
                 <Route path="/product/:slug" element={<Product />} />
                 <Route path="/category/:slug" element={<CategoryHome />} />
+                <Route path="/subs/:slug" element={<SubHome />} />
             </Routes>
         </>
     );
