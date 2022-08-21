@@ -25,6 +25,7 @@ import ProductCreate from "./pages/admin/product/ProductCreate";
 import AllProducts from "./pages/admin/product/AllProducts";
 import ProductUpdate from "./pages/admin/product/ProductUpdate";
 import Product from "./pages/Product";
+import CategoryHome from "./pages/category/CategoryHome";
 
 const App = () => {
     const dispatch = useDispatch();
@@ -151,6 +152,7 @@ const App = () => {
                     }
                 />
                 <Route path="/product/:slug" element={<Product />} />
+                <Route path="/category/:slug" element={<CategoryHome />} />
             </Routes>
         </>
     );
