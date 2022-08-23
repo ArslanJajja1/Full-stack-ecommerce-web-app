@@ -1,12 +1,17 @@
 import React, { useState, useEffect } from "react";
-import { getProductsByCount } from "../functions/product";
+import {
+    getProductsByCount,
+    fetchProductsByFilter,
+} from "../functions/product";
 import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "../components/cards/ProductCard";
 
 const Shop = () => {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false);
-
+    const { search } = useSelector((state) => ({ ...state }));
+    const { text } = search;
+    //1. Load products by default on page load;
     const loadAllProducts = () => {
         setLoading(true);
         getProductsByCount(12).then((res) => {
@@ -17,6 +22,19 @@ const Shop = () => {
     useEffect(() => {
         loadAllProducts();
     }, []);
+    //2. Load product on search input change
+    const fetchProducts = (arg) => {
+        fetchProductsByFilter(arg).then((res) => {
+            setProducts(res.data);
+        });
+    };
+    useEffect(() => {
+        const delayed = setTimeout(() => {
+            fetchProducts({ query: text });
+        }, 300);
+        return clearTimeout(delayed);
+    }, [text]);
+
     return (
         <div className="container-fluid">
             <div className="row">
