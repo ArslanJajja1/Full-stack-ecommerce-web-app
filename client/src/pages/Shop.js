@@ -3,10 +3,11 @@ import {
     getProductsByCount,
     fetchProductsByFilter,
 } from "../functions/product";
+import { getCategories } from "../functions/category";
 import { useSelector, useDispatch } from "react-redux";
 import ProductCard from "../components/cards/ProductCard";
-import { Menu, Slider } from "antd";
-import { DollarOutlined } from "@ant-design/icons";
+import { Menu, Slider, Checkbox } from "antd";
+import { DollarOutlined, DownSquareOutlined } from "@ant-design/icons";
 const { SubMenu, ItemGroup } = Menu;
 
 const Shop = () => {
@@ -14,9 +15,17 @@ const Shop = () => {
     const [loading, setLoading] = useState(false);
     const [price, setPrice] = useState([0, 0]);
     const [ok, setOk] = useState(false);
+    const [categories, setCategories] = useState([]);
+    const [categoryIds, setCategoryIds] = useState([]);
     const { search } = useSelector((state) => ({ ...state }));
     const dispatch = useDispatch();
     const { text } = search;
+    const fetchProducts = (arg) => {
+        fetchProductsByFilter(arg).then((res) => {
+            setProducts(res.data);
+        });
+    };
+
     //1. Load products by default on page load;
     const loadAllProducts = () => {
         setLoading(true);
@@ -27,24 +36,21 @@ const Shop = () => {
     };
     useEffect(() => {
         loadAllProducts();
+        getCategories().then((res) => setCategories(res.data));
     }, []);
     //2. Load product on search input change
-    const fetchProducts = (arg) => {
-        fetchProductsByFilter(arg).then((res) => {
-            setProducts(res.data);
-        });
-    };
     useEffect(() => {
         const delayed = setTimeout(() => {
             fetchProducts({ query: text });
         }, 300);
-        return clearTimeout(delayed);
+        return () => clearTimeout(delayed);
     }, [text]);
     //3. Load products based on price range
     useEffect(() => {
         fetchProducts({ price });
     }, [ok]);
     const handleSlider = (value) => {
+        setCategoryIds([]);
         dispatch({
             type: "SEARCH_QUERY",
             payload: { text: "" },
@@ -54,6 +60,41 @@ const Shop = () => {
             setOk(!ok);
         }, 300);
     };
+    //4. Load products based on categories
+    //show categories in a list of checkbox
+    const showCategories = () =>
+        categories.map((c) => (
+            <div key={c._id}>
+                <Checkbox
+                    onChange={handleCheck}
+                    className="pb-2 pl-4 pr-4"
+                    value={c._id}
+                    name="category"
+                    checked={categoryIds.includes(c._id)}
+                >
+                    {c.name}
+                </Checkbox>
+                <br />
+            </div>
+        ));
+    // handleCheck for categories
+    const handleCheck = (e) => {
+        dispatch({
+            type: "SEARCH_QUERY",
+            payload: { text: "" },
+        });
+        setPrice([0, 0]);
+        let inTheState = [...categoryIds];
+        let justChecked = e.target.value;
+        let foundInTheState = inTheState.indexOf(justChecked);
+        if (foundInTheState === -1) {
+            inTheState.push(justChecked);
+        } else {
+            inTheState.splice(foundInTheState, 1);
+        }
+        setCategoryIds(inTheState);
+        fetchProducts({ category: inTheState });
+    };
     return (
         <div className="container-fluid">
             <div className="row">
@@ -61,6 +102,7 @@ const Shop = () => {
                     <h4>Search/Filter</h4>
                     <hr />
                     <Menu mode="inline" defaultOpenKeys={["1", "2"]}>
+                        {/* //Price submenu */}
                         <SubMenu
                             key="1"
                             title={
@@ -78,6 +120,19 @@ const Shop = () => {
                                     onChange={handleSlider}
                                     max="3000"
                                 />
+                            </div>
+                        </SubMenu>
+                        {/* // categories submenu */}
+                        <SubMenu
+                            key="2"
+                            title={
+                                <span className="h6">
+                                    <DownSquareOutlined /> Categories
+                                </span>
+                            }
+                        >
+                            <div style={{ marginTop: "-10px" }}>
+                                {showCategories()}
                             </div>
                         </SubMenu>
                     </Menu>
