@@ -40,9 +40,9 @@ const Header = () => {
             <Item key="shop" icon={<ShoppingOutlined />}>
                 <Link to="/shop">Shop</Link>
             </Item>
-            <Item className=" p-1" style={{ marginLeft: "auto" }}>
+            <span className=" p-1" style={{ marginLeft: "auto" }}>
                 <Search />
-            </Item>
+            </span>
             {!user && (
                 <>
                     <Item
