@@ -13,6 +13,7 @@ import {
     StarOutlined,
 } from "@ant-design/icons";
 import Star from "../components/forms/Star";
+import { getSubCategories } from "../functions/subCategory";
 
 const { SubMenu, ItemGroup } = Menu;
 
@@ -24,6 +25,8 @@ const Shop = () => {
     const [categories, setCategories] = useState([]);
     const [categoryIds, setCategoryIds] = useState([]);
     const [star, setStar] = useState("");
+    const [subs, setSubs] = useState([]);
+    const [sub, setSub] = useState("");
     const { search } = useSelector((state) => ({ ...state }));
     const dispatch = useDispatch();
     const { text } = search;
@@ -44,6 +47,7 @@ const Shop = () => {
     useEffect(() => {
         loadAllProducts();
         getCategories().then((res) => setCategories(res.data));
+        getSubCategories().then((res) => setSubs(res.data));
     }, []);
     //2. Load product on search input change
     useEffect(() => {
@@ -64,6 +68,7 @@ const Shop = () => {
         });
         setPrice(value);
         setStar("");
+        setSub("");
         setTimeout(() => {
             setOk(!ok);
         }, 300);
@@ -93,6 +98,8 @@ const Shop = () => {
         });
         setPrice([0, 0]);
         setStar("");
+        setSub("");
+
         let inTheState = [...categoryIds];
         let justChecked = e.target.value;
         let foundInTheState = inTheState.indexOf(justChecked);
@@ -113,6 +120,7 @@ const Shop = () => {
         setPrice([0, 0]);
         setCategoryIds([]);
         setStar(num);
+        setSub("");
         fetchProducts({ stars: num });
     };
     const showStars = () => (
@@ -124,13 +132,36 @@ const Shop = () => {
             <Star starClick={handleStarClick} numberOfStars={5} />
         </div>
     );
+    // 6. show products by sub categories
+    const showSubs = () =>
+        subs.map((s) => (
+            <div
+                key={s._id}
+                onClick={() => handleSub(s)}
+                className="p-1 m-1 badge badge-secondary"
+                style={{ cursor: "pointer" }}
+            >
+                {s.name}
+            </div>
+        ));
+    const handleSub = (sub) => {
+        setSub(sub);
+        dispatch({
+            type: "SEARCH_QUERY",
+            payload: { text: "" },
+        });
+        setPrice([0, 0]);
+        setCategoryIds([]);
+        setStar("");
+        fetchProducts({ sub });
+    };
     return (
         <div className="container-fluid">
             <div className="row">
                 <div className="col-md-3 pt-2">
                     <h4>Search/Filter</h4>
                     <hr />
-                    <Menu mode="inline" defaultOpenKeys={["1", "2", "3"]}>
+                    <Menu mode="inline" defaultOpenKeys={["1", "2", "3", "4"]}>
                         {/* //Price submenu */}
                         <SubMenu
                             key="1"
@@ -172,6 +203,17 @@ const Shop = () => {
                             }
                         >
                             <div>{showStars()}</div>
+                        </SubMenu>
+                        {/* // sub categories submenu */}
+                        <SubMenu
+                            key="4"
+                            title={
+                                <span className="h6">
+                                    <DownSquareOutlined /> Sub Categories
+                                </span>
+                            }
+                        >
+                            <div className="pl-4 pr-4">{showSubs()}</div>
                         </SubMenu>
                     </Menu>
                 </div>
