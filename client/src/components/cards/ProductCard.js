@@ -10,6 +10,7 @@ const { Meta } = Card;
 const ProductCard = ({ product }) => {
     const { images, title, description, slug, price } = product;
     const handleAddToCart = () => {
+        console.log("clicked");
         let cart = [];
         if (typeof window !== "undefined") {
             if (localStorage.getItem("cart")) {
@@ -19,7 +20,7 @@ const ProductCard = ({ product }) => {
                 ...product,
                 count: 1,
             });
-            let unique = _.uniqueWith(cart, _.isEqual);
+            let unique = _.uniqWith(cart, _.isEqual);
             localStorage.setItem("cart", JSON.stringify(unique));
         }
     };

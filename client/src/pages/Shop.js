@@ -246,7 +246,7 @@ const Shop = () => {
                 className="pb-2 pl-4 pr-4"
                 onChange={handleShipping}
                 value="Yes"
-                checked={shipping == "Yes"}
+                checked={shipping === "Yes"}
             >
                 Yes{" "}
             </Checkbox>
@@ -254,7 +254,7 @@ const Shop = () => {
                 className="pb-2 pl-4 pr-4"
                 onChange={handleShipping}
                 value="No"
-                checked={shipping == "No"}
+                checked={shipping === "No"}
             >
                 No
             </Checkbox>
