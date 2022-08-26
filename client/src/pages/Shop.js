@@ -29,6 +29,7 @@ const Shop = () => {
     const [sub, setSub] = useState("");
     const [brand, setBrand] = useState("");
     const [color, setColor] = useState("");
+    const [shipping, setShipping] = useState("");
     const [brands, setBrands] = useState([
         "Apple",
         "Samsung",
@@ -87,6 +88,7 @@ const Shop = () => {
         setSub("");
         setBrand("");
         setColor("");
+        setShipping("");
         setTimeout(() => {
             setOk(!ok);
         }, 300);
@@ -119,6 +121,7 @@ const Shop = () => {
         setSub("");
         setBrand("");
         setColor("");
+        setShipping("");
         let inTheState = [...categoryIds];
         let justChecked = e.target.value;
         let foundInTheState = inTheState.indexOf(justChecked);
@@ -142,6 +145,7 @@ const Shop = () => {
         setSub("");
         setBrand("");
         setColor("");
+        setShipping("");
         fetchProducts({ stars: num });
     };
     const showStars = () => (
@@ -176,6 +180,7 @@ const Shop = () => {
         setStar("");
         setBrand("");
         setColor("");
+        setShipping("");
         fetchProducts({ sub });
     };
     // 7. show products based on brands
@@ -202,6 +207,7 @@ const Shop = () => {
         setCategoryIds([]);
         setStar("");
         setColor("");
+        setShipping("");
         setBrand(e.target.value);
         fetchProducts({ brand: e.target.value });
     };
@@ -229,8 +235,44 @@ const Shop = () => {
         setCategoryIds([]);
         setStar("");
         setBrand("");
+        setShipping("");
         setColor(e.target.value);
         fetchProducts({ color: e.target.value });
+    };
+    //9 . show products based on shipping
+    const showShipping = () => (
+        <>
+            <Checkbox
+                className="pb-2 pl-4 pr-4"
+                onChange={handleShipping}
+                value="Yes"
+                checked={shipping == "Yes"}
+            >
+                Yes{" "}
+            </Checkbox>
+            <Checkbox
+                className="pb-2 pl-4 pr-4"
+                onChange={handleShipping}
+                value="No"
+                checked={shipping == "No"}
+            >
+                No
+            </Checkbox>
+        </>
+    );
+    const handleShipping = (e) => {
+        setSub("");
+        dispatch({
+            type: "SEARCH_QUERY",
+            payload: { text: "" },
+        });
+        setPrice([0, 0]);
+        setCategoryIds([]);
+        setStar("");
+        setBrand("");
+        setColor("");
+        setShipping(e.target.value);
+        fetchProducts({ shipping: e.target.value });
     };
     return (
         <div className="container-fluid">
@@ -240,7 +282,7 @@ const Shop = () => {
                     <hr />
                     <Menu
                         mode="inline"
-                        defaultOpenKeys={["1", "2", "3", "4", "5", "6"]}
+                        defaultOpenKeys={["1", "2", "3", "4", "5", "6", "7"]}
                     >
                         {/* //Price submenu */}
                         <SubMenu
@@ -316,6 +358,17 @@ const Shop = () => {
                             }
                         >
                             <div className="pr-4">{showColors()}</div>
+                        </SubMenu>
+                        {/* // Colors submenu */}
+                        <SubMenu
+                            key="7"
+                            title={
+                                <span className="h6">
+                                    <DownSquareOutlined /> Shipping
+                                </span>
+                            }
+                        >
+                            <div className="pr-4">{showShipping()}</div>
                         </SubMenu>
                     </Menu>
                 </div>
