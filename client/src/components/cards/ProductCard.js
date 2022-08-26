@@ -20,6 +20,7 @@ const ProductCard = ({ product }) => {
                 ...product,
                 count: 1,
             });
+            // lodash function to remove duplicates
             let unique = _.uniqWith(cart, _.isEqual);
             localStorage.setItem("cart", JSON.stringify(unique));
         }
