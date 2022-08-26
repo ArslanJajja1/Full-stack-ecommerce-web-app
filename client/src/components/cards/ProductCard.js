@@ -20,7 +20,7 @@ const ProductCard = ({ product }) => {
                 count: 1,
             });
             let unique = _.uniqueWith(cart, _.isEqual);
-            localStorage.setItem("cart", JSON.stringify(unique);
+            localStorage.setItem("cart", JSON.stringify(unique));
         }
     };
     return (
