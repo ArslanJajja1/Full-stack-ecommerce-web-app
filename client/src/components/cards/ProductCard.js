@@ -5,11 +5,14 @@ import laptop from "../../images/laptop.jpg";
 import { Link } from "react-router-dom";
 import { showAverage } from "../../functions/rating";
 import _ from "lodash";
+import { useDispatch, useSelector } from "react-redux";
 const { Meta } = Card;
 
 const ProductCard = ({ product }) => {
     const [tooltip, setTooltip] = useState("Click to add");
     const { images, title, description, slug, price } = product;
+    const { user, cart } = useSelector((state) => ({ ...state }));
+    const dispatch = useDispatch();
     const handleAddToCart = () => {
         let cart = [];
         if (typeof window !== "undefined") {
@@ -24,6 +27,10 @@ const ProductCard = ({ product }) => {
             let unique = _.uniqWith(cart, _.isEqual);
             localStorage.setItem("cart", JSON.stringify(unique));
             setTooltip("Added");
+            dispatch({
+                type: "ADD_TO_CART",
+                payload: unique,
+            });
         }
     };
     return (
