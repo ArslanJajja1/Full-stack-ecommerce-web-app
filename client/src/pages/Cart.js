@@ -10,6 +10,7 @@ const Cart = () => {
             return currentValue + nextValue.count * nextValue.price;
         }, 0);
     };
+    const saveOrderToDb = () => {};
     return (
         <div className="container-fluid pt-3">
             <div className="row">
@@ -39,12 +40,16 @@ const Cart = () => {
                     Total : <b>${getTotal()}</b>
                     <hr />
                     {user ? (
-                        <button className="btn btn-sm btn-primary mt-2">
+                        <button
+                            onClick={saveOrderToDb}
+                            disabled={!cart.length}
+                            className="btn btn-sm btn-primary mt-2"
+                        >
                             Proceed to checkout
                         </button>
                     ) : (
                         <button className="btn btn-sm btn-primary mt-2">
-                            Login to checkout
+                            <Link to="/login">Login to checkout</Link>
                         </button>
                     )}
                 </div>
