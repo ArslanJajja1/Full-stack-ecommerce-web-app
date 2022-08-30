@@ -30,6 +30,8 @@ import SubHome from './pages/sub/SubHome';
 import Shop from './pages/Shop';
 import Cart from './pages/Cart';
 import SideDrawer from './components/drawer/SideDrawer';
+import Checkout from './pages/Checkout';
+
 const App = () => {
   const dispatch = useDispatch();
   useEffect(() => {
@@ -157,6 +159,14 @@ const App = () => {
         <Route path="/subs/:slug" element={<SubHome />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/cart" element={<Cart />} />
+        <Route
+          path="/checkout"
+          element={
+            <UserRoute>
+              <Checkout />
+            </UserRoute>
+          }
+        />
       </Routes>
     </>
   );
