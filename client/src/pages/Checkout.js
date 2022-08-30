@@ -1,7 +1,19 @@
-import React from 'react';
-
+import React, { useEffect, useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { getUserCart } from '../functions/user';
 const Checkout = () => {
+  const [products, setProducts] = useState([]);
+  const [total, setTotal] = useState(0);
+  const { user } = useSelector((state) => ({ ...state }));
+  const dispatch = useDispatch();
   const saveAddressToDb = () => {};
+  useEffect(() => {
+    getUserCart(user.token).then((res) => {
+      console.log('User cart response', res);
+      setProducts(res.data.products);
+      setTotal(res.data.cartTotal);
+    });
+  }, []);
   return (
     <div className="container-fluid pt-4">
       <div className="row">
