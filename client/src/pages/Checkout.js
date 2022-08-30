@@ -34,17 +34,26 @@ const Checkout = () => {
         <div className="col-md-6">
           <h4>Order Summary</h4>
           <hr />
-          <p>Products x</p>
+          <p>Products {products.length}</p>
           <hr />
-          <p>List of Products</p>
+          {products.map((p, i) => (
+            <div key={i}>
+              <p>
+                {p.product.title} ({p.color}) x {p.count} ={' '}
+                {p.product.price * p.count}
+              </p>
+            </div>
+          ))}
           <hr />
-          <p>Cart Total : $x</p>
+          <p>Cart Total : ${total}</p>
           <div className="row">
             <div className="col-md-6">
-              <button className="btn btn-primary">Place Order</button>
+              <button className="btn btn-primary btn-raised">
+                Place Order
+              </button>
             </div>
             <div className="col-md-6">
-              <button className="btn btn-primary">Place Order</button>
+              <button className="btn btn-primary btn-raised">Empty Card</button>
             </div>
           </div>
         </div>
