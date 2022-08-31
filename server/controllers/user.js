@@ -15,8 +15,8 @@ exports.userCart = async (req, res) => {
     object.product = cart[i]._id;
     object.count = cart[i].count;
     object.color = cart[i].color;
-    let { price } = await Product.findById(cart[i]._id).select('price');
-    object.price = price;
+    let productFromDb = await Product.findById(cart[i]._id).select('price');
+    object.price = productFromDb.price;
     products.push(object);
   }
   let cartTotal = 0;
@@ -42,4 +42,8 @@ exports.emptyCart = async (req, res) => {
   const user = await User.findOne({ email: req.user.email });
   const cart = await Cart.findOneAndRemove({ orderdBy: user._id });
   res.json(cart);
+};
+exports.saveAddress = async (req, res) => {
+  const user = await User.findOneAndUpdate({ email: req.user.email }, { address: req.body.address });
+  res.json({ ok: true });
 };
