@@ -7,6 +7,7 @@ exports.create = async (req, res) => {
     res.json(coupon);
   } catch (error) {
     console.log(error);
+    res.status(400).json(error);
   }
 };
 exports.remove = async (req, res) => {
