@@ -74,7 +74,7 @@ const Checkout = () => {
           <p>Cart Total : ${total}</p>
           <div className="row">
             <div className="col-md-6">
-              <button disabled={!addressSaved} className="btn btn-primary btn-raised">
+              <button disabled={!addressSaved || !products.length} className="btn btn-primary btn-raised">
                 Place Order
               </button>
             </div>
