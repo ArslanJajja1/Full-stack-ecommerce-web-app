@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUserCart } from '../functions/user';
+import { getUserCart, emptyUserCart } from '../functions/user';
+import { toast } from 'react-toastify';
 const Checkout = () => {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const { user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const saveAddressToDb = () => {};
+
   useEffect(() => {
     getUserCart(user.token).then((res) => {
       console.log('User cart response', res);
@@ -14,6 +16,20 @@ const Checkout = () => {
       setTotal(res.data.cartTotal);
     });
   }, []);
+  const emptyCart = () => {
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('cart');
+    }
+    dispatch({
+      type: 'ADD_TO_CART',
+      payload: [],
+    });
+    emptyUserCart(user.token).then((res) => {
+      setProducts([]);
+      setTotal(0);
+      toast.success('Cart is empty');
+    });
+  };
   return (
     <div className="container-fluid pt-4">
       <div className="row">
@@ -39,8 +55,7 @@ const Checkout = () => {
           {products.map((p, i) => (
             <div key={i}>
               <p>
-                {p.product.title} ({p.color}) x {p.count} ={' '}
-                {p.product.price * p.count}
+                {p.product.title} ({p.color}) x {p.count} = {p.product.price * p.count}
               </p>
             </div>
           ))}
@@ -48,12 +63,12 @@ const Checkout = () => {
           <p>Cart Total : ${total}</p>
           <div className="row">
             <div className="col-md-6">
-              <button className="btn btn-primary btn-raised">
-                Place Order
-              </button>
+              <button className="btn btn-primary btn-raised">Place Order</button>
             </div>
             <div className="col-md-6">
-              <button className="btn btn-primary btn-raised">Empty Card</button>
+              <button disabled={!products.length} onClick={emptyCart} className="btn btn-primary btn-raised">
+                Empty Card
+              </button>
             </div>
           </div>
         </div>
