@@ -32,6 +32,7 @@ import Cart from './pages/Cart';
 import SideDrawer from './components/drawer/SideDrawer';
 import Checkout from './pages/Checkout';
 import CreateCouponPage from './pages/admin/coupon/CreateCouponPage';
+import Payment from './pages/Payment';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -174,6 +175,14 @@ const App = () => {
             <AdminRoute>
               <CreateCouponPage />
             </AdminRoute>
+          }
+        />
+        <Route
+          path="/payment"
+          element={
+            <UserRoute>
+              <Payment />
+            </UserRoute>
           }
         />
       </Routes>
