@@ -4,6 +4,7 @@ import { getUserCart, emptyUserCart, saveUserAddress, applyCoupon } from '../fun
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
   const [products, setProducts] = useState([]);
@@ -11,10 +12,11 @@ const Checkout = () => {
   const [address, setAddress] = useState('');
   const [addressSaved, setAddressSaved] = useState(false);
   const [coupon, setCoupon] = useState('');
-  const [totalAfterDiscount, setTotalAfterDiscount] = useState('');
-  const [discountError, setDiscountError] = useState(0);
+  const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
+  const [discountError, setDiscountError] = useState('');
   const { user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUserCart(user.token).then((res) => {
@@ -115,7 +117,7 @@ const Checkout = () => {
           <hr />
           {showApplyCoupon()}
           <br />
-          {discountError && <p className="text-danger p-2">{discountError}</p>}
+          {discountError && <h6 className="bg-danger text-white text-center p-2">{discountError}</h6>}
         </div>
         <div className="col-md-6">
           <h4>Order Summary</h4>
@@ -127,12 +129,16 @@ const Checkout = () => {
           <p>Cart Total : ${total}</p>
           {totalAfterDiscount > 0 && (
             <div>
-              <p className="bg-success p-2">Discount Applied! Total Payable : ${totalAfterDiscount}</p>
+              <h6 className="bg-success text-white p-2">Discount Applied! Total Payable : ${totalAfterDiscount}</h6>
             </div>
           )}
           <div className="row">
             <div className="col-md-6">
-              <button disabled={!addressSaved || !products.length} className="btn btn-primary btn-raised">
+              <button
+                onClick={() => navigate('/payment')}
+                disabled={!addressSaved || !products.length}
+                className="btn btn-primary btn-raised"
+              >
                 Place Order
               </button>
             </div>
