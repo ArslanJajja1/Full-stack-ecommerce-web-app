@@ -9,18 +9,20 @@ const StripeCheckout = () => {
   const [processing, setProcessing] = useState('');
   const [disabled, setDisabled] = useState(true);
   const [clientSecret, setClientSecret] = useState('');
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user, coupon } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const stripe = useStripe();
   const elements = useElements();
   useEffect(() => {
-    createPaymentIntent(user.token).then((res) => {
+    createPaymentIntent(coupon, user.token).then((res) => {
+      console.log('client secret response ', res);
       setClientSecret(res.data.clientSecret);
     });
   }, []);
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log('---------------->', clientSecret);
     setProcessing(true);
     const payload = await stripe.confirmCardPayment(clientSecret, {
       payment_method: {
@@ -37,6 +39,7 @@ const StripeCheckout = () => {
       console.log(JSON.stringify(payload, null, 4));
       setError(null);
       setSucceeded(true);
+      setProcessing(false);
     }
   };
   const handleChange = async (e) => {
