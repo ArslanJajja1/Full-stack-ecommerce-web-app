@@ -16,11 +16,14 @@ const StripeCheckout = () => {
   const elements = useElements();
   useEffect(() => {
     createPaymentIntent(user.token).then((res) => {
-      setClientSecret(res.data);
+      setClientSecret(res.data.clientSecret);
     });
   }, []);
   const handleSubmit = async (e) => {};
-  const handleChange = async (e) => {};
+  const handleChange = async (e) => {
+    setDisabled(e.empty);
+    setError(e.error ? e.error.message : '');
+  };
   const cardStyle = {
     style: {
       base: {
@@ -44,6 +47,12 @@ const StripeCheckout = () => {
       <button className="stripe-button" disabled={processing || disabled || succeeded}>
         <span id="button-text">{processing ? <div className="spinner" id="spinner"></div> : 'Pay'}</span>
       </button>
+      <br />
+      {error && (
+        <div className="card-error" role="alert">
+          {error}
+        </div>
+      )}
     </form>
   );
 };
