@@ -53,9 +53,17 @@ const Checkout = () => {
       .then((res) => {
         if (res.data) {
           setTotalAfterDiscount(res.data);
+          dispatch({
+            type: 'COUPON_APPLIED',
+            payload: true,
+          });
         }
         if (res.data.err) {
           setDiscountError(res.data.err);
+          dispatch({
+            type: 'COUPON_APPLIED',
+            payload: true,
+          });
         }
       })
       .catch((error) => {
