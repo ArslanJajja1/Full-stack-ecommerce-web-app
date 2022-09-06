@@ -95,5 +95,14 @@ exports.createOrder = async (req, res) => {
   let { products } = await Cart.findOne({ orderdBy: user._id });
   let newOrder = await new Order({ products, paymentIntent, orderdBy: user._id }).save();
   console.log('New Order', newOrder);
+  let bulkOption = products.map((item) => {
+    return {
+      updateOne: {
+        filter: { _id: item.product._id },
+        update: { $inc: { quantity: -item.count, sold: +item.count } },
+      },
+    };
+  });
+  let updated = await Product.bulkWrite(bulkOption, {});
   res.json({ ok: true });
 };
