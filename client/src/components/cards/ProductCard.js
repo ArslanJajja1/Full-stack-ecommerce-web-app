@@ -60,20 +60,16 @@ const ProductCard = ({ product }) => {
             View Product
           </Link>,
           <Tooltip title={tooltip}>
-            <a onClick={handleAddToCart}>
+            <a onClick={handleAddToCart} disabled={product.quantity < 1}>
               <ShoppingCartOutlined className="text-danger" /> <br />
-              Add To Cart
+              {product.quantity < 1 ? 'Out of stock' : 'Add to cart'}
             </a>
           </Tooltip>,
         ]}
       >
         <Meta
           title={`${title} - $${price}`}
-          description={`${
-            description.length > 40
-              ? `${description.substring(0, 40)}...`
-              : description
-          } `}
+          description={`${description.length > 40 ? `${description.substring(0, 40)}...` : description} `}
         />
       </Card>
     </>
