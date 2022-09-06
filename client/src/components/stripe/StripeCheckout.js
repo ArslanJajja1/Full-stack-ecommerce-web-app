@@ -6,6 +6,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Card } from 'antd';
 import { DollarOutlined, CheckOutlined } from '@ant-design/icons';
 import laptop from '../../images/laptop.jpg';
+import { createOrder, emptyUserCart } from '../../functions/user';
 const StripeCheckout = () => {
   const [succeeded, setSucceeded] = useState(false);
   const [error, setError] = useState(null);
@@ -50,6 +51,20 @@ const StripeCheckout = () => {
       setProcessing(false);
     } else {
       console.log(JSON.stringify(payload, null, 4));
+      createOrder(payload, user.token).then((res) => {
+        if (res.data.ok) {
+          if (typeof window !== 'undefined') localStorage.removeItem('cart');
+          dispatch({
+            type: 'ADD_TO_CART',
+            payload: [],
+          });
+          dispatch({
+            type: 'COUPON_APPLIED',
+            payload: false,
+          });
+          emptyUserCart(user.token);
+        }
+      });
       setError(null);
       setSucceeded(true);
       setProcessing(false);
