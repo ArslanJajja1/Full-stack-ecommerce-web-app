@@ -116,3 +116,8 @@ exports.addToWishlist = async (req, res) => {
   const user = await User.findOneAndUpdate({ email: req.user.email }, { $addToSet: { wishlist: productId } }, { new: true });
   res.json({ ok: true });
 };
+exports.wishlist = async (req, res) => {
+  const list = await User.findOne({ email: req.user.email }).select('wishlist').populate('wishlist');
+  res.json(list);
+};
+exports.removeFromWishlist = async (req, res) => {};
