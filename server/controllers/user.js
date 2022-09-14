@@ -111,3 +111,8 @@ exports.orders = async (req, res) => {
   let userOrders = await Order.find({ orderdBy: user._id }).populate('products.product');
   res.json(userOrders);
 };
+exports.addToWishlist = async (req, res) => {
+  const { productId } = req.body;
+  const user = await User.findOneAndUpdate({ email: req.user.email }, { $addToSet: { wishlist: productId } }, { new: true });
+  res.json({ ok: true });
+};
