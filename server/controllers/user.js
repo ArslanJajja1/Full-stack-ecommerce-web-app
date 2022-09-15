@@ -122,6 +122,6 @@ exports.wishlist = async (req, res) => {
 };
 exports.removeFromWishlist = async (req, res) => {
   const { productId } = req.params;
-  const user = await User.findOneAndUpdate({ email: req.user.email }, { $pull: { wishlist: productId } }, { new: true });
+  const user = await User.findOneAndUpdate({ email: req.user.email }, { $pull: { wishlist: productId } }).exec();
   res.json({ ok: true });
 };
