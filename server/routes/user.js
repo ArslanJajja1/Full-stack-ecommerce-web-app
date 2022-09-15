@@ -23,5 +23,5 @@ router.post('/user/order', authCheck, createOrder);
 router.get('/user/orders', authCheck, orders);
 router.post('/user/wishlist', authCheck, addToWishlist);
 router.get('/user/wishlist', authCheck, wishlist);
-router.get('/user/wishlist/:productId', authCheck, removeFromWishlist);
+router.put('/user/wishlist/:productId', authCheck, removeFromWishlist);
 module.exports = router;
