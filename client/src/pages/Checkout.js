@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getUserCart, emptyUserCart, saveUserAddress, applyCoupon } from '../functions/user';
+import { getUserCart, emptyUserCart, saveUserAddress, applyCoupon, createCashOrderForUser } from '../functions/user';
 import { toast } from 'react-toastify';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -11,10 +11,10 @@ const Checkout = () => {
   const [total, setTotal] = useState(0);
   const [address, setAddress] = useState('');
   const [addressSaved, setAddressSaved] = useState(false);
-  const [coupon, setCoupon] = useState('');
+  const [couponForCheckout, setCouponForCheckout] = useState('');
   const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
   const [discountError, setDiscountError] = useState('');
-  const { user } = useSelector((state) => ({ ...state }));
+  const { user, COD, coupon } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -37,7 +37,7 @@ const Checkout = () => {
       setProducts([]);
       setTotal(0);
       setTotalAfterDiscount(0);
-      setCoupon('');
+      setCouponForCheckout('');
       toast.success('Cart is empty');
     });
   };
@@ -50,8 +50,8 @@ const Checkout = () => {
     });
   };
   const applyDiscountCoupon = () => {
-    console.log('send coupon to server ', coupon);
-    applyCoupon(coupon, user.token)
+    console.log('send coupon to server ', couponForCheckout);
+    applyCoupon(couponForCheckout, user.token)
       .then((res) => {
         if (res.data) {
           setTotalAfterDiscount(res.data);
@@ -96,7 +96,7 @@ const Checkout = () => {
         placeholder="Enter Coupon"
         className="form-control"
         onChange={(e) => {
-          setCoupon(e.target.value);
+          setCouponForCheckout(e.target.value);
           setDiscountError('');
         }}
       />
@@ -105,6 +105,22 @@ const Checkout = () => {
       </button>
     </>
   );
+  const createCashOrder = () => {
+    createCashOrderForUser(user.token, COD, coupon).then((res) => {
+      console.log('Create cash order response ', res);
+      // empty cart from redux,local storage,reset coupon,reset COD,redirect to user history
+      if (res.data.ok) {
+        if (typeof window !== 'undefined') localStorage.removeItem('cart');
+        dispatch({ type: 'ADD_TO_CART', payload: [] });
+        dispatch({ type: 'COUPON_APPLIED', payload: false });
+        dispatch({ type: 'COD', payload: false });
+        emptyUserCart(user.token);
+        setTimeout(() => {
+          navigate('/user/history');
+        }, 1000);
+      }
+    });
+  };
   return (
     <div className="container-fluid pt-4">
       <div className="row">
@@ -134,13 +150,23 @@ const Checkout = () => {
           )}
           <div className="row">
             <div className="col-md-6">
-              <button
-                onClick={() => navigate('/payment')}
-                disabled={!addressSaved || !products.length}
-                className="btn btn-primary btn-raised"
-              >
-                Place Order
-              </button>
+              {COD ? (
+                <button
+                  onClick={createCashOrder}
+                  disabled={!addressSaved || !products.length}
+                  className="btn btn-primary btn-raised"
+                >
+                  Place Order
+                </button>
+              ) : (
+                <button
+                  onClick={() => navigate('/payment')}
+                  disabled={!addressSaved || !products.length}
+                  className="btn btn-primary btn-raised"
+                >
+                  Place Order
+                </button>
+              )}
             </div>
             <div className="col-md-6">
               <button disabled={!products.length} onClick={emptyCart} className="btn btn-primary btn-raised">
