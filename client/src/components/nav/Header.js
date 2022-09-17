@@ -1,99 +1,52 @@
-import React, { useState } from "react";
-import { Menu, Badge } from "antd";
-import {
-    AppstoreOutlined,
-    SettingOutlined,
-    UserOutlined,
-    UserAddOutlined,
-    ShopOutlined,
-    ShoppingOutlined,
-    ShoppingCartOutlined,
-} from "@ant-design/icons";
-import { Link, useNavigate } from "react-router-dom";
-import { auth } from "../../firebase";
-import { useDispatch, useSelector } from "react-redux";
-import Search from "../forms/Search";
-const { SubMenu, Item } = Menu;
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import RightNav from './RightNav';
+import { Button, Drawer, Space } from 'antd';
+import { MenuOutlined } from '@ant-design/icons';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 
 const Header = () => {
-    const [current, setCurrent] = useState("home");
-    const { user, cart } = useSelector((state) => ({ ...state }));
-    const dispatch = useDispatch();
-    const navigate = useNavigate();
-    const logout = () => {
-        auth.signOut();
-        dispatch({
-            type: "LOGOUT",
-            payload: null,
-        });
-        navigate("/login");
-    };
-    const handleClick = (e) => {
-        // console.log(e.key);
-        setCurrent(e.key);
-    };
-    let subMenuKey = 0;
-    return (
-        <Menu onClick={handleClick} selectedKeys={[current]} mode="horizontal">
-            <Item key="home" icon={<AppstoreOutlined />}>
-                <Link to="/">Home</Link>
-            </Item>
-            <Item key="shop" icon={<ShoppingOutlined />}>
-                <Link to="/shop">Shop</Link>
-            </Item>
-            <Item key="cart" icon={<ShoppingCartOutlined />}>
-                <Link to="/cart">
-                    <Badge count={cart.length} offset={[9, 0]}>
-                        Cart
-                    </Badge>
-                </Link>
-            </Item>
-            <span className=" p-1" style={{ marginLeft: "auto" }}>
-                <Search />
-            </span>
-            {!user && (
-                <>
-                    <Item
-                        key="register"
-                        icon={<UserAddOutlined />}
-                        // style={{ marginLeft: "auto" }}
-                    >
-                        <Link to="/register">Register</Link>
-                    </Item>
+  const [open, setOpen] = useState(false);
+  const [smallDevice, setSmallDevice] = useState(false);
+  const location = useLocation();
+  const dimensions = useWindowDimensions();
+  const handleWindowResize = () => {
+    if (dimensions.width < 650) {
+      setSmallDevice(true);
+    } else {
+      setSmallDevice(false);
+    }
+  };
+  const onClose = () => {
+    console.log('onClose called on location change');
+    setOpen(false);
+  };
+  useEffect(() => {
+    handleWindowResize();
+  }, [dimensions]);
+  useEffect(() => {
+    onClose();
+  }, [location]);
 
-                    <Item key="login" icon={<UserOutlined />}>
-                        <Link to="/login">Login</Link>
-                    </Item>
-                </>
-            )}
-
-            {user && (
-                <>
-                    <SubMenu
-                        className="float-end"
-                        icon={<SettingOutlined />}
-                        title={user.email && user.email.split("@")[0]}
-                        key={"#" + subMenuKey++}
-                        // style={{ marginLeft: "auto" }}
-                    >
-                        {user && user.role === "subscriber" && (
-                            <Link to="/user/history">
-                                <Item key="setting:1">Dashboard</Item>
-                            </Link>
-                        )}
-                        {user && user.role === "admin" && (
-                            <Link to="/admin/dashboard">
-                                <Item key="setting:1">Dashboard</Item>
-                            </Link>
-                        )}
-                        <Item key="setting:3" onClick={logout}>
-                            Logout
-                        </Item>
-                    </SubMenu>
-                </>
-            )}
-        </Menu>
-    );
+  return (
+    <nav
+      className="navbar-container container-fluid d-flex justify-content-between alignt-items-center border-bottom"
+      style={{ height: '50px' }}
+    >
+      <div className="logo align-self-center text-white font-weight-bold font-italic">
+        <Link to="/" className="text-white">
+          {' '}
+          E-Commy
+        </Link>
+      </div>
+      <div className="rightNavContainer h-100 d-flex align-items-center">
+        {!smallDevice && <RightNav navMode="horizontal" navTheme="white" />}
+        {smallDevice && <MenuOutlined onClick={() => setOpen(true)} style={{ color: 'white' }} className="hamburger" />}
+      </div>
+      <Drawer className="text-black" placement="right" size="default" onClose={onClose} open={open} closable={false}>
+        <RightNav navMode="vertical" navTheme="dark" />
+      </Drawer>
+    </nav>
+  );
 };
-
 export default Header;

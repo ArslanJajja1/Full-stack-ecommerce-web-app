@@ -63,7 +63,7 @@ const History = () => {
     </PDFDownloadLink>
   );
   const showEachOrders = () =>
-    orders.reverse().map((order, i) => (
+    orders.map((order, i) => (
       <div key={i} className="m-5 p-3 card">
         <ShowPaymentInfo order={order} />
         {showOrderInTable(order)}
