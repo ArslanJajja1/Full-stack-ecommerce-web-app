@@ -27,7 +27,7 @@ const CategoryUpdate = () => {
   const loadCategory = () => {
     getCategory(slug).then((res) => {
       setName(res.data.name);
-      setValues({ ...values, ...res.data });
+      setValues({ ...values, ...res.data.category });
     });
   };
   const handleSubmit = (e) => {
