@@ -12,6 +12,7 @@ const Header = () => {
   const dimensions = useWindowDimensions();
   const handleWindowResize = () => {
     if (dimensions.width < 650) {
+      console.log(dimensions);
       setSmallDevice(true);
     } else {
       setSmallDevice(false);

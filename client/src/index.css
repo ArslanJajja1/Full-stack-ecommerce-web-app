@@ -35,6 +35,13 @@ body {
   color: var(--color-white);
   line-height: 1.7;
   background-image: url(./assets/images/bg-image.jpg);
+  max-width: 1320px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+.productCard-container {
+  /* box-shadow: #1f1f38 0px 50px 100px -20px, #2c2c6c 0px 30px 60px -30px !important; */
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 30px 150px 20px;
 }
 .hamburger {
   color: white !important;
@@ -49,4 +56,16 @@ body {
 }
 .pointer {
   cursor: pointer;
+}
+.mt-n1 {
+  margin-top: -5rem;
+}
+.mt-n2 {
+  margin-top: -10rem;
+}
+.mt-n3 {
+  margin-top: -12rem;
+}
+.mt-n4 {
+  margin-top: -18rem;
 }
