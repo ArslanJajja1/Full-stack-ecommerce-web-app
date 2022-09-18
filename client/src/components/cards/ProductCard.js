@@ -6,11 +6,14 @@ import { Link } from 'react-router-dom';
 import { showAverage } from '../../functions/rating';
 import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
+import useWindowDimensions from '../../hooks/useWindowDimensions';
 const { Meta } = Card;
 
 const ProductCard = ({ product }) => {
   const [tooltip, setTooltip] = useState('Click to add');
   const { images, title, description, slug, price } = product;
+  const dimensions = useWindowDimensions();
+  const deviceWidth = dimensions.width;
   const { user, cart } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const handleAddToCart = () => {
@@ -53,11 +56,11 @@ const ProductCard = ({ product }) => {
           <img src={images && images.length ? images[0].url : laptop} alt={title} className="w-100  h-50" />
         </div>
         <div className="productContent">
-          <h4 className="productTitle text-white text-center pt-2">{`${
+          <h4 className={`productTitle text-white text-center pt-2 ${deviceWidth < 600}&& h5`}>{`${
             title.length > 25 ? `${title.substring(0, 25)}...` : title
           } `}</h4>
           <p className="productDescription text-white text-center text-wrap">{`${
-            description.length > 40 ? `${description.substring(0, 40)}...` : description
+            description.length > 30 ? `${description.substring(0, 30)}...` : description
           } `}</p>
         </div>
         {product && product.ratings && product.ratings.length > 0 ? (

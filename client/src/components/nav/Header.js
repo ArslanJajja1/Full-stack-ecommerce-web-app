@@ -31,7 +31,7 @@ const Header = () => {
   return (
     <nav
       className="navbar-container container-fluid d-flex justify-content-between alignt-items-center border-bottom"
-      style={{ height: '50px' }}
+      style={{ height: '50px', width: '100%' }}
     >
       <div className="logo align-self-center text-white font-weight-bold font-italic">
         <Link to="/" className="text-white">

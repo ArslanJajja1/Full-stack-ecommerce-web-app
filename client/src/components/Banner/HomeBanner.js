@@ -20,7 +20,7 @@ const HomeBanner = () => {
     handleWindowResize();
   }, [dimensions]);
   const contentStyle = {
-    maxHeight: smallDevice ? '350px' : '75vh',
+    maxHeight: smallDevice ? '350px' : '40vh',
     width: '100%',
     objectFit: 'cover',
     objectPosition: 'top',

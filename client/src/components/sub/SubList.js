@@ -59,7 +59,7 @@ const SubList = ({ smallDevice }) => {
     });
   }, []);
   const showSubs = () => (
-    <Slider {...settings} className="w-100">
+    <Slider {...settings} className=" mx-auto" style={{ width: '85%' }}>
       {subs.map((s) => {
         return (
           <Link

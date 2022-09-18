@@ -24,24 +24,21 @@ const Home = () => {
     handleWindowResize();
   }, [dimensions]);
   return (
-    <div className="w-100 homeContainer" style={{ overflowY: 'hidden' }}>
+    <div className="container-fluid px-2">
       {/* <div className="jumbotron text-danger h1 font-weight-bold text-center ">
         <Jumbotron text={['Latest Products', 'Top Sellers', 'New Arrivals']} />
       </div> */}
       <HomeBanner />
-      <div className={smallDevice ? 'mt-4' : 'mt-n4'}>
-        <NewArrivals />
+      <div className={`mt-4 w-100`}>
+        <NewArrivals deviceWidth={dimensions.width} />
       </div>
-      {/* <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron ">New Arrivals</h4>
-      <NewArrivals />
-      <br /> */}
       <h4
         className={`${smallDevice ? 'h4' : 'display-3'}  text-center pb-3   my-5 text-white font-weight-bold font-italic mx-auto`}
         style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
       >
         Top Sellers
       </h4>
-      <BestSellers />
+      <BestSellers deviceWidth={dimensions.width} />
       <h4
         className={`${smallDevice ? 'h4' : 'display-3'}  text-center pb-3   my-5 text-white font-weight-bold font-italic mx-auto`}
         style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}

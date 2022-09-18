@@ -58,7 +58,7 @@ const CategoryList = ({ smallDevice }) => {
     });
   }, []);
   const showCategories = () => (
-    <Slider {...settings} className="w-100">
+    <Slider {...settings} className="mx-auto" style={{ width: '85%' }}>
       {categories.map((c) => {
         return (
           <Link

@@ -4,7 +4,7 @@ import ProductCard from '../cards/ProductCard';
 import { getProducts, getProductsCount } from '../../functions/product';
 import { Pagination } from 'antd';
 
-const NewArrivals = () => {
+const NewArrivals = ({ deviceWidth }) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
@@ -33,13 +33,13 @@ const NewArrivals = () => {
 
   return (
     <>
-      <div className="container">
+      <div className="container w-100 mx-auto">
         {loading === true ? (
           <LoadingCard count={6} />
         ) : (
-          <div className="row">
+          <div className="row" style={deviceWidth > 450 && deviceWidth < 576 ? { marginLeft: '2rem' } : {}}>
             {products.map((product) => (
-              <div key={product._id} className="col-lg-4 col-md-6 col-sm-12 mb-5">
+              <div key={product._id} className="col-lg-4 col-md-6 col-sm-6 mb-5">
                 <ProductCard product={product} />
               </div>
             ))}
