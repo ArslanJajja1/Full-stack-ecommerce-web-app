@@ -13,7 +13,7 @@ const CategoryForm = ({ values, setValues, setImageLoading, loading, handleSubmi
           className="form-control text-white border-bottom"
           id="name"
           name="name"
-          placeholder="Enter Category Name"
+          placeholder="Enter Name"
           value={values.name}
           onChange={handleChange}
           autoFocus
