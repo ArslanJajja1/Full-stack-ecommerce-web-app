@@ -1,24 +1,30 @@
-import React from "react";
-
-const CategoryForm = ({ name, setName, handleSubmit, loading }) => (
-    <form onSubmit={handleSubmit}>
-        <div className="form-group">
-            <label htmlFor="name">Name</label>
-            <input
-                type="text"
-                className="form-control"
-                id="name"
-                value={name}
-                onChange={(e) => setName(e.target.value)}
-                autoFocus
-                required
-            />
-            <br />
-            <button type="submit" className="btn btn-outline-primary">
-                {loading ? "Loading..." : "Save"}
-            </button>
-        </div>
-    </form>
+import React from 'react';
+import FileUpload from './FileUpload';
+const CategoryForm = ({ values, setValues, setImageLoading, loading, handleSubmit, handleChange }) => (
+  <form onSubmit={handleSubmit}>
+    <div className="form-group text-white">
+      <label htmlFor="name" className="font-weight-bold">
+        Name
+      </label>
+      <input
+        type="text"
+        className="form-control text-white border-bottom"
+        id="name"
+        name="name"
+        placeholder="Enter Category Name"
+        value={values.name}
+        onChange={handleChange}
+        autoFocus
+        required
+      />
+      <br />
+      <FileUpload values={values} setValues={setValues} setImageLoading={setImageLoading} />
+      <br />
+      <button type="submit" className="btn bg-info btn-raised text-white">
+        {loading ? 'Loading...' : 'Save'}
+      </button>
+    </div>
+  </form>
 );
 
 export default CategoryForm;
