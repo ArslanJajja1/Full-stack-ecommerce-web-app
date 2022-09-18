@@ -12,7 +12,6 @@ const Header = () => {
   const dimensions = useWindowDimensions();
   const handleWindowResize = () => {
     if (dimensions.width < 650) {
-      console.log(dimensions);
       setSmallDevice(true);
     } else {
       setSmallDevice(false);
@@ -44,7 +43,7 @@ const Header = () => {
         {!smallDevice && <RightNav navMode="horizontal" navTheme="white" />}
         {smallDevice && <MenuOutlined onClick={() => setOpen(true)} style={{ color: 'white' }} className="hamburger" />}
       </div>
-      <Drawer className="text-black" placement="right" size="default" onClose={onClose} open={open} closable={false}>
+      <Drawer width={200} className="text-black" placement="right" size="default" onClose={onClose} open={open} closable={false}>
         <RightNav navMode="vertical" navTheme="dark" />
       </Drawer>
     </nav>

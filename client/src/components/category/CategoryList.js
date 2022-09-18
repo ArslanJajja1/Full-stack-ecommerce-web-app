@@ -10,9 +10,8 @@ var settings = {
   slidesToShow: 5,
   slidesToScroll: 1,
   autoplay: true,
-  speed: 3000,
-  autoplaySpeed: 3000,
-  slickPause: false,
+  speed: 2000,
+  autoplaySpeed: 2000,
   cssEase: 'linear',
   responsive: [
     {
@@ -47,7 +46,7 @@ var settings = {
     },
   ],
 };
-const CategoryList = () => {
+const CategoryList = ({ smallDevice }) => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -62,14 +61,24 @@ const CategoryList = () => {
     <Slider {...settings} className="w-100">
       {categories.map((c) => {
         return (
-          <div key={c._id} className="col d-flex flex-column justify-content-center align-items-center pointer">
+          <Link
+            to={`/category/${c.slug}`}
+            key={c._id}
+            className="col d-flex flex-column justify-content-center align-items-center pointer"
+          >
             <img
-              style={{ width: '100px', height: '100px', borderRadius: '100%' }}
+              style={
+                smallDevice
+                  ? { width: '60px', height: '60px', borderRadius: '100%' }
+                  : { width: '100px', height: '100px', borderRadius: '100%' }
+              }
               src={c.images.length > 0 ? c.images[0].url : laptopAvatar}
               alt=""
             />
-            <h6 className="text-white pt-2 text-uppercase">{c.name}</h6>
-          </div>
+            <p className={`${smallDevice && 'fs-6'} text-white pt-2 text-uppercase font-weight-bold`}>{`${
+              c.name.length > 10 ? `${c.name.substring(0, 10)}...` : c.name
+            } `}</p>
+          </Link>
         );
       })}
     </Slider>

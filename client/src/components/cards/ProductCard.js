@@ -42,9 +42,9 @@ const ProductCard = ({ product }) => {
       <div
         className="productCard-container p-2 shadow-lg bg-body"
         style={{
-          minHeight: '350px',
+          minHeight: '300px',
           maxHeight: '400px',
-          minWidth: '300px',
+          minWidth: '250px',
           maxWidth: '350px',
           background: '#2c2c6c',
         }}

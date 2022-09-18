@@ -10,10 +10,9 @@ var settings = {
   slidesToShow: 5,
   slidesToScroll: 1,
   autoplay: true,
-  speed: 3000,
-  autoplaySpeed: 3000,
+  speed: 2000,
+  autoplaySpeed: 2000,
   rtl: true,
-  slickPause: false,
   cssEase: 'linear',
   responsive: [
     {
@@ -48,7 +47,7 @@ var settings = {
     },
   ],
 };
-const SubList = () => {
+const SubList = ({ smallDevice }) => {
   const [subs, setSubs] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -63,14 +62,24 @@ const SubList = () => {
     <Slider {...settings} className="w-100">
       {subs.map((s) => {
         return (
-          <div key={s._id} className="col d-flex flex-column justify-content-center align-items-center pointer">
+          <Link
+            to={`/subs/${s.slug}`}
+            key={s._id}
+            className="col d-flex flex-column justify-content-center align-items-center pointer"
+          >
             <img
-              style={{ width: '100px', height: '100px', borderRadius: '100%' }}
+              style={
+                smallDevice
+                  ? { width: '60px', height: '60px', borderRadius: '100%' }
+                  : { width: '100px', height: '100px', borderRadius: '100%' }
+              }
               src={s.images.length > 0 ? s.images[0].url : laptopAvatar}
               alt=""
             />
-            <h6 className="text-white pt-2 text-uppercase">{s.name}</h6>
-          </div>
+            <p className={`${smallDevice && 'fs-6'} text-white pt-2 text-uppercase font-weight-bold`}>{`${
+              s.name.length > 10 ? `${s.name.substring(0, 10)}...` : s.name
+            } `}</p>
+          </Link>
         );
       })}
     </Slider>
