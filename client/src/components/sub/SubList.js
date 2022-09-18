@@ -1,38 +1,85 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import { getSubCategories } from "../../functions/subCategory";
-
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { getSubCategories } from '../../functions/subCategory';
+import laptopAvatar from '../../assets/images/laptop-avatar.jpg';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
+var settings = {
+  infinite: true,
+  slidesToShow: 5,
+  slidesToScroll: 1,
+  autoplay: true,
+  speed: 3000,
+  autoplaySpeed: 3000,
+  rtl: true,
+  slickPause: false,
+  cssEase: 'linear',
+  responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 4,
+        slidesToScroll: 1,
+        infinite: true,
+      },
+    },
+    {
+      breakpoint: 800,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        infinite: true,
+      },
+    },
+    {
+      breakpoint: 650,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 1,
+      },
+    },
+    {
+      breakpoint: 550,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 1,
+      },
+    },
+  ],
+};
 const SubList = () => {
-    const [subs, setSubs] = useState([]);
-    const [loading, setLoading] = useState(false);
+  const [subs, setSubs] = useState([]);
+  const [loading, setLoading] = useState(false);
 
-    useEffect(() => {
-        setLoading(true);
-        getSubCategories().then((res) => {
-            setSubs(res.data);
-            setLoading(false);
-        });
-    }, []);
-    const showSubs = () =>
-        subs.map((s) => (
-            <div
-                key={setSubs._id}
-                className=" col btn btn-outlined-primary btn-lg btn-block btn-raised m-3"
-            >
-                <Link to={`/subs/${s.slug}`}>{s.name}</Link>
-            </div>
-        ));
-    return (
-        <div className="container">
-            <div className="row">
-                {loading ? (
-                    <h4 className="text-center">Loading...</h4>
-                ) : (
-                    showSubs()
-                )}
-            </div>
-        </div>
-    );
+  useEffect(() => {
+    setLoading(true);
+    getSubCategories().then((res) => {
+      setSubs(res.data);
+      setLoading(false);
+    });
+  }, []);
+  const showSubs = () => (
+    <Slider {...settings} className="w-100">
+      {subs.map((s) => {
+        return (
+          <div key={s._id} className="col d-flex flex-column justify-content-center align-items-center pointer">
+            <img
+              style={{ width: '100px', height: '100px', borderRadius: '100%' }}
+              src={s.images.length > 0 ? s.images[0].url : laptopAvatar}
+              alt=""
+            />
+            <h6 className="text-white pt-2 text-uppercase">{s.name}</h6>
+          </div>
+        );
+      })}
+    </Slider>
+  );
+  return (
+    <div className="container">
+      <div className="row">{loading ? <h4 className="text-center">Loading...</h4> : showSubs()}</div>
+    </div>
+  );
 };
 
 export default SubList;
