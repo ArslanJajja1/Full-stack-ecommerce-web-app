@@ -21,7 +21,8 @@ const HomeBanner = () => {
   }, [dimensions]);
   const contentStyle = {
     maxHeight: '30vh',
-    width: '100%',
+    minWidth: '100%',
+    maxWidth: '100%',
     objectFit: 'cover',
     objectPosition: 'top',
   };

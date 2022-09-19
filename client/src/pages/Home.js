@@ -24,7 +24,7 @@ const Home = () => {
     handleWindowResize();
   }, [dimensions]);
   return (
-    <div className="container-fluid px-2">
+    <div className="">
       {/* <div className="jumbotron text-danger h1 font-weight-bold text-center ">
         <Jumbotron text={['Latest Products', 'Top Sellers', 'New Arrivals']} />
       </div> */}

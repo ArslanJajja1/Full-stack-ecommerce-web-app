@@ -246,7 +246,12 @@ const Shop = () => {
             ) : (
               <div className="d-flex align-items-center justify-content-between">
                 <MenuOutlined onClick={() => setOpen(true)} style={{ color: 'white' }} className="hamburger font-weight-bold" />
-                <h4 className="text-white font-weight-bold text-center">Products</h4>
+                <h4
+                  style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+                  className="text-white font-weight-bold text-center"
+                >
+                  Products
+                </h4>
                 <span>{''}</span>
               </div>
             )}

@@ -33,13 +33,13 @@ const NewArrivals = ({ deviceWidth }) => {
 
   return (
     <>
-      <div className="container w-100 mx-auto">
+      <div className="px-2 w-100 mx-auto">
         {loading === true ? (
-          <LoadingCard count={6} />
+          <LoadingCard count={8} />
         ) : (
           <div className="row" style={deviceWidth > 450 && deviceWidth < 576 ? { marginLeft: '2rem' } : {}}>
             {products.map((product) => (
-              <div key={product._id} className="col-lg-4 col-md-6 col-sm-6 mb-5">
+              <div key={product._id} className="col-lg-3 col-md-4 col-sm-6 mb-5 d-flex justify-content-center align-items-center">
                 <ProductCard product={product} />
               </div>
             ))}

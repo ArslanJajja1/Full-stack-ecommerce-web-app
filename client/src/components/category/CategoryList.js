@@ -84,8 +84,10 @@ const CategoryList = ({ smallDevice }) => {
     </Slider>
   );
   return (
-    <div className="container">
-      <div className="row">{loading ? <h4 className="text-center">Loading...</h4> : showCategories()}</div>
+    <div className="px-5 w-100 mx-auto">
+      <div className="row d-flex justify-content-center">
+        {loading ? <h4 className="text-white">Loading...</h4> : showCategories()}
+      </div>
     </div>
   );
 };

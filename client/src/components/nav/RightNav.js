@@ -53,7 +53,11 @@ const RightNav = ({ navMode }) => {
       </Item>
       <Item className={navMode === 'vertical' ? 'text-dark' : 'text-white'} key="cart" icon={<ShoppingCartOutlined />}>
         <Link to="/cart">
-          <Badge count={cart.length} offset={[9, 0]}>
+          <Badge
+            count={cart.length}
+            offset={[9, 0]}
+            style={{ backgroundColor: 'white', color: '#1f1f38', fontWeight: 'bold', fontSize: '14px' }}
+          >
             <span style={{ color: linkColor }}>Cart</span>
           </Badge>
         </Link>
