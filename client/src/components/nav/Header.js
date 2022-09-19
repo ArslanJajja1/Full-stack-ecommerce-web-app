@@ -18,7 +18,6 @@ const Header = () => {
     }
   };
   const onClose = () => {
-    console.log('onClose called on location change');
     setOpen(false);
   };
   useEffect(() => {

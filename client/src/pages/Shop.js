@@ -3,10 +3,12 @@ import { getProductsByCount, fetchProductsByFilter } from '../functions/product'
 import { getCategories } from '../functions/category';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../components/cards/ProductCard';
-import { Menu, Slider, Checkbox, Radio } from 'antd';
-import { DollarOutlined, DownSquareOutlined, StarOutlined } from '@ant-design/icons';
+import { Menu, Slider, Checkbox, Radio, Drawer } from 'antd';
+import { DollarOutlined, DownSquareOutlined, MenuOutlined, StarOutlined } from '@ant-design/icons';
 import Star from '../components/forms/Star';
 import { getSubCategories } from '../functions/subCategory';
+import useWindowDimensions from '../hooks/useWindowDimensions';
+import RightNav from '../components/nav/RightNav';
 
 const { SubMenu, ItemGroup } = Menu;
 
@@ -25,9 +27,14 @@ const Shop = () => {
   const [shipping, setShipping] = useState('');
   const [brands, setBrands] = useState(['Apple', 'Samsung', 'Microsoft', 'Lenovo', 'ASUS']);
   const [colors, setColors] = useState(['Black', 'Brown', 'Silver', 'White', 'Blue']);
+  const [open, setOpen] = useState(false);
+  const dimensions = useWindowDimensions();
   const { search } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const { text } = search;
+  const onClose = () => {
+    setOpen(false);
+  };
   const fetchProducts = (arg) => {
     fetchProductsByFilter(arg).then((res) => {
       setProducts(res.data);
@@ -230,11 +237,34 @@ const Shop = () => {
     fetchProducts({ shipping: e.target.value });
   };
   return (
-    <div className="container-fluid">
-      <div className="row">
-        <div className="col-md-3 pt-2">
-          <h4>Search/Filter</h4>
-          <hr />
+    <>
+      <div className="container-fluid">
+        <div className="row">
+          <div className="col-md-12 pt-2">
+            {loading ? (
+              <h4 className="text-white">Loading...</h4>
+            ) : (
+              <div className="d-flex align-items-center justify-content-between">
+                <MenuOutlined onClick={() => setOpen(true)} style={{ color: 'white' }} className="hamburger font-weight-bold" />
+                <h4 className="text-white font-weight-bold text-center">Products</h4>
+                <span>{''}</span>
+              </div>
+            )}
+            {products.length < 1 && <p className="text-white">No products Found</p>}
+            <div className="row pb-5">
+              {products.map((p) => (
+                <div key={p._id} className="col-lg-3 col-md-4 col-sm-6  mt-3 d-flex justify-content-center align-items-center">
+                  <ProductCard product={p} />
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+      <Drawer title="Filter Products" width={280} className="" placement="left" size="default" onClose={onClose} open={open}>
+        <div className="">
+          <h4 className="text-center font-italic border-bottom pb-1">Search, What you are thinking...🤔</h4>
+          <MenuOutlined onClick={() => setOpen(true)} style={{ color: 'white' }} className="hamburger" />
           <Menu mode="inline" defaultOpenKeys={['1', '2', '3', '4', '5', '6', '7']}>
             {/* //Price submenu */}
             <SubMenu
@@ -324,19 +354,8 @@ const Shop = () => {
             </SubMenu>
           </Menu>
         </div>
-        <div className="col-md-9 pt-2">
-          {loading ? <h4 className="text-danger">Loading...</h4> : <h4 className="text-danger">Products</h4>}
-          {products.length < 1 && <p>No products Found</p>}
-          <div className="row pb-5">
-            {products.map((p) => (
-              <div key={p._id} className="col-md-4 mt-3">
-                <ProductCard product={p} />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </div>
+      </Drawer>
+    </>
   );
 };
 
