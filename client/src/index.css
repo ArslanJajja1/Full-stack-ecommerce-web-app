@@ -38,9 +38,9 @@ body {
   max-width: 1320px !important;
   margin-left: auto !important;
   margin-right: auto !important;
+  overflow-x: hidden !important;
 }
 .productCard-container {
-  /* box-shadow: #1f1f38 0px 50px 100px -20px, #2c2c6c 0px 30px 60px -30px !important; */
   box-shadow: rgba(0, 0, 0, 0.6) 0px 30px 150px 20px;
 }
 .hamburger {
