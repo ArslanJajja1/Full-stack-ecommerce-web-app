@@ -24,7 +24,7 @@ const Home = () => {
     handleWindowResize();
   }, [dimensions]);
   return (
-    <div className="">
+    <div style={{ overflow: 'hidden' }}>
       {/* <div className="jumbotron text-danger h1 font-weight-bold text-center ">
         <Jumbotron text={['Latest Products', 'Top Sellers', 'New Arrivals']} />
       </div> */}
