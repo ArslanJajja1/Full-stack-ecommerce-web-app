@@ -46,9 +46,9 @@ const ProductCard = ({ product }) => {
         className="productCard-container p-2 shadow-lg bg-body"
         style={{
           minHeight: '300px',
-          maxHeight: '400px',
+          maxHeight: '450px',
           minWidth: '250px',
-          maxWidth: '270px',
+          maxWidth: '300px',
           background: '#2c2c6c',
         }}
       >
@@ -68,50 +68,26 @@ const ProductCard = ({ product }) => {
         ) : (
           <div className="text-center text-white">No rating yet</div>
         )}
-        <div className="buttonsContainer d-flex justify-content-around pt-2">
-          <Link to={`/product/${slug}`} className="btn text-white btn-raised">
-            View
-          </Link>
+        <div className="pt-2 d-flex flex-column justify-content-center ">
           <Tooltip title={tooltip}>
-            <button onClick={handleAddToCart} disabled={product.quantity < 1} className="btn text-white   btn-raised">
+            <button
+              onClick={handleAddToCart}
+              disabled={product.quantity < 1}
+              style={{ color: '#2c2c6c', letterSpacing: '1px' }}
+              className=" btn mt-2 bg-white font-weight-bold btn-raised"
+            >
               {product.quantity < 1 ? 'Out of stock' : 'Add to cart'}
             </button>
           </Tooltip>
+          <Link
+            to={`/product/${slug}`}
+            style={{ color: '#2c2c6c', letterSpacing: '1px' }}
+            className=" btn mt-2 bg-white font-weight-bold btn-raised"
+          >
+            View Product
+          </Link>
         </div>
       </div>
-      {/* {product && product.ratings && product.ratings.length > 0 ? (
-        showAverage(product)
-      ) : (
-        <div className="text-center pt-1 pb-3">No rating yet</div>
-      )} */}
-      {/* <Card
-        style={{ minHeight: 300, background: '#2c2c6c' }}
-        cover={
-          <img
-            src={images && images.length ? images[0].url : laptop}
-            style={{ height: '200px', objectFit: 'cover' }}
-            className="p-1"
-            alt=""
-          />
-        }
-        actions={[
-          <Link to={`/product/${slug}`}>
-            <EyeOutlined className="text-warning" /> <br />
-            View Product
-          </Link>,
-          <Tooltip title={tooltip}>
-            <a onClick={handleAddToCart} disabled={product.quantity < 1}>
-              <ShoppingCartOutlined className="text-danger" /> <br />
-              {product.quantity < 1 ? 'Out of stock' : 'Add to cart'}
-            </a>
-          </Tooltip>,
-        ]}
-      >
-        <Meta
-          title={`${title} - $${price}`}
-          description={`${description.length > 40 ? `${description.substring(0, 40)}...` : description} `}
-        />
-      </Card> */}
     </>
   );
 };
