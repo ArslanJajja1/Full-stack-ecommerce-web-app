@@ -69,7 +69,7 @@ const ProductCard = ({ product }) => {
           <div className="text-center text-white">No rating yet</div>
         )}
         <div className="buttonsContainer d-flex justify-content-around pt-2">
-          <Link to={`/product/${slug}`} className="text-white btn text-white btn-raised">
+          <Link to={`/product/${slug}`} className="btn text-white btn-raised">
             View
           </Link>
           <Tooltip title={tooltip}>

@@ -3,11 +3,7 @@ import { useDispatch } from 'react-redux';
 import ModalImage from 'react-modal-image';
 import laptop from '../../images/laptop.jpg';
 import { toast } from 'react-toastify';
-import {
-  CheckCircleOutlined,
-  CloseCircleOutlined,
-  CloseOutlined,
-} from '@ant-design/icons';
+import { CheckCircleOutlined, CloseCircleOutlined, CloseOutlined } from '@ant-design/icons';
 const ProductCardInCheckout = ({ product }) => {
   console.log('product ', product);
   const dispatch = useDispatch();
@@ -75,15 +71,12 @@ const ProductCardInCheckout = ({ product }) => {
     }
   };
   return (
-    <tbody>
+    <tbody className="text-white">
       <tr>
-        <td className="text-center">
+        <td className="text-center ">
           <div style={{ width: '50px', height: 'auto' }}>
             {product.images.length ? (
-              <ModalImage
-                small={product.images[0].url}
-                large={product.images[0].url}
-              />
+              <ModalImage small={product.images[0].url} large={product.images[0].url} />
             ) : (
               <ModalImage small={laptop} large={laptop} />
             )}
@@ -94,15 +87,12 @@ const ProductCardInCheckout = ({ product }) => {
         <td>{product.brand}</td>
         <td>
           <select
-            className="form-control"
+            className="form-control text-white"
+            style={{ backgroundColor: '#2c2c6c' }}
             onChange={handleColorChange}
             name="color"
           >
-            {product.color ? (
-              <option value={product.color}>{product.color}</option>
-            ) : (
-              'select'
-            )}
+            {product.color ? <option value={product.color}>{product.color}</option> : 'select'}
             {colors
               .filter((c) => c !== product.color)
               .map((c) => (
@@ -113,12 +103,7 @@ const ProductCardInCheckout = ({ product }) => {
           </select>
         </td>
         <td className="text-center" style={{ width: '50px' }}>
-          <input
-            type="number"
-            className="form-control"
-            value={product.count}
-            onChange={handleQuantityChange}
-          />
+          <input type="number" className="form-control text-white" value={product.count} onChange={handleQuantityChange} />
         </td>
         <td className="text-center">
           {product.shipping === 'Yes' ? (
@@ -128,10 +113,7 @@ const ProductCardInCheckout = ({ product }) => {
           )}
         </td>
         <td className="text-center">
-          <CloseOutlined
-            onClick={handleRemove}
-            className="text-danger pointer"
-          />
+          <CloseOutlined onClick={handleRemove} className="text-danger pointer" />
         </td>
       </tr>
     </tbody>
