@@ -56,7 +56,11 @@ const RightNav = ({ navMode }) => {
           <Badge
             count={cart.length}
             offset={[9, 0]}
-            style={{ backgroundColor: 'white', color: '#1f1f38', fontWeight: 'bold', fontSize: '14px' }}
+            style={
+              navMode === 'vertical'
+                ? { backgroundColor: '#1f1f38', color: 'white', fontWeight: 'bold', fontSize: '14px' }
+                : { backgroundColor: 'white', color: '#1f1f38', fontWeight: 'bold', fontSize: '14px' }
+            }
           >
             <span style={{ color: linkColor }}>Cart</span>
           </Badge>
