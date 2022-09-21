@@ -4,7 +4,7 @@ import { getCategories } from '../functions/category';
 import { useSelector, useDispatch } from 'react-redux';
 import ProductCard from '../components/cards/ProductCard';
 import { Menu, Slider, Checkbox, Radio, Drawer } from 'antd';
-import { DollarOutlined, DownSquareOutlined, MenuOutlined, StarOutlined } from '@ant-design/icons';
+import { DollarOutlined, DownSquareOutlined, MenuOutlined, MenuUnfoldOutlined, StarOutlined } from '@ant-design/icons';
 import Star from '../components/forms/Star';
 import { getSubCategories } from '../functions/subCategory';
 import useWindowDimensions from '../hooks/useWindowDimensions';
@@ -245,7 +245,14 @@ const Shop = () => {
               <h4 className="text-white">Loading...</h4>
             ) : (
               <div className="d-flex align-items-center justify-content-between">
-                <MenuOutlined onClick={() => setOpen(true)} style={{ color: 'white' }} className="hamburger font-weight-bold" />
+                <span className="d-flex text-white">
+                  <MenuUnfoldOutlined
+                    onClick={() => setOpen(true)}
+                    style={{ color: 'white' }}
+                    className="hamburger font-weight-bold pr-2"
+                  />
+                  <p className="font-weight-bold h6">Filter By</p>
+                </span>
                 <h4
                   style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
                   className="text-white font-weight-bold text-center"
