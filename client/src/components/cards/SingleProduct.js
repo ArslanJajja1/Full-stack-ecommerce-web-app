@@ -59,24 +59,15 @@ const SingleProduct = ({ product, onStarClick, star }) => {
         ) : (
           <Card cover={<img src={images && images.length ? images[0].url : laptop} className="mb-3 card-image" />}></Card>
         )}
-        <Tabs>
-          <TabPane tab="Description" key="1">
-            {description && description}
-          </TabPane>
-          <TabPane tab="More Details" key="2">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa rerum error veniam recusandae repellat in magni
-            inventore. Distinctio, sint omnis.
-          </TabPane>
-        </Tabs>
       </div>
       <div className="col-md-5">
-        <h2 className="bg-info p-3 text-white">{title && title}</h2>
-        {product && product.ratings && product.ratings.length > 0 ? (
-          showAverage(product)
-        ) : (
-          <div className="text-center pt-1 pb-3">No rating yet</div>
-        )}
+        <h2 className="p-3 text-white text-center  " style={{ backgroundColor: '#2c2c6c' }}>
+          {title && title}
+        </h2>
+
         <Card
+          className="text-white  "
+          style={{ backgroundColor: '#2c2c6c' }}
           actions={[
             <Tooltip title={tooltip}>
               <a onClick={handleAddToCart}>
@@ -100,8 +91,19 @@ const SingleProduct = ({ product, onStarClick, star }) => {
             </RatingModal>,
           ]}
         >
-          <ProductListItems product={product} />
+          <ProductListItems product={product} showAverage={showAverage} />
         </Card>
+      </div>
+      <div className="container-fluid ">
+        <Tabs className="text-white">
+          <TabPane tab="Description" key="1">
+            {description && description}
+          </TabPane>
+          <TabPane tab="More Details" key="2">
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa rerum error veniam recusandae repellat in magni
+            inventore. Distinctio, sint omnis.
+          </TabPane>
+        </Tabs>
       </div>
     </>
   );
