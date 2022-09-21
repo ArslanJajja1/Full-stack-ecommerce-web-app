@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Menu, Badge } from 'antd';
 import {
   AppstoreOutlined,
@@ -10,7 +10,7 @@ import {
   ShoppingCartOutlined,
   SearchOutlined,
 } from '@ant-design/icons';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase';
 import { useDispatch, useSelector } from 'react-redux';
 import Search from '../forms/Search';
@@ -21,6 +21,8 @@ const RightNav = ({ navMode }) => {
   const { user, cart } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
+  console.log('Location...', location);
   const logout = () => {
     auth.signOut();
     dispatch({
@@ -33,6 +35,10 @@ const RightNav = ({ navMode }) => {
     // console.log(e.key);
     setCurrent(e.key);
   };
+  useEffect(() => {
+    setCurrent(location.pathname);
+  }, []);
+
   let linkColor = navMode === 'vertical' ? 'black' : 'white';
   return (
     <Menu
@@ -41,17 +47,17 @@ const RightNav = ({ navMode }) => {
       selectedKeys={[current]}
       mode={navMode}
     >
-      <Item className={navMode === 'vertical' ? 'text-dark' : 'text-white'} key="home" icon={<AppstoreOutlined />}>
+      <Item className={navMode === 'vertical' ? 'text-dark' : 'text-white'} key="/home" icon={<AppstoreOutlined />}>
         <Link to="/" style={{ color: linkColor }}>
           Home
         </Link>
       </Item>
-      <Item className={navMode === 'vertical' ? 'text-dark' : 'text-white'} key="shop" icon={<ShoppingOutlined />}>
+      <Item className={navMode === 'vertical' ? 'text-dark' : 'text-white'} key="/shop" icon={<ShoppingOutlined />}>
         <Link to="/shop" style={{ color: linkColor }}>
           Shop
         </Link>
       </Item>
-      <Item className={navMode === 'vertical' ? 'text-dark' : 'text-white'} key="cart" icon={<ShoppingCartOutlined />}>
+      <Item className={navMode === 'vertical' ? 'text-dark' : 'text-white'} key="/cart" icon={<ShoppingCartOutlined />}>
         <Link to="/cart">
           <Badge
             count={cart.length}
@@ -66,7 +72,7 @@ const RightNav = ({ navMode }) => {
           </Badge>
         </Link>
       </Item>
-      <Item key="search">
+      <Item key="/search">
         <Search navMode={navMode} />
       </Item>
 
@@ -74,7 +80,7 @@ const RightNav = ({ navMode }) => {
         <>
           <Item
             className={navMode === 'vertical' ? 'text-dark d-flex align-items-center' : 'text-white'}
-            key="register"
+            key="/register"
             icon={<UserAddOutlined />}
           >
             <Link to="/register" className="text-white">
@@ -84,7 +90,7 @@ const RightNav = ({ navMode }) => {
 
           <Item
             className={navMode === 'vertical' ? 'text-dark d-flex align-items-center' : 'text-white'}
-            key="login"
+            key="/login"
             icon={<UserOutlined />}
           >
             <Link to="/login" className="text-white">
@@ -99,7 +105,7 @@ const RightNav = ({ navMode }) => {
           <SubMenu
             icon={<SettingOutlined />}
             title={user.email && user.email.split('@')[0]}
-            key={user.email && user.email.split('@')[0]}
+            key="/user"
             className={linkColor === 'white' ? `text-white userDropdown` : ''}
             theme="light"
             style={{ color: linkColor }}
