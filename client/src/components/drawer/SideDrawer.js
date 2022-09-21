@@ -26,27 +26,31 @@ const SideDrawer = () => {
         <div key={p._id} className="row">
           <div className="col">
             {p.images[0] ? (
-              <>
-                <img src={p.images[0].url} style={{ width: '100%', height: '50px', objectFit: 'cover' }} alt="" />
+              <div>
+                <img src={p.images[0].url} style={{ width: '100px', height: '100px', objectFit: 'cover' }} alt="" />
                 <p className="text-center bg-primary text-light">
                   {p.title} x {p.count}
                 </p>
-              </>
+              </div>
             ) : (
-              <>
-                <img src={laptop} style={{ width: '100%', height: '50px', objectFit: 'cover' }} alt="" />
-                <p className="text-center bg-primary text-light">
+              <div
+                className="d-flex justify-content-between align-items-center mb-2 p-1 text-white shadow-lg bg-body"
+                style={{ backgroundColor: '#2c2c6c' }}
+              >
+                <img src={laptop} style={{ width: '70px', height: '70px', objectFit: 'contain' }} alt="" />
+                <p className=" ">
                   {p.title} x {p.count}
                 </p>
-              </>
+              </div>
             )}
           </div>
         </div>
       ))}
       <Link to="/cart">
         <button
-          className="text-center btn btn-primary btn-raised btn-block"
+          className="text-center btn text-white btn-raised btn-block"
           onClick={() => dispatch({ type: 'SET_VISIBLE', payload: false })}
+          style={{ backgroundColor: '#2c2c6c' }}
         >
           Go to cart
         </button>
