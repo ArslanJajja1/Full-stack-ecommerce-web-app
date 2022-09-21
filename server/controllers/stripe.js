@@ -17,7 +17,6 @@ exports.createPaymentIntent = async (req, res) => {
   const { cartTotal, totalAfterDiscount } = await Cart.findOne({
     orderdBy: user._id,
   }).exec();
-  // console.log("CART TOTAL", cartTotal, "AFTER DIS%", totalAfterDiscount);
 
   let finalAmount = 0;
 
