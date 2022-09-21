@@ -17,7 +17,16 @@ const userSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-    address: String,
+    address: {
+      name: String,
+      email: String,
+      number: String,
+      address1: String,
+      address2: String,
+      state: String,
+      city: String,
+      zipcode: String,
+    },
     wishlist: [
       {
         type: ObjectId,
