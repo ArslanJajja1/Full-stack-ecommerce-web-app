@@ -48,7 +48,24 @@ body {
   font-weight: bold;
   cursor: pointer;
 }
-
+.ant-menu-item > span > a {
+  color: white !important;
+}
+.anticon {
+  color: white !important;
+}
+.ant-menu-title-content {
+  color: white;
+}
+.ant-menu-title-content span {
+  color: white !important;
+}
+/* .ant-menu-title-content {
+  color: white;
+}
+.ant-menu-title-content a {
+  color: white;
+} */
 .slider img,
 .card-image {
   height: 450px;

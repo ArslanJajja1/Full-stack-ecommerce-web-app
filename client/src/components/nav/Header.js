@@ -38,11 +38,24 @@ const Header = () => {
           E-Commy
         </Link>
       </div>
-      <div className="rightNavContainer h-100 d-flex align-items-center">
-        {!smallDevice && <RightNav navMode="horizontal" navTheme="white" />}
-        {smallDevice && <MenuOutlined onClick={() => setOpen(true)} style={{ color: 'white' }} className="hamburger" />}
+      <div className="rightNavContainer h-100 d-flex align-items-center justify-content-end w-50">
+        <div>
+          {dimensions.width < 810 && (
+            <MenuOutlined onClick={() => setOpen(true)} style={{ color: 'white' }} className="hamburger" />
+          )}
+          {dimensions.width > 810 && <RightNav navMode="horizontal" navTheme="white" />}
+        </div>
       </div>
-      <Drawer width={200} className="text-black" placement="right" size="default" onClose={onClose} open={open} closable={false}>
+      <Drawer
+        width={200}
+        className="text-white"
+        placement="right"
+        size="default"
+        onClose={onClose}
+        open={open}
+        closable={false}
+        drawerStyle={{ backgroundColor: '#2c2c6c', color: 'white' }}
+      >
         <RightNav navMode="vertical" navTheme="dark" />
       </Drawer>
     </nav>

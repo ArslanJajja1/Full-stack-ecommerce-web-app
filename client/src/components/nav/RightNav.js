@@ -43,9 +43,10 @@ const RightNav = ({ navMode }) => {
   return (
     <Menu
       onClick={handleClick}
-      style={{ background: 'transparent', color: 'white', height: '100%', border: 'none' }}
+      style={{ background: 'transparent', color: 'white', height: '100%', width: '100%', border: 'none' }}
       selectedKeys={[current]}
       mode={navMode}
+      theme="dark"
     >
       <Item className={navMode === 'vertical' ? 'text-dark' : 'text-white'} key="/home" icon={<AppstoreOutlined />}>
         <Link to="/" style={{ color: linkColor }}>
@@ -59,15 +60,7 @@ const RightNav = ({ navMode }) => {
       </Item>
       <Item className={navMode === 'vertical' ? 'text-dark' : 'text-white'} key="/cart" icon={<ShoppingCartOutlined />}>
         <Link to="/cart">
-          <Badge
-            count={cart.length}
-            offset={[9, 0]}
-            style={
-              navMode === 'vertical'
-                ? { backgroundColor: '#1f1f38', color: 'white', fontWeight: 'bold', fontSize: '14px' }
-                : { backgroundColor: 'white', color: '#1f1f38', fontWeight: 'bold', fontSize: '14px' }
-            }
-          >
+          <Badge count={cart.length} offset={[9, 0]}>
             <span style={{ color: linkColor }}>Cart</span>
           </Badge>
         </Link>
@@ -107,7 +100,7 @@ const RightNav = ({ navMode }) => {
             title={user.email && user.email.split('@')[0]}
             key="/user"
             className={linkColor === 'white' ? `text-white userDropdown` : ''}
-            theme="light"
+            theme="dark"
             style={{ color: linkColor }}
           >
             {user && user.role === 'subscriber' && (
