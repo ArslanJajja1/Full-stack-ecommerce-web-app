@@ -93,7 +93,7 @@ const Login = () => {
     <form onSubmit={handleSubmit}>
       <input
         type="your Email"
-        className="form-control"
+        className="form-control text-white"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         autoFocus
@@ -102,7 +102,7 @@ const Login = () => {
       <br />
       <input
         type="password"
-        className="form-control"
+        className="form-control text-white"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Your password"
