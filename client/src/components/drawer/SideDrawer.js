@@ -26,9 +26,12 @@ const SideDrawer = () => {
         <div key={p._id} className="row">
           <div className="col">
             {p.images[0] ? (
-              <div>
-                <img src={p.images[0].url} style={{ width: '100px', height: '100px', objectFit: 'cover' }} alt="" />
-                <p className="text-center bg-primary text-light">
+              <div
+                className="d-flex justify-content-between align-items-center mb-2 p-1 text-white shadow-lg bg-body"
+                style={{ backgroundColor: '#2c2c6c' }}
+              >
+                <img src={p.images[0].url} style={{ width: '60px', height: '60px', objectFit: 'cover' }} alt="" />
+                <p>
                   {p.title} x {p.count}
                 </p>
               </div>
@@ -38,7 +41,7 @@ const SideDrawer = () => {
                 style={{ backgroundColor: '#2c2c6c' }}
               >
                 <img src={laptop} style={{ width: '70px', height: '70px', objectFit: 'contain' }} alt="" />
-                <p className=" ">
+                <p>
                   {p.title} x {p.count}
                 </p>
               </div>
