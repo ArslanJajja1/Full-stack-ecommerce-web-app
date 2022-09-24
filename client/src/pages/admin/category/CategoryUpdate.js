@@ -53,19 +53,30 @@ const CategoryUpdate = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-md-1">
           <AdminNav />
         </div>
-        <div className="col">
-          {imageLoading ? <LoadingOutlined className="text-danger h1" /> : <h4 className="text-white">Create Update</h4>}
-          <CategoryForm
-            values={values}
-            setValues={setValues}
-            setImageLoading={setImageLoading}
-            handleSubmit={handleSubmit}
-            loading={loading}
-            handleChange={handleChange}
-          />
+        <div className="col-md-11">
+          {imageLoading ? (
+            <LoadingOutlined className="text-danger h1" />
+          ) : (
+            <h4
+              style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+              className="text-white font-weight-bold text-center mx-auto my-4 pb-2"
+            >
+              Create Update
+            </h4>
+          )}
+          <div className="text-white font-weight-bold productCard-container shadow-lg bg-body py-2 px-3">
+            <CategoryForm
+              values={values}
+              setValues={setValues}
+              setImageLoading={setImageLoading}
+              handleSubmit={handleSubmit}
+              loading={loading}
+              handleChange={handleChange}
+            />
+          </div>
           <hr />
         </div>
       </div>
