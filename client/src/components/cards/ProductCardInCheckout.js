@@ -75,7 +75,7 @@ const ProductCardInCheckout = ({ product }) => {
       <tr>
         <td className="text-center ">
           <div style={{ width: '50px', height: 'auto' }}>
-            {product.images.length ? (
+            {product.images && product.images.length ? (
               <ModalImage small={product.images[0].url} large={product.images[0].url} />
             ) : (
               <ModalImage small={laptop} large={laptop} />

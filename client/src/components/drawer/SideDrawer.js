@@ -25,7 +25,7 @@ const SideDrawer = () => {
       {cart.map((p) => (
         <div key={p._id} className="row">
           <div className="col">
-            {p.images[0] ? (
+            {p.images && p.images[0] ? (
               <div
                 className="d-flex justify-content-between align-items-center mb-2 p-1 text-white shadow-lg bg-body"
                 style={{ backgroundColor: '#2c2c6c' }}
