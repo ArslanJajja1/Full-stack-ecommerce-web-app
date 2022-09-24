@@ -14,7 +14,7 @@ const ProductCreateForm = ({
   const { title, description, price, categories, category, subs, shipping, quantity, images, colors, brands, color, brand } =
     values;
   return (
-    <form onSubmit={handleSubmit} className="text-white font-weight-bold">
+    <form onSubmit={handleSubmit} className="text-white font-weight-bold productCard-container shadow-lg bg-body py-2 px-3">
       <div className="form-group">
         <label htmlFor="title">Title</label>
         <input
