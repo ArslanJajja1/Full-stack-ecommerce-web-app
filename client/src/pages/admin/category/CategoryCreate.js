@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import AdminNav from '../../../components/nav/AdminNav';
 import { toast } from 'react-toastify';
@@ -23,17 +23,7 @@ const CategoryCreate = () => {
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
-  const updateButtonRef = useRef(null);
-  const deleteButtonRef = useRef(null);
 
-  //Another way to filter categories
-  // const filterCategories = categories.filter((item) => {
-  //     if (keyword === "") {
-  //         return item;
-  //     } else {
-  //         return item.name.toLowerCase().includes(keyword);
-  //     }
-  // });
   useEffect(() => {
     loadCategories();
   }, []);
