@@ -43,9 +43,21 @@ const History = () => {
             <td>{p.count}</td>
             <td>
               {p.product.shipping === 'Yes' ? (
-                <CheckCircleOutlined style={{ color: 'green' }} />
+                <CheckCircleOutlined
+                  ref={(el) => {
+                    if (el) {
+                      el.style.setProperty('color', '#2c2c6c', 'important');
+                    }
+                  }}
+                />
               ) : (
-                <CloseCircleOutlined style={{ color: 'red' }} />
+                <CloseCircleOutlined
+                  ref={(el) => {
+                    if (el) {
+                      el.style.setProperty('color', 'red', 'important');
+                    }
+                  }}
+                />
               )}
             </td>
           </tr>
@@ -64,7 +76,7 @@ const History = () => {
   );
   const showEachOrders = () =>
     orders.map((order, i) => (
-      <div key={i} className="m-5 p-3 card">
+      <div key={i} className="mb-2 p-3 card" style={{ overflowX: 'auto' }}>
         <ShowPaymentInfo order={order} />
         {showOrderInTable(order)}
         <div className="row">
@@ -79,7 +91,12 @@ const History = () => {
           <UserNav />
         </div>
         <div className="col-md-11 text-center">
-          <h4>{orders.length > 0 ? 'User orders' : 'No orders'}</h4>
+          <h4
+            className="text-white  font-weight-bold font-italic mx-auto my-4"
+            style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+          >
+            {orders.length > 0 ? 'User orders' : 'No orders'}
+          </h4>
           {showEachOrders()}
         </div>
       </div>
