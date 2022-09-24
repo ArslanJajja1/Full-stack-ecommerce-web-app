@@ -10,7 +10,7 @@ const CategoryForm = ({ values, setValues, setImageLoading, loading, handleSubmi
         </label>
         <input
           type="text"
-          className="form-control text-white border-bottom"
+          className="form-control text-white "
           id="name"
           name="name"
           placeholder="Enter Name"
@@ -22,7 +22,11 @@ const CategoryForm = ({ values, setValues, setImageLoading, loading, handleSubmi
         <br />
         <FileUpload values={values} setValues={setValues} setImageLoading={setImageLoading} />
         <br />
-        <button type="submit" className="btn bg-info btn-raised text-white">
+        <button
+          type="submit"
+          style={{ color: '#2c2c6c', letterSpacing: '1px' }}
+          className="btn mt-2 bg-white font-weight-bold btn-raised"
+        >
           {loading ? 'Loading...' : 'Save'}
         </button>
       </div>

@@ -83,49 +83,60 @@ const CategoryCreate = () => {
   return (
     <div className="container-fluid mt-2">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-md-1">
           <AdminNav />
         </div>
-        <div className="col ">
-          {imageLoading ? <LoadingOutlined className="text-danger h1" /> : <h4 className="text-white">Create Category</h4>}
-          <CategoryForm
-            values={values}
-            setValues={setValues}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            loading={loading}
-            setImageLoading={setImageLoading}
-          />
-          <LocalSearch keyword={keyword} setKeyword={setKeyword} />
-          {categories.filter(searchedCategories(keyword)).map((category) => (
-            <div key={category._id} className="alert alert-secondary">
-              {category.images.length > 0 ? (
-                <img
-                  src={category.images[0].url}
-                  alt=""
-                  className="mr-2"
-                  style={{ width: '50px', height: 'auto', border: '2px solid #2c2c6c' }}
-                />
-              ) : (
-                <img
-                  src={laptopAvatar}
-                  alt=""
-                  className="mr-2"
-                  style={{ width: '50px', height: 'auto', border: '2px solid #2c2c6c' }}
-                />
-              )}
-              {category.name}
-              <span onClick={(e) => handleRemove(category.slug)} className="btn btn-sm float-right ">
-                <DeleteOutlined className="text-danger" />
-              </span>
-
-              <Link to={`/admin/category/${category.slug}`}>
-                <span className="btn btn-sm float-right">
-                  <EditOutlined className="text-warning" />
+        <div className="col-md-11 ">
+          {imageLoading ? (
+            <LoadingOutlined className="text-danger h1 mx-auto" />
+          ) : (
+            <h4
+              style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+              className="text-white font-weight-bold text-center mx-auto my-4 pb-2"
+            >
+              Create Category
+            </h4>
+          )}
+          <div className="text-white font-weight-bold productCard-container shadow-lg bg-body py-2 px-3">
+            <CategoryForm
+              values={values}
+              setValues={setValues}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              loading={loading}
+              setImageLoading={setImageLoading}
+            />
+            <LocalSearch keyword={keyword} setKeyword={setKeyword} />
+            {categories.filter(searchedCategories(keyword)).map((category) => (
+              <div key={category._id} className="alert alert-secondary">
+                {category.images.length > 0 ? (
+                  <img
+                    src={category.images[0].url}
+                    alt=""
+                    className="mr-2"
+                    style={{ width: '50px', height: 'auto', border: '2px solid #2c2c6c' }}
+                  />
+                ) : (
+                  <img
+                    src={laptopAvatar}
+                    alt=""
+                    className="mr-2"
+                    style={{ width: '50px', height: 'auto', border: '2px solid #2c2c6c' }}
+                  />
+                )}
+                {category.name}
+                <span onClick={(e) => handleRemove(category.slug)} className="btn btn-sm float-right ">
+                  <DeleteOutlined className="text-danger" />
                 </span>
-              </Link>
-            </div>
-          ))}
+
+                <Link to={`/admin/category/${category.slug}`}>
+                  <span className="btn btn-sm float-right">
+                    <EditOutlined className="text-warning" />
+                  </span>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>

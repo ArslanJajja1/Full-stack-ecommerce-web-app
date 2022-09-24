@@ -10,7 +10,7 @@ const LocalSearch = ({ keyword, setKeyword }) => {
       type="text"
       value={keyword}
       onChange={handleSearchChange}
-      className="form-control mb-4 text-white border-bottom"
+      className="form-control mb-4 text-white "
       placeholder="Search Categories"
     />
   );
