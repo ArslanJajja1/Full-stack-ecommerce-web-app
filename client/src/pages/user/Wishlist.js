@@ -4,6 +4,7 @@ import { getWishlist, removeWishlist } from '../../functions/user';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { DeleteOutlined } from '@ant-design/icons';
+import AdminProductCard from '../../components/cards/AdminProductCard';
 
 const Wishlist = () => {
   const [wishlist, setWishlist] = useState([]);
@@ -26,15 +27,23 @@ const Wishlist = () => {
           <UserNav />
         </div>
         <div className="col">
-          <h4>Wishlist</h4>
-          {wishlist.map((p) => (
-            <div key={p._id} className="alert alert-secondary d-flex justify-content-between">
+          <h4
+            className="text-white  font-weight-bold font-italic mx-auto my-4"
+            style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+          >
+            Wishlist
+          </h4>
+          {wishlist.map((product) => (
+            <div className="col-lg-3 col-md-4 col-sm-6  mt-3 d-flex justify-content-center align-items-center" key={product._id}>
+              <AdminProductCard product={product} handleRemove={handleRemove} wishlistProduct={true} />
+            </div>
+          ))}
+          {/* <div key={p._id} className="alert alert-secondary d-flex justify-content-between">
               <Link to={`/product/${p.slug}`}>{p.title}</Link>
               <span onClick={(e) => handleRemove(p._id)} className="btn btn-sm">
                 <DeleteOutlined className="text-danger" />
               </span>
-            </div>
-          ))}
+            </div> */}
         </div>
       </div>
     </div>

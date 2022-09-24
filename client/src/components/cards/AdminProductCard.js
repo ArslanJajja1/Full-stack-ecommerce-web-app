@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 const { Meta } = Card;
 
-const AdminProductCard = ({ product, handleRemove }) => {
+const AdminProductCard = ({ product, handleRemove, wishlistProduct = false }) => {
   const dimensions = useWindowDimensions();
   const deviceWidth = dimensions.width;
   const { title, description, images, slug } = product;
@@ -58,9 +58,12 @@ const AdminProductCard = ({ product, handleRemove }) => {
               <span className="pl-1">Edit Product</span>
             </Link>
           </button>
-          <button style={{ color: '#2c2c6c', letterSpacing: '1px' }} className=" btn mt-2 bg-white font-weight-bold btn-raised">
-            <DeleteOutlined ref={deleteButtonRef} className="text-danger" onClick={() => handleRemove(slug)} />{' '}
-            <span>Delete Product</span>
+          <button
+            style={{ color: '#2c2c6c', letterSpacing: '1px' }}
+            className=" btn mt-2 bg-white font-weight-bold btn-raised"
+            onClick={wishlistProduct ? () => handleRemove(product._id) : () => handleRemove(slug)}
+          >
+            <DeleteOutlined ref={deleteButtonRef} className="text-danger" /> <span>Delete Product</span>
           </button>
         </div>
       </div>
