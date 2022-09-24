@@ -59,39 +59,50 @@ const SubCategoryUpdate = () => {
   return (
     <div className="container-fluid mt-2">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-md-1">
           <AdminNav />
         </div>
-        <div className="col">
-          {imageLoading ? <LoadingOutlined className="text-danger h1" /> : <h4 className="text-white">Update Sub Category</h4>}
-          <div className="form-group">
-            <label htmlFor="category" className="text-white font-weight-bold">
-              Parent Category
-            </label>
-            <select
-              name="category"
-              id="category"
-              className="form-control border-bottom text-white"
-              style={{ backgroundColor: '#2c2c6c' }}
-              onChange={(e) => setParent(e.target.value)}
+        <div className="col-md-11">
+          {imageLoading ? (
+            <LoadingOutlined className="text-danger h1" />
+          ) : (
+            <h4
+              style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+              className="text-white font-weight-bold text-center mx-auto my-4 pb-2"
             >
-              <option>Please select</option>
-              {categories.length > 0 &&
-                categories.map((c) => (
-                  <option key={c._id} value={c._id} selected={c._id === parent}>
-                    {c.name}
-                  </option>
-                ))}
-            </select>
+              Update Sub Category
+            </h4>
+          )}
+          <div className="text-white font-weight-bold productCard-container shadow-lg bg-body py-2 px-3">
+            <div className="form-group">
+              <label htmlFor="category" className="text-white font-weight-bold">
+                Parent Category
+              </label>
+              <select
+                name="category"
+                id="category"
+                className="form-control border-bottom text-white"
+                style={{ backgroundColor: '#2c2c6c' }}
+                onChange={(e) => setParent(e.target.value)}
+              >
+                <option>Please select</option>
+                {categories.length > 0 &&
+                  categories.map((c) => (
+                    <option key={c._id} value={c._id} selected={c._id === parent}>
+                      {c.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <CategoryForm
+              values={values}
+              setValues={setValues}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              loading={loading}
+              setImageLoading={setImageLoading}
+            />
           </div>
-          <CategoryForm
-            values={values}
-            setValues={setValues}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            loading={loading}
-            setImageLoading={setImageLoading}
-          />
         </div>
       </div>
     </div>
