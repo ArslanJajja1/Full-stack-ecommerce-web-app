@@ -75,10 +75,10 @@ const History = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-md-1">
           <UserNav />
         </div>
-        <div className="col text-center">
+        <div className="col-md-11 text-center">
           <h4>{orders.length > 0 ? 'User orders' : 'No orders'}</h4>
           {showEachOrders()}
         </div>
