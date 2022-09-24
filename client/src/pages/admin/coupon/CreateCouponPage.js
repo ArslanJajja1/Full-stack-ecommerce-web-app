@@ -58,69 +58,90 @@ const CreateCouponPage = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-md-1">
           <AdminNav />
         </div>
-        <div className="col-md-10">
-          {loading ? <h4 className="text-danger">Loading...</h4> : <h4>Coupon</h4>}
-          <form onSubmit={handleSubmit}>
-            <div className="form-group">
-              <label className="text-muted">Name</label>
-              <input
-                type="text"
-                className="form-control"
-                onChange={(e) => setName(e.target.value)}
-                value={name}
-                autoFocus
-                required
-              />
+        <div className="col-md-11">
+          {loading ? (
+            <h4 className="text-white">Loading...</h4>
+          ) : (
+            <h4
+              style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+              className="text-white font-weight-bold text-center mx-auto my-4 pb-2"
+            >
+              Coupon
+            </h4>
+          )}
+          <div className="text-white font-weight-bold productCard-container shadow-lg bg-body py-2 px-3 mb-4">
+            <form onSubmit={handleSubmit}>
+              <div className="form-group">
+                <label className="text-white">Name</label>
+                <input
+                  type="text"
+                  className="form-control text-white"
+                  onChange={(e) => setName(e.target.value)}
+                  value={name}
+                  autoFocus
+                  required
+                  placeholder="Enter Coupon Name"
+                />
+              </div>
+              <div className="form-group">
+                <label className="text-white">Discount %</label>
+                <input
+                  type="text"
+                  className="form-control text-white"
+                  onChange={(e) => setDiscount(e.target.value)}
+                  value={discount}
+                  required
+                  placeholder="Enter Discount %"
+                />
+              </div>
+              <div className="form-group">
+                <label className="text-white">Expiry</label>
+                <DatePicker
+                  className="form-control text-white"
+                  selected={new Date()}
+                  value={expiry}
+                  required
+                  onChange={(date) => setExpiry(date)}
+                  placeholder="Click to Add Expiry Date"
+                />
+              </div>
+              <button
+                style={{ color: '#2c2c6c', letterSpacing: '1px' }}
+                className="btn mt-2 bg-white font-weight-bold btn-raised"
+              >
+                Save
+              </button>
+            </form>
+            <br />
+            <h4 className="text-white">{coupons.length} Coupons</h4>
+            <div style={{ overflowX: 'auto' }}>
+              <table className="table table-bordered">
+                <thead className="thead-light">
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Expiry</th>
+                    <th scope="col">Discount</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody style={{ backgroundColor: '#2c2c6c' }}>
+                  {coupons.map((c) => (
+                    <tr key={c._id}>
+                      <td>{c.name}</td>
+                      <td>{new Date(c.expiry).toLocaleDateString()}</td>
+                      <td>{c.discount}%</td>
+                      <td>
+                        <DeleteOutlined onClick={(e) => handleRemove(c._id)} className="text-danger pointer" />
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
             </div>
-            <div className="form-group">
-              <label className="text-muted">Discount %</label>
-              <input
-                type="text"
-                className="form-control"
-                onChange={(e) => setDiscount(e.target.value)}
-                value={discount}
-                required
-              />
-            </div>
-            <div className="form-group">
-              <label className="text-muted">Expiry</label>
-              <DatePicker
-                className="form-control"
-                selected={new Date()}
-                value={expiry}
-                required
-                onChange={(date) => setExpiry(date)}
-              />
-            </div>
-            <button className="btn btn-outline-primary">Save</button>
-          </form>
-          <br />
-          <h4>{coupons.length} Coupons</h4>
-          <table className="table table-bordered">
-            <thead className="thead-light">
-              <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Expiry</th>
-                <th scope="col">Discount</th>
-                <th scope="col">Delete</th>
-              </tr>
-            </thead>
-            <tbody>
-              {coupons.map((c) => (
-                <tr key={c._id}>
-                  <td>{c.name}</td>
-                  <td>{new Date(c.expiry).toLocaleDateString()}</td>
-                  <td>{c.discount}%</td>
-                  <td>
-                    <DeleteOutlined onClick={(e) => handleRemove(c._id)} className="text-danger pointer" />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          </div>
         </div>
       </div>
     </div>
