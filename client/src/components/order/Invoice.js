@@ -22,13 +22,13 @@ const Invoice = ({ order }) => (
         </TableHeader>
       </Table>
 
-      <Table data={order.products}>
+      <Table data={order?.products}>
         <TableBody>
-          <DataTableCell getContent={(x) => x.product.title} />
-          <DataTableCell getContent={(x) => `$${x.product.price}`} />
-          <DataTableCell getContent={(x) => x.count} />
-          <DataTableCell getContent={(x) => x.product.brand} />
-          <DataTableCell getContent={(x) => x.product.color} />
+          <DataTableCell getContent={(x) => x?.product?.title} />
+          <DataTableCell getContent={(x) => `$${x?.product?.price}`} />
+          <DataTableCell getContent={(x) => x?.count} />
+          <DataTableCell getContent={(x) => x?.product?.brand} />
+          <DataTableCell getContent={(x) => x?.product?.color} />
         </TableBody>
       </Table>
 
