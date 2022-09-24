@@ -83,69 +83,92 @@ const SubCategoryCreate = () => {
   return (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-2">
+        <div className="col-md-1">
           <AdminNav />
         </div>
-        <div className="col">
-          {imageLoading ? <LoadingOutlined className="text-danger h1" /> : <h4 className="text-white">Create Sub Category</h4>}
-          <div className="form-group">
-            <label htmlFor="category" className="text-white font-weight-bold ">
-              Parent Category
-            </label>
-            <select
-              name="category"
-              id="category"
-              className="form-control border-bottom text-white"
-              style={{ backgroundColor: '#2c2c6c' }}
-              onChange={(e) => setCategory(e.target.value)}
+        <div className="col-md-11">
+          {imageLoading ? (
+            <LoadingOutlined className="text-danger h1" />
+          ) : (
+            <h4
+              style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+              className="text-white font-weight-bold text-center mx-auto my-4 pb-2"
             >
-              <option>Please select</option>
-              {categories.length > 0 &&
-                categories.map((c) => (
-                  <option key={c._id} value={c._id}>
-                    {c.name}
-                  </option>
-                ))}
-            </select>
-          </div>
-          <CategoryForm
-            values={values}
-            setValues={setValues}
-            handleChange={handleChange}
-            handleSubmit={handleSubmit}
-            loading={loading}
-            setImageLoading={setImageLoading}
-          />
-          <LocalSearch keyword={keyword} setKeyword={setKeyword} />
-          {subCategories.filter(searchedCategories(keyword)).map((sub) => (
-            <div key={sub._id} className="alert alert-secondary">
-              {sub.images.length > 0 ? (
-                <img
-                  src={sub.images[0].url}
-                  alt=""
-                  className="mr-2"
-                  style={{ width: '50px', height: 'auto', border: '2px solid #2c2c6c' }}
-                />
-              ) : (
-                <img
-                  src={laptopAvatar}
-                  alt=""
-                  className="mr-2"
-                  style={{ width: '50px', height: 'auto', border: '2px solid #2c2c6c' }}
-                />
-              )}
-              {sub.name}
-              <span onClick={(e) => handleRemove(sub.slug)} className="btn btn-sm float-right">
-                <DeleteOutlined className="text-danger" />
-              </span>
-
-              <Link to={`/admin/sub/${sub.slug}`}>
-                <span className="btn btn-sm float-right">
-                  <EditOutlined className="text-warning" />
-                </span>
-              </Link>
+              Create Sub Category
+            </h4>
+          )}
+          <div className="text-white font-weight-bold productCard-container shadow-lg bg-body py-2 px-3">
+            <div className="form-group">
+              <label htmlFor="category" className="text-white font-weight-bold ">
+                Parent Category
+              </label>
+              <select
+                name="category"
+                id="category"
+                className="form-control border-bottom text-white"
+                style={{ backgroundColor: '#2c2c6c' }}
+                onChange={(e) => setCategory(e.target.value)}
+              >
+                <option>Please select</option>
+                {categories.length > 0 &&
+                  categories.map((c) => (
+                    <option key={c._id} value={c._id}>
+                      {c.name}
+                    </option>
+                  ))}
+              </select>
             </div>
-          ))}
+            <CategoryForm
+              values={values}
+              setValues={setValues}
+              handleChange={handleChange}
+              handleSubmit={handleSubmit}
+              loading={loading}
+              setImageLoading={setImageLoading}
+            />
+            <LocalSearch keyword={keyword} setKeyword={setKeyword} />
+            {subCategories.filter(searchedCategories(keyword)).map((sub) => (
+              <div key={sub._id} className="alert alert-secondary">
+                {sub.images.length > 0 ? (
+                  <img
+                    src={sub.images[0].url}
+                    alt=""
+                    className="mr-2"
+                    style={{ width: '50px', height: '50px', border: '2px solid #2c2c6c', borderRadius: '100%' }}
+                  />
+                ) : (
+                  <img
+                    src={laptopAvatar}
+                    alt=""
+                    className="mr-2"
+                    style={{ width: '50px', height: '50px', border: '2px solid #2c2c6c', borderRadius: '100%' }}
+                  />
+                )}
+                {sub.name}
+                <span onClick={(e) => handleRemove(sub.slug)} className="btn btn-sm float-right">
+                  <DeleteOutlined
+                    ref={(el) => {
+                      if (el) {
+                        el.style.setProperty('color', 'red', 'important');
+                      }
+                    }}
+                  />
+                </span>
+
+                <Link to={`/admin/sub/${sub.slug}`}>
+                  <span className="btn btn-sm float-right">
+                    <EditOutlined
+                      ref={(el) => {
+                        if (el) {
+                          el.style.setProperty('color', '#2c2c6c', 'important');
+                        }
+                      }}
+                    />
+                  </span>
+                </Link>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
