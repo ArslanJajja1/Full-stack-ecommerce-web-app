@@ -1,15 +1,16 @@
 import React from 'react';
 
 const ShowPaymentInfo = ({ order, showStatus = true }) => {
+  console.log('payment info ...', order);
   return (
     <div className="d-flex justify-content-between align-items-center flex-wrap">
       <span>
-        <p className="badge bg-info text-white"> Order Id </p>:{order.paymentIntent.id}
+        <p className="badge bg-info text-white"> Order Id </p>:{order.paymentIntent.id || order._id}
       </span>
       {' | '}
       <span>
         <p className="badge bg-info text-white"> Amount </p>:
-        {(order.paymentIntent.amount /= 100).toLocaleString('en-US', {
+        {(order.paymentIntent.amount /= 10).toLocaleString('en-US', {
           style: 'currency',
           currency: 'USD',
         })}
