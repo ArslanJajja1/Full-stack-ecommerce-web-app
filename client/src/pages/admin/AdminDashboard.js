@@ -28,7 +28,12 @@ const AdminDashboard = () => {
           <AdminNav />
         </div>
         <div className="col-md-10">
-          <h4>Admin Dashboard</h4>
+          <h4
+            className="text-white  font-weight-bold font-italic mx-auto my-4"
+            style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+          >
+            Admin Dashboard
+          </h4>
           <Orders orders={orders} handleStatusChange={handleStatusChange} />
         </div>
       </div>
