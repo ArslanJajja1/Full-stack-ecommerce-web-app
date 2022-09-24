@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import AdminNav from '../../../components/nav/AdminNav';
 import { toast } from 'react-toastify';
@@ -23,6 +23,9 @@ const CategoryCreate = () => {
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+  const updateButtonRef = useRef(null);
+  const deleteButtonRef = useRef(null);
+
   //Another way to filter categories
   // const filterCategories = categories.filter((item) => {
   //     if (keyword === "") {
@@ -126,12 +129,24 @@ const CategoryCreate = () => {
                 )}
                 {category.name}
                 <span onClick={(e) => handleRemove(category.slug)} className="btn btn-sm float-right ">
-                  <DeleteOutlined className="text-danger" />
+                  <DeleteOutlined
+                    ref={(el) => {
+                      if (el) {
+                        el.style.setProperty('color', 'red', 'important');
+                      }
+                    }}
+                  />
                 </span>
 
                 <Link to={`/admin/category/${category.slug}`}>
                   <span className="btn btn-sm float-right">
-                    <EditOutlined className="text-warning" />
+                    <EditOutlined
+                      ref={(el) => {
+                        if (el) {
+                          el.style.setProperty('color', '#2c2c6c', 'important');
+                        }
+                      }}
+                    />
                   </span>
                 </Link>
               </div>
