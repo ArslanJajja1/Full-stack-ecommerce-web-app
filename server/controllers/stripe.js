@@ -21,9 +21,9 @@ exports.createPaymentIntent = async (req, res) => {
   let finalAmount = 0;
 
   if (couponApplied && totalAfterDiscount) {
-    finalAmount = totalAfterDiscount * 100;
+    finalAmount = Math.ceil(totalAfterDiscount * 100);
   } else {
-    finalAmount = cartTotal * 100;
+    finalAmount = Math.ceil(cartTotal * 100);
   }
   console.log('final amount', finalAmount);
   // create payment intent with order amount and currency
