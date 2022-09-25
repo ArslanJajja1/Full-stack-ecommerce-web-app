@@ -33,6 +33,7 @@ import SideDrawer from './components/drawer/SideDrawer';
 import Checkout from './pages/Checkout';
 import CreateCouponPage from './pages/admin/coupon/CreateCouponPage';
 import Payment from './pages/Payment';
+import Footer from './components/footer/Footer';
 
 const App = () => {
   const dispatch = useDispatch();
@@ -186,6 +187,7 @@ const App = () => {
           }
         />
       </Routes>
+      <Footer />
     </>
   );
 };
