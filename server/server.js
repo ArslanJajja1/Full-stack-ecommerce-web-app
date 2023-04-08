@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const fs = require('fs');
+const helmet = require('helmet')
 require('dotenv').config();
 
 const app = express();
@@ -16,13 +17,13 @@ mongoose
     console.log(`Database connection error : ${error}`);
   });
 // Middlewares
-app.use(morgan('dev'));
 app.use(bodyParser.json({ limit: '2mb' }));
-app.use(cors());
+app.use(helmet())
 // Route Middlewares
 fs.readdirSync('./routes').map((r) => app.use('/api', require('./routes/' + r)));
 // Port
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
+  console.log(app.get('env'))
 });
