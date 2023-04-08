@@ -47,8 +47,8 @@ const ProductCard = ({ product }) => {
         style={{
           minHeight: '300px',
           maxHeight: '450px',
-          minWidth: '250px',
-          maxWidth: '300px',
+          minWidth: '200px',
+          maxWidth: '250px',
           background: '#2c2c6c',
         }}
       >

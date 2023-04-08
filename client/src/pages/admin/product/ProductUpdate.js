@@ -102,14 +102,15 @@ const ProductUpdate = (props) => {
     return (
         <div className="container-fluid">
             <div className="row">
-                <div className="col-md-2">
+                <div className="col-md-1">
                     <AdminNav />
                 </div>
-                <div className="col-md-10">
+                <div className="col-md-11">
                     {imageLoading ? (
                         <LoadingOutlined className="text-danger h1" />
                     ) : (
-                        <h4>Product Update</h4>
+                        <h4 className="text-white  font-weight-bold font-italic mx-auto my-4"
+                        style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}>Product Update</h4>
                     )}
                     <hr />
                     <div className="p-3">

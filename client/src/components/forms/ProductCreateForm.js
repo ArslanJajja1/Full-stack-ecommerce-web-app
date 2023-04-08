@@ -53,7 +53,7 @@ const ProductCreateForm = ({
       </div>
       <div className="form-group">
         <label htmlFor="shipping">Shipping</label>
-        <select name="shipping" id="shipping" className="form-control text-white" onChange={handleChange}>
+        <select name="shipping" id="shipping" style={{ backgroundColor: '#2c2c6c' }} className="form-control text-white" onChange={handleChange}>
           <option value="No">No</option>
           <option value="Yes">Yes</option>
         </select>

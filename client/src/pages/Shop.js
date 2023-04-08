@@ -276,14 +276,14 @@ const Shop = () => {
       <Drawer title="Filter Products" width={280} className="" placement="left" size="default" onClose={onClose} open={open}>
         <div className="">
           <h4 className="text-center font-italic border-bottom pb-1">Search, What you are thinking...🤔</h4>
-          <MenuOutlined onClick={() => setOpen(true)} style={{ color: 'white' }} className="hamburger" />
+          <MenuOutlined onClick={() => setOpen(true)} style={{ color: 'black' }} className="hamburger" />
           <Menu mode="inline" defaultOpenKeys={['1', '2', '3', '4', '5', '6', '7']}>
             {/* //Price submenu */}
             <SubMenu
               key="1"
               title={
-                <span className="h6">
-                  <DollarOutlined /> Price
+                <span className="h6 filter-heading-bg">
+                  <DollarOutlined /> <span >Price</span>
                 </span>
               }
             >
@@ -302,7 +302,7 @@ const Shop = () => {
             <SubMenu
               key="2"
               title={
-                <span className="h6">
+                <span className="h6 filter-heading-bg">
                   <DownSquareOutlined /> Categories
                 </span>
               }
@@ -313,7 +313,7 @@ const Shop = () => {
             <SubMenu
               key="3"
               title={
-                <span className="h6">
+                <span className="h6 filter-heading-bg">
                   <StarOutlined /> Ratings
                 </span>
               }
@@ -324,7 +324,7 @@ const Shop = () => {
             <SubMenu
               key="4"
               title={
-                <span className="h6">
+                <span className="h6 filter-heading-bg" >
                   <DownSquareOutlined /> Sub Categories
                 </span>
               }
@@ -335,7 +335,7 @@ const Shop = () => {
             <SubMenu
               key="5"
               title={
-                <span className="h6">
+                <span className="h6 filter-heading-bg">
                   <DownSquareOutlined /> Brands
                 </span>
               }
@@ -346,7 +346,7 @@ const Shop = () => {
             <SubMenu
               key="6"
               title={
-                <span className="h6">
+                <span className="h6 filter-heading-bg">
                   <DownSquareOutlined /> Colors
                 </span>
               }
@@ -357,7 +357,7 @@ const Shop = () => {
             <SubMenu
               key="7"
               title={
-                <span className="h6">
+                <span className="h6 filter-heading-bg">
                   <DownSquareOutlined /> Shipping
                 </span>
               }

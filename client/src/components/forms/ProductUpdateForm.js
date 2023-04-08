@@ -29,14 +29,14 @@ const ProductUpdateForm = ({
         brand,
     } = values;
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="text-white font-weight-bold productCard-container shadow-lg bg-body py-2 px-3">
             <div className="form-group">
                 <label htmlFor="title">Title</label>
                 <input
                     type="text"
                     name="title"
                     id="title"
-                    className="form-control"
+                    className="form-control text-white"
                     value={title}
                     onChange={handleChange}
                 />
@@ -47,7 +47,7 @@ const ProductUpdateForm = ({
                     type="text"
                     name="description"
                     id="description"
-                    className="form-control"
+                    className="form-control text-white"
                     value={description}
                     onChange={handleChange}
                 />
@@ -58,7 +58,7 @@ const ProductUpdateForm = ({
                     type="number"
                     name="price"
                     id="price"
-                    className="form-control"
+                    className="form-control text-white"
                     value={price}
                     onChange={handleChange}
                 />
@@ -68,7 +68,8 @@ const ProductUpdateForm = ({
                 <select
                     name="shipping"
                     id="shipping"
-                    className="form-control"
+                    className="form-control text-white"
+                    style={{ backgroundColor: '#2c2c6c' }} 
                     value={shipping}
                     onChange={handleChange}
                 >
@@ -82,7 +83,7 @@ const ProductUpdateForm = ({
                     type="number"
                     name="quantity"
                     id="quantity"
-                    className="form-control"
+                    className="form-control text-white"
                     value={quantity}
                     onChange={handleChange}
                 />
@@ -92,7 +93,8 @@ const ProductUpdateForm = ({
                 <select
                     name="color"
                     id="color"
-                    className="form-control"
+                    className="form-control text-white"
+                    style={{ backgroundColor: '#2c2c6c' }} 
                     value={color}
                     onChange={handleChange}
                 >
@@ -109,7 +111,8 @@ const ProductUpdateForm = ({
                 <select
                     name="brand"
                     id="brand"
-                    className="form-control"
+                    className="form-control text-white"
+                    style={{ backgroundColor: '#2c2c6c' }} 
                     value={brand}
                     onChange={handleChange}
                 >
@@ -126,7 +129,8 @@ const ProductUpdateForm = ({
                 <select
                     name="category"
                     id="category"
-                    className="form-control"
+                    className="form-control text-white"
+                    style={{ backgroundColor: '#2c2c6c' }} 
                     value={selectedCategory ? selectedCategory : category._id}
                     onChange={handleCategoryChange}
                 >
