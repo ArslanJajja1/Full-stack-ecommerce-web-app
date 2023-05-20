@@ -19,10 +19,15 @@ mongoose
 // Middlewares
 app.use(bodyParser.json({ limit: '2mb' }));
 app.use(helmet())
+app.use(cors())
 // Route Middlewares
+app.get('/',(req,res)=>res.send("Helloooooooo"))
 fs.readdirSync('./routes').map((r) => app.use('/api', require('./routes/' + r)));
 // Port
 const port = process.env.PORT || 5000;
+if(process.env.NODE_ENV=='production'){
+  app.use(express.static("client/build/"))
+}
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
   console.log(app.get('env'))
