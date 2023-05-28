@@ -4,7 +4,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import StripeCheckout from '../components/stripe/StripeCheckout';
 import '../css/stripe.css';
 
-const REACT_APP_STRIPE_KEY = pk_test_51L8ZspEkjmpgd6jONqtM1Bx9mTd7w0qRkwRsXkDzSG0flsotPD7Y6pjRATsgey9FGHX0ZackY9qVmWOR3rth6szd00IIZj0hLz
+const REACT_APP_STRIPE_KEY = 'pk_test_51L8ZspEkjmpgd6jONqtM1Bx9mTd7w0qRkwRsXkDzSG0flsotPD7Y6pjRATsgey9FGHX0ZackY9qVmWOR3rth6szd00IIZj0hLz'
 const promise = loadStripe(REACT_APP_STRIPE_KEY);
 const Payment = () => {
   return (
