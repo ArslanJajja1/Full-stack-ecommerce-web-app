@@ -21,7 +21,6 @@ app.use(bodyParser.json({ limit: '2mb' }));
 app.use(helmet())
 app.use(cors())
 // Route Middlewares
-app.get('/',(req,res)=>res.send("Helloooooooo"))
 fs.readdirSync('./routes').map((r) => app.use('/api', require('./routes/' + r)));
 // Port
 const port = process.env.PORT || 8000;
