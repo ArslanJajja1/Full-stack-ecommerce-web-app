@@ -3,7 +3,7 @@
 
  const firebaseConfig = {
   apiKey: "AIzaSyCznmCT9cgcNLcA94s8FpIa2V-vyTBqLp8",
-  authDomain: "https://ecommy.herokuapp.com",
+  authDomain: "ecommerce-82d33.firebaseapp.com",
   projectId: "ecommerce-82d33",
   storageBucket: "ecommerce-82d33.appspot.com",
   messagingSenderId: "977082123243",
