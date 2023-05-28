@@ -17,9 +17,7 @@ mongoose
     console.log(`Database connection error : ${error}`);
   });
 // Middlewares
-app.use(bodyParser.json({ limit: '2mb' }));
-app.use(helmet())
-app.use(cors())
+app.use(bodyParser.json({ limit: '10mb' }));
 // Route Middlewares
 fs.readdirSync('./routes').map((r) => app.use('/api', require('./routes/' + r)));
 // Port
