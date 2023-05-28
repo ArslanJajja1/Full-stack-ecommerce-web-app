@@ -1,10 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const morgan = require('morgan');
-const cors = require('cors');
 const bodyParser = require('body-parser');
 const fs = require('fs');
-const helmet = require('helmet')
 require('dotenv').config();
 
 const app = express();
@@ -31,5 +28,4 @@ if(process.env.NODE_ENV=='production'){
 }
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-  console.log(app.get('env'))
 });
