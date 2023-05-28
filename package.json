@@ -1,7 +1,7 @@
 {
   "name": "server",
   "version": "1.0.0",
-  "description": "Nodejs backend api for the ecommerce web application",
+  "description": "Ecommy : MERN Stack ecommerce web application",
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
