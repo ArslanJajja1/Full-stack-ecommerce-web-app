@@ -5,6 +5,8 @@ import { useSelector } from 'react-redux';
 import { sendPasswordResetEmail } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 
+const REACT_APP_FORGOT_PASSWORD_REDIRECT='https://ecommy.herokuapp.com/login'
+
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [loading, setLoading] = useState(false);
@@ -19,7 +21,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setLoading(true);
     const config = {
-      url: process.env.REACT_APP_FORGOT_PASSWORD_REDIRECT,
+      url: REACT_APP_FORGOT_PASSWORD_REDIRECT,
       handleCodeInApp: true,
     };
     await sendPasswordResetEmail(auth, email, config)

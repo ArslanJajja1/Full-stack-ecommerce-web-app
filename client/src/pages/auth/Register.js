@@ -4,6 +4,7 @@ import { sendSignInLinkToEmail } from 'firebase/auth';
 import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+const REACT_APP_REGISTER_REDIRECT_URL='https://ecommy.herokuapp.com/register/complete'
 
 const Register = () => {
   const [email, setEmail] = useState('');
@@ -17,7 +18,7 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const config = {
-      url: process.env.REACT_APP_REGISTER_REDIRECT_URL,
+      url: REACT_APP_REGISTER_REDIRECT_URL,
       handleCodeInApp: true,
     };
     await sendSignInLinkToEmail(auth, email, config);

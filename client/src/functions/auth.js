@@ -1,8 +1,9 @@
 import axios from "axios";
+const REACT_APP_API = 'https://ecommy.herokuapp.com/api'
 
 export const createOrUpdateUser = async (authToken) => {
     return await axios.post(
-        `${process.env.REACT_APP_API}/create-or-update-user`,
+        `${REACT_APP_API}/create-or-update-user`,
         {},
         {
             headers: {
@@ -14,7 +15,7 @@ export const createOrUpdateUser = async (authToken) => {
 
 export const currentUser = async (authToken) => {
     return axios.post(
-        `${process.env.REACT_APP_API}/current-user`,
+        `${REACT_APP_API}/current-user`,
         {},
         {
             headers: {
@@ -26,7 +27,7 @@ export const currentUser = async (authToken) => {
 
 export const currentAdmin = async (authToken) => {
     return axios.post(
-        `${process.env.REACT_APP_API}/current-admin`,
+        `${REACT_APP_API}/current-admin`,
         {},
         {
             headers: {
