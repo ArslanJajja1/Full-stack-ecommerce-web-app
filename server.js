@@ -17,18 +17,11 @@ mongoose
   });
 // Middlewares
 app.use(bodyParser.json({ limit: '10mb' }));
-const whitelist = ["http://localhost:3000","https://ecommerce-by-arslan.web.app"]
-const corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error("Not allowed by CORS"))
-    }
-  },
-  credentials: true,
-}
-app.use(cors(corsOptions))
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', 'https://ecommerce-by-arslan.web.app, http://localhost:3000');
+  // You can also include other necessary CORS headers here, such as Access-Control-Allow-Methods and Access-Control-Allow-Headers.
+  next();
+});
 
 
 // Route Middlewares
