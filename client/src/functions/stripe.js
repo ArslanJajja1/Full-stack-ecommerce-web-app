@@ -1,5 +1,5 @@
 import axios from 'axios';
-const REACT_APP_API = 'https://ecommy.herokuapp.com/api'
+const REACT_APP_API = process.env.REACT_APP_API
 
 export const createPaymentIntent = async (coupon, authtoken) => {
   return await axios.post(

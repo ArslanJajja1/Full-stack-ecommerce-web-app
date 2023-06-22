@@ -1,5 +1,5 @@
 import axios from 'axios';
-const REACT_APP_API = 'https://ecommy.herokuapp.com/api'
+const REACT_APP_API = process.env.REACT_APP_API
 export const userCart = async (cart, authtoken) =>
   await axios.post(`${REACT_APP_API}/user/cart`, { cart }, { headers: { authtoken } });
 export const getUserCart = async (authtoken) =>
