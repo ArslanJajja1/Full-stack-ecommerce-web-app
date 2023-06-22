@@ -22,7 +22,7 @@ const CategoryHome = () => {
             <div className="row">
                 <div className="col">
                     {loading ? (
-                        <h4 className="text-center p-3 mt-5 mb-5 display-4jumbotron">
+                        <h4 className="text-center p-3 mt-5 mb-5 display-4 jumbotron">
                             Loading...
                         </h4>
                     ) : (
