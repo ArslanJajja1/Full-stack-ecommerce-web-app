@@ -18,10 +18,20 @@ mongoose
 // Middlewares
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use((req, res, next) => {
-  res.setHeader('Access-Control-Allow-Origin', 'https://ecommerce-by-arslan.web.app, http://localhost:3000');
-  // You can also include other necessary CORS headers here, such as Access-Control-Allow-Methods and Access-Control-Allow-Headers.
+  const allowedOrigins = ['https://ecommerce-by-arslan.web.app', 'http://localhost:3000'];
+  const origin = req.headers.origin;
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader('Access-Control-Allow-Origin', origin);
+  }
+
+  // Set other necessary CORS headers
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+
   next();
 });
+
 
 
 // Route Middlewares
