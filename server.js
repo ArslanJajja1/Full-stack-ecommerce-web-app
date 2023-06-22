@@ -10,11 +10,12 @@ const app = express();
 mongoose
   .connect(process.env.DATABASE_URL)
   .then(() => {
-    console.log(`Database connected successfully !`);
+    console.log(`Database connected successfully!`);
   })
   .catch((error) => {
-    console.log(`Database connection error : ${error}`);
+    console.log(`Database connection error: ${error}`);
   });
+
 // Middlewares
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use((req, res, next) => {
@@ -27,19 +28,18 @@ app.use((req, res, next) => {
 
   // Set other necessary CORS headers
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization, authtoken'); // Add 'authtoken' header
 
   next();
 });
 
-
-
 // Route Middlewares
 fs.readdirSync('./routes').map((r) => app.use('/api', require('./routes/' + r)));
+
 // Port
 const port = process.env.PORT || 8000;
 
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
-  console.log(app.get('env'))
+  console.log(app.get('env'));
 });
