@@ -5,9 +5,7 @@
   "main": "server.js",
   "scripts": {
     "dev": "nodemon server.js",
-    "start": "node server.js",
-    "heroku_postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-  },
+    "start": "node server.js"  },
   "author": "Arslan jajja",
   "license": "MIT",
   "dependencies": {
