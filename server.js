@@ -17,9 +17,20 @@ mongoose
   });
 // Middlewares
 app.use(bodyParser.json({ limit: '10mb' }));
-app.use(cors({
-  origin:["https://ecommerce-by-arslan.web.app","http://localhost:3000/"]
-}))
+const whitelist = ["http://localhost:3000","https://ecommerce-by-arslan.web.app"]
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (!origin || whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error("Not allowed by CORS"))
+    }
+  },
+  credentials: true,
+}
+app.use(cors(corsOptions))
+
+
 // Route Middlewares
 fs.readdirSync('./routes').map((r) => app.use('/api', require('./routes/' + r)));
 // Port
