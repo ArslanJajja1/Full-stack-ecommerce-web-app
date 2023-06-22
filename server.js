@@ -17,7 +17,9 @@ mongoose
   });
 // Middlewares
 app.use(bodyParser.json({ limit: '10mb' }));
-app.use(cors())
+app.use(cors({
+  origin:["https://ecommerce-by-arslan.web.app","http://localhost:3000/"]
+}))
 // Route Middlewares
 fs.readdirSync('./routes').map((r) => app.use('/api', require('./routes/' + r)));
 // Port
