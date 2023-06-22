@@ -18,14 +18,7 @@ mongoose
 
 // Middlewares
 app.use(bodyParser.json({ limit: '10mb' }));
-const corsOpts = {
-  origin: '*',
-  credentials: true,
-  methods: ['GET','POST','HEAD','PUT','PATCH','DELETE'],
-  allowedHeaders: ['Content-Type'],
-  exposedHeaders: ['Content-Type']
-};
-app.use(cors(corsOpts));
+app.use(cors());
 
 // Route Middlewares
 fs.readdirSync('./routes').map((r) => app.use('/api', require('./routes/' + r)));
