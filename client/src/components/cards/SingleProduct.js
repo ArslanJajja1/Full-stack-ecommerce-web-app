@@ -71,12 +71,12 @@ const SingleProduct = ({ product, onStarClick, star }) => {
           actions={[
             <Tooltip title={tooltip}>
               <a onClick={handleAddToCart}>
-                <ShoppingCartOutlined className="text-danger" /> <br />
+                <ShoppingCartOutlined className='single_product_icons'/> <br />
                 Add To Cart
               </a>
             </Tooltip>,
-            <a onClick={handleAddToWishist}>
-              <HeartOutlined className="text-info" />
+            <a onClick={handleAddToWishist} >
+              <HeartOutlined className='single_product_icons' />
               <br /> Add To Wishlist
             </a>,
             <RatingModal>
