@@ -88,3 +88,8 @@ body {
 .mt-n4 {
   margin-top: -18rem;
 }
+@media only screen and (max-width: 600px){
+  form {
+    width: 65vw !important;
+}
+}

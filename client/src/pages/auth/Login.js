@@ -123,12 +123,11 @@ const Login = () => {
     <div className="container p-5">
       <div className="row">
         <div
-          className="col-md-6 offset-md-3 text-white mx-auto p-4 text-center shadow-lg bg-body productCard-container"
+          className="col-md-6 offset-md-3 col-sm-12 text-white p-4 text-center shadow-lg bg-body productCard-container"
           style={{
             backgroundColor: "#2c2c6c",
             marginTop: "3.2rem",
-            minWidth: "max-content",
-            maxWidth: "70%",
+            width:"min-content"
           }}
         >
           <h4
