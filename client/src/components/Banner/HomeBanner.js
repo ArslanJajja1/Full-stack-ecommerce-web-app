@@ -20,25 +20,23 @@ const HomeBanner = () => {
     handleWindowResize();
   }, [dimensions]);
   const contentStyle = {
-    maxHeight: '30vh',
+    height: '580px',
     minWidth: '100%',
     maxWidth: '100%',
-    objectFit: 'cover',
-    objectPosition: 'top',
+    backgroundSize:'cover',
+    backgroundPosition:'top'
   };
   return (
     <Carousel autoplay className="w-100" dots={false}>
       <div>
-        <img src={backgroundImageOne} style={contentStyle} alt="backgroundImage" />
+        <img src={backgroundImageFour} style={contentStyle} alt="backgroundImage" />
       </div>
       <div>
         <img src={backgroundImageTwo} style={contentStyle} alt="backgroundImage" />
       </div>
+      
       <div>
-        <img src={backgroundImageThree} style={contentStyle} alt="backgroundImage" />
-      </div>
-      <div>
-        <img src={backgroundImageFour} style={contentStyle} alt="backgroundImage" />
+        <img src={backgroundImageOne} style={contentStyle} alt="backgroundImage" />
       </div>
     </Carousel>
   );
