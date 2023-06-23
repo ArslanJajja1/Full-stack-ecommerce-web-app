@@ -60,6 +60,10 @@ This MERN stack eCommerce project is a comprehensive web application that provid
 ### Categories Management Page In Admin Dashboard
 
 ![Categories Management Page Image](client/public/projectImages/categories-management.png)
+
+### Subcategories Management Page In Admin Dashboard
+
+![Subcategories Management Page Image](client/public/projectImages/subcategories.png)
 ## Features
 
 - Login Registration System:
