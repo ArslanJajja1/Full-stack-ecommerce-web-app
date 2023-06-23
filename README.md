@@ -1,6 +1,8 @@
 # MERN Stack eCommerce Project
 
-This MERN stack eCommerce project is a comprehensive web application that provides a complete solution for online shopping. It offers a wide range of features including user authentication, product management, advanced search options, cart functionality, payment integration, and more.
+This MERN stack eCommerce project is a comprehensive web application that provides a complete solution for online shopping. It offers a wide range of features including user authentication, product management, advanced search options, cart functionality, payment integration, order management, user panel and admin panel.
+
+The backend is deployed on heroku and the frontend is deployed on firebase.
 
 ## Pages
 
@@ -19,6 +21,15 @@ This MERN stack eCommerce project is a comprehensive web application that provid
 ### Shop Page Advance Filtering Feature
 
 ![Shop Page Advance Filtering Feature Image](client/public/projectImages/filtering.png)
+
+### Product Details Page
+
+![Product Details Page Image](client/public/projectImages/product-page.png)
+
+### Star Rating Feature
+
+![Product Details Page Image](client/public/projectImages/star-rating.png)
+
 
 ### Shopping Cart Page
 
@@ -111,7 +122,7 @@ This MERN stack eCommerce project is a comprehensive web application that provid
   - Social login with Google authentication is also available.
 
 - Admin Dashboard and Order Management System:
-  - An admin dashboard allows for easy management of products, orders, and users.
+  - An admin dashboard allows for easy management of products, orders, categories, subcategories and coupons.
   - Order management system enables efficient order tracking and processing.
 
 - Products CRUD with Advanced Features:
@@ -121,7 +132,7 @@ This MERN stack eCommerce project is a comprehensive web application that provid
 
 - Advanced Searching and Filtering:
   - Plenty of advanced searching and filtering options to help users find desired products quickly.
-  - Search by keywords, categories, price range, and more.
+  - Search by keywords, categories,subcategories, price range, colors, brands and shipping .
 
 - Star Rating System:
   - Users can rate and provide feedback on products using a star rating system.
