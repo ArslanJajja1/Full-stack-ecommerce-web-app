@@ -84,7 +84,11 @@ This MERN stack eCommerce project is a comprehensive web application that provid
 
 ### User Registration Page
 
-![Coupons Management Page Image](client/public/projectImages/registration.png)
+![User Registration Page Image](client/public/projectImages/registration.png)
+
+### User Login Page
+
+![User Login Page Image](client/public/projectImages/login.png)
 
 
 ## Features
