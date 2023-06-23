@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/nav/Header';
@@ -185,6 +185,12 @@ const App = () => {
               <Payment />
             </UserRoute>
           }
+        />
+        <Route
+          path="*"
+          element={<div className='w-100 ml-auto my-auto'> <h3 className='text-white'>This page does not exist. </h3>
+          <Link to='/'>Back to Home</Link>
+          </div>}
         />
       </Routes>
       <Footer />
