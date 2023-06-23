@@ -5,7 +5,11 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 const { Meta } = Card;
-
+const imgStyle = {
+  backgroundSize:'cover',
+  backgroundPosition:'center',
+  objectFit:'cover'
+}
 const AdminProductCard = ({ product, handleRemove, wishlistProduct = false }) => {
   const dimensions = useWindowDimensions();
   const deviceWidth = dimensions.width;
@@ -23,7 +27,7 @@ const AdminProductCard = ({ product, handleRemove, wishlistProduct = false }) =>
       <div
         className="productCard-container p-2 shadow-lg bg-body"
         style={{
-          minHeight: '300px',
+          minHeight: '450px',
           maxHeight: '450px',
           minWidth: '250px',
           maxWidth: '300px',
@@ -31,7 +35,7 @@ const AdminProductCard = ({ product, handleRemove, wishlistProduct = false }) =>
         }}
       >
         <div className="productImage-container">
-          <img src={images && images.length ? images[0].url : laptop} alt={title} className="w-100  h-50" />
+          <img src={images && images.length ? images[0].url : laptop} alt={title} style={{height:'250px',...imgStyle}} className="w-100 " />
         </div>
         <div className="productContent">
           <h4 className={`productTitle text-white text-center pt-2 ${deviceWidth < 600}&& h5`}>{`${
