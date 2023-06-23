@@ -32,13 +32,10 @@ const Header = () => {
       className="navbar-container container-fluid d-flex justify-content-between alignt-items-center border-bottom"
       style={{ height: '50px', width: '100%' }}
     >
-      <div className="logo align-self-center text-white font-weight-bold font-italic">
-        <Link to="/" className="text-white">
-          {' '}
+      <div className="logo align-self-center text-white font-weight-bold font-italic w-30">
           E-Commy
-        </Link>
       </div>
-      <div className="rightNavContainer h-100 d-flex align-items-center justify-content-end w-50">
+      <div className="rightNavContainer h-100 d-flex align-items-center justify-content-end w-70">
         <div>
           {dimensions.width < 810 && (
             <MenuOutlined onClick={() => setOpen(true)} style={{ color: 'white' }} className="hamburger" />

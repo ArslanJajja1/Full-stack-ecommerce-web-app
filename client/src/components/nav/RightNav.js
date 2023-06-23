@@ -44,6 +44,7 @@ const RightNav = ({ navMode }) => {
     <Menu
       onClick={handleClick}
       style={{ background: 'transparent', color: 'white', height: '100%', width: '100%', border: 'none' }}
+      className='flex justify-content-between mr-4'
       selectedKeys={[current]}
       mode={navMode}
       theme="dark"
