@@ -7,7 +7,7 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 var settings = {
   infinite: true,
-  slidesToShow: 5,
+  slidesToShow: 4,
   slidesToScroll: 1,
   autoplay: true,
   speed: 2000,
@@ -76,8 +76,8 @@ const SubList = ({ smallDevice }) => {
               src={s.images.length > 0 ? s.images[0].url : laptopAvatar}
               alt=""
             />
-            <p className={`${smallDevice && 'fs-6'} text-white pt-2 text-uppercase font-weight-bold`}>{`${
-              s.name.length > 10 ? `${s.name.substring(0, 10)}...` : s.name
+            <p className={`${smallDevice && 'fs-6'} text-white pt-2 text-center`}>{`${
+              s.name.length > 10 ? s.name : s.name
             } `}</p>
           </Link>
         );

@@ -65,7 +65,7 @@ const Product = () => {
             </div>
           ))
         ) : (
-          <div className="text-center col">No Related Products Available</div>
+          <div className="text-center col text-white">No Related Products Available</div>
         )}
       </div>
     </div>
