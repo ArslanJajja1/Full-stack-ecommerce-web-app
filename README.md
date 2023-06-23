@@ -81,6 +81,12 @@ This MERN stack eCommerce project is a comprehensive web application that provid
 ### Coupons Management Page In Admin Dashboard
 
 ![Coupons Management Page Image](client/public/projectImages/coupons.png)
+
+### User Registration Page
+
+![Coupons Management Page Image](client/public/projectImages/registration.png)
+
+
 ## Features
 
 - Login Registration System:
