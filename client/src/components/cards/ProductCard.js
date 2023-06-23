@@ -8,7 +8,11 @@ import _ from 'lodash';
 import { useDispatch, useSelector } from 'react-redux';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
 const { Meta } = Card;
-
+const imgStyle = {
+  backgroundSize:'cover',
+  backgroundPosition:'center',
+  objectFit:'cover'
+}
 const ProductCard = ({ product }) => {
   const [tooltip, setTooltip] = useState('Click to add');
   const { images, title, description, slug, price } = product;
@@ -45,19 +49,19 @@ const ProductCard = ({ product }) => {
       <div
         className="productCard-container p-2 shadow-lg bg-body"
         style={{
-          minHeight: '300px',
-          maxHeight: '450px',
-          minWidth: '200px',
+          minHeight: '430px',
+          maxHeight: '430px',
+          minWidth: '250px',
           maxWidth: '250px',
           background: '#2c2c6c',
         }}
       >
         <div className="productImage-container">
-          <img src={images && images.length ? images[0].url : laptop} alt={title} className="w-100  h-50" />
+          <img src={images && images.length ? images[0].url : laptop} alt={title} style={{height:'200px',...imgStyle}} className="w-100  h-40" />
         </div>
         <div className="productContent">
           <h4 className={`productTitle text-white text-center pt-2 ${deviceWidth < 600}&& h5`}>{`${
-            title.length > 25 ? `${title.substring(0, 25)}...` : title
+            title.length > 25 ? `${title.substring(0, 25)}...` : `${title} - $${price}`
           } `}</h4>
           <p className="productDescription text-white text-center text-wrap">{`${
             description.length > 30 ? `${description.substring(0, 30)}...` : description
