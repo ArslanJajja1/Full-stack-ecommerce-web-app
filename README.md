@@ -41,10 +41,13 @@ This MERN stack eCommerce project is a comprehensive web application that provid
 
 ![Admin Dashboard Page Image](client/public/projectImages/admin-dashboard.png)
 
-### Admin Order Tracking Page
+### Order Tracking Page In Admin Dashboard
 
-![Wishlist Page Image](client/public/projectImages/admin-order-tracking.png)
+![Admin Order Tracking Page Image](client/public/projectImages/admin-order-tracking.png)
 
+### Product Create Page In Admin Dashboard
+
+![Admin Product Create Page Image](client/public/projectImages/product-create.png)
 ## Features
 
 - Login Registration System:
