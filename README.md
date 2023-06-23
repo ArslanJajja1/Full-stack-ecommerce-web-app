@@ -3,8 +3,18 @@
 This MERN stack eCommerce project is a comprehensive web application that provides a complete solution for online shopping. It offers a wide range of features including user authentication, product management, advanced search options, cart functionality, payment integration, and more.
 
 ## Pages
+
+### Home Page
+
 ![Home Page Image](client/public/projectImages/home.png)
+
+### Shop Page 
+
 ![Shop Page Image](client/public/projectImages/shop.png)
+
+### Shopping Cart Page
+
+![Cart Page Image](client/public/projectImages/cart.png)
 
 
 ## Features
