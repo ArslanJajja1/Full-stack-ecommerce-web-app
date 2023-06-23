@@ -53,6 +53,11 @@ const Login = () => {
         toast.error(error.message);
       });
   };
+  const handleRecruiterSubmit = (e)=>{
+    e.preventDefault()
+    setEmail('arslanjajja13@gmail.com')
+    setPassword('password')
+  }
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
@@ -105,6 +110,17 @@ const Login = () => {
         placeholder="Your password"
       />
       <br />
+      <Button
+        onClick={handleRecruiterSubmit}
+        type="primary"
+        block
+        style={{ color: "#2c2c6c", letterSpacing: "1px" }}
+        className="btn mt-2 bg-white font-weight-bold btn-raised"
+        icon={<MailOutlined />}
+        size="large"
+      >
+        Recruiter Login
+      </Button>
       <Button
         onClick={handleSubmit}
         type="primary"
