@@ -14,7 +14,11 @@ This MERN stack eCommerce project is a comprehensive web application that provid
 
 ### Shop Page Search Feature
 
-![Shop Page Image](client/public/projectImages/search.png)
+![Shop Page Search Feature Image](client/public/projectImages/search.png)
+
+### Shop Page Advance Filtering Feature
+
+![Shop Page Advance Filtering Feature Image](client/public/projectImages/filtering.png)
 
 ### Shopping Cart Page
 
