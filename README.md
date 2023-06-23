@@ -53,9 +53,13 @@ This MERN stack eCommerce project is a comprehensive web application that provid
 
 ![Admin Product Update Page Image](client/public/projectImages/product-update.png)
 
-### All Products Page In Admin Dashboard
+### Products Management Page In Admin Dashboard
 
 ![All Products Page Image](client/public/projectImages/all-products.png)
+
+### Categories Management Page In Admin Dashboard
+
+![Categories Management Page Image](client/public/projectImages/categories-management.png)
 ## Features
 
 - Login Registration System:
