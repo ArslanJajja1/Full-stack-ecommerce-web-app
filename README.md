@@ -20,6 +20,10 @@ This MERN stack eCommerce project is a comprehensive web application that provid
 
 ![Checkout Page Image](client/public/projectImages/checkout.png)
 
+### Payment Page
+
+![Payment Page Image](client/public/projectImages/payment.png)
+
 
 ## Features
 
