@@ -54,11 +54,11 @@ const productSchema = new mongoose.Schema(
         },
         color: {
             type: String,
-            enum: ["Black", "Brown", "Silver", "White", "Blue"],
+            enum: ["Black", "White", "Gray", "Blue", "Red", "Green", "Yellow", "Pink", "Purple", "Orange", "Brown"]            ,
         },
         brand: {
             type: String,
-            enum: ["Apple", "Samsung", "Microsoft", "Lenovo", "ASUS"],
+            enum: ["Levi's", "Zara", "Gucci", "Armani", "Khadi","Zelbury","Hermes"],
         },
         ratings: {
             type: [

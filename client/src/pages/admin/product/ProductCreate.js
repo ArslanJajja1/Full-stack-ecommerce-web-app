@@ -18,8 +18,8 @@ const initialState = {
   shipping: '',
   quantity: '',
   images: [],
-  colors: ['Black', 'Brown', 'Silver', 'White', 'Blue'],
-  brands: ['Apple', 'Samsung', 'Microsoft', 'Lenovo', 'ASUS'],
+  colors: ["Black", "White", "Gray", "Blue", "Red", "Green", "Yellow", "Pink", "Purple", "Orange", "Brown"]  ,
+  brands: ["Levi's", "Zara", "Gucci", "Armani", "Khadi","Zelbury","Hermes"],
   color: '',
   brand: '',
 };
