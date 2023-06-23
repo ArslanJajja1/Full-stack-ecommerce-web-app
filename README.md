@@ -29,6 +29,10 @@ This MERN stack eCommerce project is a comprehensive web application that provid
 ![User Order Tracking Page Image](client/public/projectImages/order-tracking.png)
 
 
+### Wishlist Page
+
+![Wishlist Page Image](client/public/projectImages/wishlist.png)
+
 ## Features
 
 - Login Registration System:
