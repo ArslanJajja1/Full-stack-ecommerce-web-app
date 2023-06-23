@@ -38,6 +38,10 @@ body {
   max-width: 1320px !important;
   margin-left: auto !important;
   margin-right: auto !important;
+  max-width: 1250px;
+}
+.anticon.single_product_icons {
+    color: blue !important;
 }
 .productCard-container {
   box-shadow: rgba(0, 0, 0, 0.6) 0px 30px 150px 20px;
