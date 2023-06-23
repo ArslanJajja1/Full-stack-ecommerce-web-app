@@ -110,9 +110,9 @@ const Footer = () => {
 
         {/* <!-- Copyright --> */}
         <div className="text-center p-3" style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-          © 2022 Copyright :
-          <a className="text-white ml-1" href="https://www.youtube.com/channel/UC43qMvhZ0MR6g5UOEI3skiQ">
-            Arslan Jajja
+          © 2023 Copyright :
+          <a className="text-white ml-1" href="https://www.youtube.com/@arslancodecorner">
+            Arslan Haroon
           </a>
         </div>
         {/* <!-- Copyright --> */}
