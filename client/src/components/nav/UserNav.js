@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
-import { MenuOutlined } from '@ant-design/icons';
-import { Link, NavLink } from 'react-router-dom';
-import { Drawer } from 'antd';
+import React, { useState } from "react";
+import { MenuOutlined } from "@ant-design/icons";
+import { Link, NavLink } from "react-router-dom";
+import { Drawer } from "antd";
 
 const UserNav = () => {
   const [open, setOpen] = useState(false);
@@ -11,7 +11,7 @@ const UserNav = () => {
   return (
     <>
       <div onClick={() => setOpen(true)} className="d-flex mt-4">
-        <MenuOutlined style={{ color: 'white' }} className="hamburger pr-2" />
+        <MenuOutlined style={{ color: "white" }} className="hamburger pr-2" />
         <p className="pointer text-white font-weight-bold">Menu</p>
       </div>
       <Drawer
@@ -22,7 +22,7 @@ const UserNav = () => {
         onClose={onClose}
         open={open}
         closable={false}
-        drawerStyle={{ backgroundColor: '#2c2c6c', color: 'white' }}
+        drawerStyle={{ backgroundColor: "#2c2c6c", color: "white" }}
       >
         <nav>
           <ul className="nav flex-column">
@@ -30,7 +30,9 @@ const UserNav = () => {
               <NavLink
                 to="/user/history"
                 className={({ isActive }) =>
-                  isActive ? 'nav-link text-white font-weight-bold border-bottom' : 'nav-link text-white font-weight-bold '
+                  isActive
+                    ? "nav-link text-white font-weight-bold border-bottom"
+                    : "nav-link text-white font-weight-bold "
                 }
               >
                 History
@@ -40,7 +42,9 @@ const UserNav = () => {
               <NavLink
                 to="/user/password"
                 className={({ isActive }) =>
-                  isActive ? 'nav-link text-white font-weight-bold border-bottom' : 'nav-link text-white font-weight-bold '
+                  isActive
+                    ? "nav-link text-white font-weight-bold border-bottom"
+                    : "nav-link text-white font-weight-bold "
                 }
               >
                 Password
@@ -50,7 +54,9 @@ const UserNav = () => {
               <NavLink
                 to="/user/wishlist"
                 className={({ isActive }) =>
-                  isActive ? 'nav-link text-white font-weight-bold border-bottom' : 'nav-link text-white font-weight-bold '
+                  isActive
+                    ? "nav-link text-white font-weight-bold border-bottom"
+                    : "nav-link text-white font-weight-bold "
                 }
               >
                 Wishlist

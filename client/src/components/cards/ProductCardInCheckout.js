@@ -5,7 +5,6 @@ import laptop from '../../images/laptop.jpg';
 import { toast } from 'react-toastify';
 import { CheckCircleOutlined, CloseCircleOutlined, CloseOutlined } from '@ant-design/icons';
 const ProductCardInCheckout = ({ product }) => {
-  console.log('product ', product);
   const dispatch = useDispatch();
   const colors = ['Black', 'Brown', 'Silver', 'White', 'Blue'];
   const handleColorChange = (e) => {
@@ -20,7 +19,6 @@ const ProductCardInCheckout = ({ product }) => {
         }
       });
     }
-    console.log('cart updated');
     localStorage.setItem('cart', JSON.stringify(cart));
     dispatch({
       type: 'ADD_TO_CART',

@@ -1,27 +1,35 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import AdminNav from '../../../components/nav/AdminNav';
-import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
-import { EditOutlined, DeleteOutlined, LoadingOutlined } from '@ant-design/icons';
-import { createSubCategory, getSubCategories, removeSubCategory } from '../../../functions/subCategory';
-import { getCategories } from '../../../functions/category';
-import CategoryForm from '../../../components/forms/CategoryForm';
-import LocalSearch from '../../../components/forms/LocalSearch';
-import laptopAvatar from '../../../assets/images/laptop-avatar.jpg';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import AdminNav from "../../../components/nav/AdminNav";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
+import {
+  createSubCategory,
+  getSubCategories,
+  removeSubCategory,
+} from "../../../functions/subCategory";
+import { getCategories } from "../../../functions/category";
+import CategoryForm from "../../../components/forms/CategoryForm";
+import LocalSearch from "../../../components/forms/LocalSearch";
+import laptopAvatar from "../../../assets/images/laptop-avatar.jpg";
 
 const initialState = {
-  name: '',
+  name: "",
   images: [],
 };
 const SubCategoryCreate = () => {
   const [values, setValues] = useState(initialState);
   const [categories, setCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
-  const [category, setCategory] = useState('');
+  const [category, setCategory] = useState("");
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState("");
   const { user } = useSelector((state) => ({ ...state }));
 
   useEffect(() => {
@@ -40,24 +48,21 @@ const SubCategoryCreate = () => {
     createSubCategory({ ...values, parent: category }, user.token)
       .then((res) => {
         setLoading(false);
-        setValues({ name: '', images: [] });
-        console.log('res===>', res);
+        setValues({ name: "", images: [] });
         toast.success(`${res.data.sub.name} created`);
         loadSubCategories();
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
         if (err.response.status === 400) toast.error(err.response.data);
       });
   };
   const handleRemove = (slug) => {
-    if (window.confirm('Delete ? ')) {
+    if (window.confirm("Delete ? ")) {
       // setLoading(true);
       removeSubCategory(slug, user.token)
         .then((res) => {
           setLoading(false);
-          console.log(res);
           toast.error(`${res.data.deleted.name} deleted`);
           loadSubCategories();
         })
@@ -76,7 +81,6 @@ const SubCategoryCreate = () => {
 
   const searchedCategories = (keyword) => {
     return (c) => {
-      console.log('c ', c);
       return c.name.toLowerCase().includes(keyword);
     };
   };
@@ -91,7 +95,11 @@ const SubCategoryCreate = () => {
             <LoadingOutlined className="text-danger h1" />
           ) : (
             <h4
-              style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+              style={{
+                letterSpacing: "3px",
+                borderBottom: "5px solid #4db5ff",
+                width: "fit-content",
+              }}
               className="text-white font-weight-bold text-center mx-auto my-4 pb-2"
             >
               Create Sub Category
@@ -99,14 +107,17 @@ const SubCategoryCreate = () => {
           )}
           <div className="text-white font-weight-bold productCard-container shadow-lg bg-body py-2 px-3">
             <div className="form-group">
-              <label htmlFor="category" className="text-white font-weight-bold ">
+              <label
+                htmlFor="category"
+                className="text-white font-weight-bold "
+              >
                 Parent Category
               </label>
               <select
                 name="category"
                 id="category"
                 className="form-control border-bottom text-white"
-                style={{ backgroundColor: '#2c2c6c' }}
+                style={{ backgroundColor: "#2c2c6c" }}
                 onChange={(e) => setCategory(e.target.value)}
               >
                 <option>Please select</option>
@@ -134,22 +145,35 @@ const SubCategoryCreate = () => {
                     src={sub.images[0].url}
                     alt=""
                     className="mr-2"
-                    style={{ width: '50px', height: '50px', border: '2px solid #2c2c6c', borderRadius: '100%' }}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      border: "2px solid #2c2c6c",
+                      borderRadius: "100%",
+                    }}
                   />
                 ) : (
                   <img
                     src={laptopAvatar}
                     alt=""
                     className="mr-2"
-                    style={{ width: '50px', height: '50px', border: '2px solid #2c2c6c', borderRadius: '100%' }}
+                    style={{
+                      width: "50px",
+                      height: "50px",
+                      border: "2px solid #2c2c6c",
+                      borderRadius: "100%",
+                    }}
                   />
                 )}
                 {sub.name}
-                <span onClick={(e) => handleRemove(sub.slug)} className="btn btn-sm float-right">
+                <span
+                  onClick={(e) => handleRemove(sub.slug)}
+                  className="btn btn-sm float-right"
+                >
                   <DeleteOutlined
                     ref={(el) => {
                       if (el) {
-                        el.style.setProperty('color', 'red', 'important');
+                        el.style.setProperty("color", "red", "important");
                       }
                     }}
                   />
@@ -160,7 +184,7 @@ const SubCategoryCreate = () => {
                     <EditOutlined
                       ref={(el) => {
                         if (el) {
-                          el.style.setProperty('color', '#2c2c6c', 'important');
+                          el.style.setProperty("color", "#2c2c6c", "important");
                         }
                       }}
                     />

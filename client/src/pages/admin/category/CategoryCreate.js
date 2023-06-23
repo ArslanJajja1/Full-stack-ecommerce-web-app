@@ -1,16 +1,24 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import AdminNav from '../../../components/nav/AdminNav';
-import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
-import { EditOutlined, DeleteOutlined, LoadingOutlined } from '@ant-design/icons';
-import { createCategory, getCategories, removeCategory } from '../../../functions/category';
-import CategoryForm from '../../../components/forms/CategoryForm';
-import LocalSearch from '../../../components/forms/LocalSearch';
-import laptopAvatar from '../../../assets/images/laptop-avatar.jpg';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import AdminNav from "../../../components/nav/AdminNav";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import {
+  EditOutlined,
+  DeleteOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
+import {
+  createCategory,
+  getCategories,
+  removeCategory,
+} from "../../../functions/category";
+import CategoryForm from "../../../components/forms/CategoryForm";
+import LocalSearch from "../../../components/forms/LocalSearch";
+import laptopAvatar from "../../../assets/images/laptop-avatar.jpg";
 
 const initialState = {
-  name: '',
+  name: "",
   images: [],
 };
 const CategoryCreate = () => {
@@ -18,7 +26,7 @@ const CategoryCreate = () => {
   const [categories, setCategories] = useState([]);
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState("");
   const { user } = useSelector((state) => ({ ...state }));
   const handleChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
@@ -36,23 +44,21 @@ const CategoryCreate = () => {
     createCategory(values, user.token)
       .then((res) => {
         setLoading(false);
-        setValues({ name: '', images: [] });
+        setValues({ name: "", images: [] });
         toast.success(`${res.data.category.name} created`);
         loadCategories();
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
         if (err.response.status === 400) toast.error(err.response.data);
       });
   };
   const handleRemove = (slug) => {
-    if (window.confirm('Delete ? ')) {
+    if (window.confirm("Delete ? ")) {
       // setLoading(true);
       removeCategory(slug, user.token)
         .then((res) => {
           setLoading(false);
-          console.log(res);
           toast.error(`${res.data.deleted.name} deleted`);
           loadCategories();
         })
@@ -69,7 +75,6 @@ const CategoryCreate = () => {
 
   const searchedCategories = (keyword) => {
     return (c) => {
-      console.log('c ', c);
       return c.name.toLowerCase().includes(keyword);
     };
   };
@@ -84,7 +89,11 @@ const CategoryCreate = () => {
             <LoadingOutlined className="text-danger h1 mx-auto" />
           ) : (
             <h4
-              style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+              style={{
+                letterSpacing: "3px",
+                borderBottom: "5px solid #4db5ff",
+                width: "fit-content",
+              }}
               className="text-white font-weight-bold text-center mx-auto my-4 pb-2"
             >
               Create Category
@@ -107,22 +116,33 @@ const CategoryCreate = () => {
                     src={category.images[0].url}
                     alt=""
                     className="mr-2"
-                    style={{ width: '50px', height: 'auto', border: '2px solid #2c2c6c' }}
+                    style={{
+                      width: "50px",
+                      height: "auto",
+                      border: "2px solid #2c2c6c",
+                    }}
                   />
                 ) : (
                   <img
                     src={laptopAvatar}
                     alt=""
                     className="mr-2"
-                    style={{ width: '50px', height: 'auto', border: '2px solid #2c2c6c' }}
+                    style={{
+                      width: "50px",
+                      height: "auto",
+                      border: "2px solid #2c2c6c",
+                    }}
                   />
                 )}
                 {category.name}
-                <span onClick={(e) => handleRemove(category.slug)} className="btn btn-sm float-right ">
+                <span
+                  onClick={(e) => handleRemove(category.slug)}
+                  className="btn btn-sm float-right "
+                >
                   <DeleteOutlined
                     ref={(el) => {
                       if (el) {
-                        el.style.setProperty('color', 'red', 'important');
+                        el.style.setProperty("color", "red", "important");
                       }
                     }}
                   />
@@ -133,7 +153,7 @@ const CategoryCreate = () => {
                     <EditOutlined
                       ref={(el) => {
                         if (el) {
-                          el.style.setProperty('color', '#2c2c6c', 'important');
+                          el.style.setProperty("color", "#2c2c6c", "important");
                         }
                       }}
                     />

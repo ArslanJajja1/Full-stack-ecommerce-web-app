@@ -27,7 +27,6 @@ const CreateCouponPage = () => {
         toast.success(`${res.data.name} is created`);
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
         toast.error('Error! Try Again.');
       });
@@ -42,7 +41,6 @@ const CreateCouponPage = () => {
           toast.error(`${res.data.name} coupon removed`);
         })
         .catch((err) => {
-          console.log(err);
           setLoading(false);
         });
     }

@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import AdminProductCard from '../../../components/cards/AdminProductCard';
-import AdminNav from '../../../components/nav/AdminNav';
-import { getProductsByCount, removeProduct } from '../../../functions/product';
-import { useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
+import React, { useEffect, useState } from "react";
+import AdminProductCard from "../../../components/cards/AdminProductCard";
+import AdminNav from "../../../components/nav/AdminNav";
+import { getProductsByCount, removeProduct } from "../../../functions/product";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const AllProducts = () => {
   const [products, setProducts] = useState([]);
@@ -17,17 +17,15 @@ const AllProducts = () => {
     setLoading(true);
     getProductsByCount(100)
       .then((res) => {
-        console.log(res);
         setProducts(res.data);
         setLoading(false);
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
       });
   };
   const handleRemove = (slug) => {
-    if (window.confirm('Delete?')) {
+    if (window.confirm("Delete?")) {
       removeProduct(slug, user.token)
         .then((res) => {
           loadAllProducts();
@@ -35,7 +33,6 @@ const AllProducts = () => {
         })
         .catch((err) => {
           if (err.response.status === 400) toast.error(err.response.data);
-          console.log(err);
         });
     }
   };
@@ -50,7 +47,11 @@ const AllProducts = () => {
             <h4 className="text-white">Loading</h4>
           ) : (
             <h4
-              style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+              style={{
+                letterSpacing: "3px",
+                borderBottom: "5px solid #4db5ff",
+                width: "fit-content",
+              }}
               className="text-white font-weight-bold text-center mx-auto my-4 pb-2"
             >
               All Products
@@ -63,9 +64,12 @@ const AllProducts = () => {
                 className="col-lg-3 col-md-4 col-sm-6  mt-3 d-flex justify-content-center align-items-center"
                 key={product._id}
               >
-                <AdminProductCard product={product} handleRemove={handleRemove} />
+                <AdminProductCard
+                  product={product}
+                  handleRemove={handleRemove}
+                />
               </div>
-            ))}{' '}
+            ))}{" "}
           </div>
         </div>
       </div>

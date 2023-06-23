@@ -26,7 +26,6 @@ const StripeCheckout = () => {
 
   useEffect(() => {
     createPaymentIntent(coupon, user.token).then((res) => {
-      console.log('client secret response ', res);
       setClientSecret(res.data.clientSecret);
       setCartTotal(res.data.cartTotal);
       setTotalAfterDiscount(res.data.totalAfterDiscount);
@@ -49,7 +48,6 @@ const StripeCheckout = () => {
       setError(`Payment failed ${payload.error.message}`);
       setProcessing(false);
     } else {
-      console.log(JSON.stringify(payload, null, 4));
       createOrder(payload, user.token).then((res) => {
         if (res.data.ok) {
           if (typeof window !== 'undefined') localStorage.removeItem('cart');

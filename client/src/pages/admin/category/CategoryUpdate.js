@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
-import AdminNav from '../../../components/nav/AdminNav';
-import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
-import { getCategory, updateCategory } from '../../../functions/category';
-import CategoryForm from '../../../components/forms/CategoryForm';
-import { LoadingOutlined } from '@ant-design/icons';
+import React, { useState, useEffect } from "react";
+import { useNavigate, useParams } from "react-router-dom";
+import AdminNav from "../../../components/nav/AdminNav";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { getCategory, updateCategory } from "../../../functions/category";
+import CategoryForm from "../../../components/forms/CategoryForm";
+import { LoadingOutlined } from "@ant-design/icons";
 
 const initialState = {
-  name: '',
+  name: "",
   images: [],
 };
 const CategoryUpdate = () => {
   const [values, setValues] = useState(initialState);
-  const [name, setName] = useState('');
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [imageLoading, setImageLoading] = useState(false);
   const param = useParams();
@@ -22,7 +22,6 @@ const CategoryUpdate = () => {
   const slug = param.slug;
   useEffect(() => {
     loadCategory();
-    console.log('Slug ', slug);
   }, []);
   const loadCategory = () => {
     getCategory(slug).then((res) => {
@@ -36,13 +35,12 @@ const CategoryUpdate = () => {
     updateCategory(slug, values, user.token)
       .then((res) => {
         setLoading(false);
-        setName('');
-        setValues({ name: '', images: [] });
+        setName("");
+        setValues({ name: "", images: [] });
         toast.success(`${res.data.name} updated`);
-        navigate('/admin/category');
+        navigate("/admin/category");
       })
       .catch((err) => {
-        console.log(err);
         setLoading(false);
         if (err.response.status === 400) toast.error(err.response.data);
       });
@@ -61,7 +59,11 @@ const CategoryUpdate = () => {
             <LoadingOutlined className="text-danger h1" />
           ) : (
             <h4
-              style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+              style={{
+                letterSpacing: "3px",
+                borderBottom: "5px solid #4db5ff",
+                width: "fit-content",
+              }}
               className="text-white font-weight-bold text-center mx-auto my-4 pb-2"
             >
               Create Update

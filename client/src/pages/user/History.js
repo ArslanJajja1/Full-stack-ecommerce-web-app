@@ -15,9 +15,7 @@ const History = () => {
     loadUserOrders();
   }, []);
   const loadUserOrders = () =>
-    getUserOrders(user.token).then((res) => {
-      console.log('Show orders', res.data);
-      setOrders(res.data);
+    getUserOrders(user.token).then((res) => {      setOrders(res.data);
     });
   const showOrderInTable = (order) => (
     <table className="table table-bordered">

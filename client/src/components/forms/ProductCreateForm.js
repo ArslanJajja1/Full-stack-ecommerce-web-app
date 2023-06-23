@@ -1,5 +1,5 @@
-import React from 'react';
-import { Select } from 'antd';
+import React from "react";
+import { Select } from "antd";
 const { Option } = Select;
 const ProductCreateForm = ({
   handleChange,
@@ -11,10 +11,26 @@ const ProductCreateForm = ({
   showSub,
   setValues,
 }) => {
-  const { title, description, price, categories, category, subs, shipping, quantity, images, colors, brands, color, brand } =
-    values;
+  const {
+    title,
+    description,
+    price,
+    categories,
+    category,
+    subs,
+    shipping,
+    quantity,
+    images,
+    colors,
+    brands,
+    color,
+    brand,
+  } = values;
   return (
-    <form onSubmit={handleSubmit} className="text-white font-weight-bold productCard-container shadow-lg bg-body py-2 px-3">
+    <form
+      onSubmit={handleSubmit}
+      className="text-white font-weight-bold productCard-container shadow-lg bg-body py-2 px-3"
+    >
       <div className="form-group">
         <label htmlFor="title">Title</label>
         <input
@@ -53,7 +69,13 @@ const ProductCreateForm = ({
       </div>
       <div className="form-group">
         <label htmlFor="shipping">Shipping</label>
-        <select name="shipping" id="shipping" style={{ backgroundColor: '#2c2c6c' }} className="form-control text-white" onChange={handleChange}>
+        <select
+          name="shipping"
+          id="shipping"
+          style={{ backgroundColor: "#2c2c6c" }}
+          className="form-control text-white"
+          onChange={handleChange}
+        >
           <option value="No">No</option>
           <option value="Yes">Yes</option>
         </select>
@@ -76,7 +98,7 @@ const ProductCreateForm = ({
           name="color"
           id="color"
           className="form-control text-white"
-          style={{ backgroundColor: '#2c2c6c' }}
+          style={{ backgroundColor: "#2c2c6c" }}
           onChange={handleChange}
         >
           <option>Please Select</option>
@@ -93,7 +115,7 @@ const ProductCreateForm = ({
           name="brand"
           id="brand"
           className="form-control text-white"
-          style={{ backgroundColor: '#2c2c6c' }}
+          style={{ backgroundColor: "#2c2c6c" }}
           onChange={handleChange}
         >
           <option>Please Select</option>
@@ -110,7 +132,7 @@ const ProductCreateForm = ({
           name="category"
           id="category"
           className="form-control text-white"
-          style={{ backgroundColor: '#2c2c6c' }}
+          style={{ backgroundColor: "#2c2c6c" }}
           onChange={handleCategoryChange}
         >
           <option>Please select</option>
@@ -127,7 +149,7 @@ const ProductCreateForm = ({
           <label htmlFor="subs">Sub Category</label>
           <Select
             mode="multiple"
-            style={{ width: '100%' }}
+            style={{ width: "100%" }}
             placeholder="Please select"
             value={subs}
             onChange={(value) => setValues({ ...values, subs: value })}
@@ -142,8 +164,11 @@ const ProductCreateForm = ({
         </div>
       )}
       <br />
-      <button style={{ color: '#2c2c6c', letterSpacing: '1px' }} className="btn mt-2 bg-white font-weight-bold btn-raised">
-        {loading ? 'Loading...' : 'Save'}
+      <button
+        style={{ color: "#2c2c6c", letterSpacing: "1px" }}
+        className="btn mt-2 bg-white font-weight-bold btn-raised"
+      >
+        {loading ? "Loading..." : "Save"}
       </button>
     </form>
   );

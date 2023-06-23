@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoadingToRedirect = () => {
   const [count, setCount] = useState(5);
@@ -8,7 +8,7 @@ const LoadingToRedirect = () => {
     const interval = setInterval(() => {
       setCount((prevCount) => prevCount - 1);
     }, 1000);
-    count === 0 && navigate('/');
+    count === 0 && navigate("/");
     return () => clearInterval(interval);
   }, [navigate, count]);
   return (

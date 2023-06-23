@@ -1,8 +1,8 @@
-import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link, useNavigate } from 'react-router-dom';
-import ProductCardInCheckout from '../components/cards/ProductCardInCheckout';
-import { userCart } from '../functions/user';
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import ProductCardInCheckout from "../components/cards/ProductCardInCheckout";
+import { userCart } from "../functions/user";
 const Cart = () => {
   const { cart, user } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
@@ -16,27 +16,30 @@ const Cart = () => {
     userCart(cart, user.token)
       .then((res) => {
         if (res.data.ok) {
-          navigate('/checkout');
+          navigate("/checkout");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   };
   const saveCashOrderToDb = () => {
     dispatch({
-      type: 'COD',
+      type: "COD",
       payload: true,
     });
     userCart(cart, user.token)
       .then((res) => {
         if (res.data.ok) {
-          navigate('/checkout');
+          navigate("/checkout");
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {});
   };
   const showCartItems = () => {
     return (
-      <div style={{ overflowX: 'auto', backgroundColor: '#2c2c6c' }} className="shadow-lg bg-body productCard-container">
+      <div
+        style={{ overflowX: "auto", backgroundColor: "#2c2c6c" }}
+        className="shadow-lg bg-body productCard-container"
+      >
         <table className="table table-bordered">
           <thead className="thead-light">
             <tr>
@@ -63,7 +66,11 @@ const Cart = () => {
         <div className="col-lg-8 col-md-12">
           <h4
             className="text-white mb-4"
-            style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+            style={{
+              letterSpacing: "3px",
+              borderBottom: "5px solid #4db5ff",
+              width: "fit-content",
+            }}
           >
             Cart / {cart.length}
           </h4>
@@ -78,29 +85,41 @@ const Cart = () => {
 
         <div
           className="col-lg-3 col-md-12 text-white mx-auto p-4 text-center shadow-lg bg-body productCard-container"
-          style={{ backgroundColor: '#2c2c6c', marginTop: '3.2rem', minWidth: 'max-content', maxWidth: '70%' }}
+          style={{
+            backgroundColor: "#2c2c6c",
+            marginTop: "3.2rem",
+            minWidth: "max-content",
+            maxWidth: "70%",
+          }}
         >
           <h4
             className="text-white  font-weight-bold font-italic mx-auto mb-4"
-            style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+            style={{
+              letterSpacing: "3px",
+              borderBottom: "5px solid #4db5ff",
+              width: "fit-content",
+            }}
           >
             Order
           </h4>
           {cart.map((c, i) => (
             <div key={i}>
               <p>
-                <span className="font-weight-bold" style={{ letterSpacing: '2px' }}>
+                <span
+                  className="font-weight-bold"
+                  style={{ letterSpacing: "2px" }}
+                >
                   {c.title} x {c.count}
-                </span>{' '}
+                </span>{" "}
                 = <span>${c.price * c.count}</span>
               </p>
             </div>
           ))}
           <hr />
           <p>
-            <span className="font-weight-bold" style={{ letterSpacing: '2px' }}>
+            <span className="font-weight-bold" style={{ letterSpacing: "2px" }}>
               Total
-            </span>{' '}
+            </span>{" "}
             : <b>${getTotal()}</b>
           </p>
           <hr />
@@ -109,7 +128,7 @@ const Cart = () => {
               <button
                 onClick={saveOrderToDb}
                 disabled={!cart.length}
-                style={{ color: '#2c2c6c', letterSpacing: '1px' }}
+                style={{ color: "#2c2c6c", letterSpacing: "1px" }}
                 className="btn mt-2 bg-white font-weight-bold btn-raised"
               >
                 Proceed to checkout
@@ -118,7 +137,7 @@ const Cart = () => {
               <button
                 onClick={saveCashOrderToDb}
                 disabled={!cart.length}
-                style={{ color: '#2c2c6c', letterSpacing: '1px' }}
+                style={{ color: "#2c2c6c", letterSpacing: "1px" }}
                 className="btn mt-2 bg-white font-weight-bold btn-raised"
               >
                 Pay Cash on Delivery
@@ -126,7 +145,10 @@ const Cart = () => {
             </>
           ) : (
             <button className="btn mt-2 bg-white font-weight-bold btn-raised">
-              <Link to="/login" style={{ color: '#2c2c6c', letterSpacing: '1px' }}>
+              <Link
+                to="/login"
+                style={{ color: "#2c2c6c", letterSpacing: "1px" }}
+              >
                 Login to checkout
               </Link>
             </button>

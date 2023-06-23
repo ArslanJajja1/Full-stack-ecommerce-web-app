@@ -1,27 +1,39 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import AdminNav from '../../../components/nav/AdminNav';
-import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
-import { createProduct } from '../../../functions/product';
-import ProductCreateForm from '../../../components/forms/ProductCreateForm';
-import { getCategories, getCategorySubs } from '../../../functions/category';
-import FileUpload from '../../../components/forms/FileUpload';
-import { LoadingOutlined } from '@ant-design/icons';
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import AdminNav from "../../../components/nav/AdminNav";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { createProduct } from "../../../functions/product";
+import ProductCreateForm from "../../../components/forms/ProductCreateForm";
+import { getCategories, getCategorySubs } from "../../../functions/category";
+import FileUpload from "../../../components/forms/FileUpload";
+import { LoadingOutlined } from "@ant-design/icons";
 const initialState = {
-  title: '',
-  description: '',
-  price: '',
-  categories: '',
-  category: '',
+  title: "",
+  description: "",
+  price: "",
+  categories: "",
+  category: "",
   subs: [],
-  shipping: '',
-  quantity: '',
+  shipping: "",
+  quantity: "",
   images: [],
-  colors: ["Black", "White", "Gray", "Blue", "Red", "Green", "Yellow", "Pink", "Purple", "Orange", "Brown"]  ,
-  brands: ["Levi's", "Zara", "Gucci", "Armani", "Khadi","Zelbury","Hermes"],
-  color: '',
-  brand: '',
+  colors: [
+    "Black",
+    "White",
+    "Gray",
+    "Blue",
+    "Red",
+    "Green",
+    "Yellow",
+    "Pink",
+    "Purple",
+    "Orange",
+    "Brown",
+  ],
+  brands: ["Levi's", "Zara", "Gucci", "Armani", "Khadi", "Zelbury", "Hermes"],
+  color: "",
+  brand: "",
 };
 const ProductCreate = () => {
   const { user } = useSelector((state) => ({ ...state }));
@@ -41,13 +53,11 @@ const ProductCreate = () => {
     setLoading(true);
     createProduct(values, user.token)
       .then((res) => {
-        console.log('Product res...', res);
         setLoading(false);
         window.location.reload();
         toast.success(`Product created successfully`);
       })
       .catch((error) => {
-        console.log(error);
         toast.error(error.response.data.error);
         setLoading(false);
       });
@@ -57,14 +67,12 @@ const ProductCreate = () => {
   };
   const handleCategoryChange = (e) => {
     e.preventDefault();
-    console.log('Category clicked ... ', e.target.value);
     setValues({ ...values, subs: [], category: e.target.value });
     getCategorySubs(e.target.value)
       .then((res) => {
         setSubOptions(res.data);
-        console.log('getCategorySubs response...', res);
       })
-      .catch((error) => console.log(error));
+      .catch((error) => {});
     setShowSub(true);
   };
   return (
@@ -79,14 +87,22 @@ const ProductCreate = () => {
           ) : (
             <h4
               className="text-white  font-weight-bold font-italic mx-auto my-4"
-              style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+              style={{
+                letterSpacing: "3px",
+                borderBottom: "5px solid #4db5ff",
+                width: "fit-content",
+              }}
             >
               Product Create
             </h4>
           )}
           <hr />
           <div className="p-3">
-            <FileUpload values={values} setValues={setValues} setImageLoading={setImageLoading} />
+            <FileUpload
+              values={values}
+              setValues={setValues}
+              setImageLoading={setImageLoading}
+            />
           </div>
           <ProductCreateForm
             handleSubmit={handleSubmit}

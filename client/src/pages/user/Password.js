@@ -12,7 +12,6 @@ const Password = () => {
     setLoading(true);
     setPassword('');
     const user = await auth.currentUser;
-    console.log('user', user);
     await updatePassword(user, password)
       .then(() => {
         setLoading(false);
@@ -20,7 +19,6 @@ const Password = () => {
       })
       .catch((error) => {
         setLoading(false);
-        console.log(error);
         toast.error(error.message);
       });
   };

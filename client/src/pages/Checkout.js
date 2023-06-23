@@ -1,35 +1,40 @@
-import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { getUserCart, emptyUserCart, saveUserAddress, applyCoupon, createCashOrderForUser } from '../functions/user';
-import { toast } from 'react-toastify';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  getUserCart,
+  emptyUserCart,
+  saveUserAddress,
+  applyCoupon,
+  createCashOrderForUser,
+} from "../functions/user";
+import { toast } from "react-toastify";
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import { useNavigate } from "react-router-dom";
 const initialState = {
-  name: '',
-  email: '',
-  number: '',
-  address1: '',
-  address2: '',
-  city: '',
-  state: '',
-  zipcode: '',
+  name: "",
+  email: "",
+  number: "",
+  address1: "",
+  address2: "",
+  city: "",
+  state: "",
+  zipcode: "",
 };
 const Checkout = () => {
   const [products, setProducts] = useState([]);
   const [total, setTotal] = useState(0);
   const [address, setAddress] = useState(initialState);
   const [addressSaved, setAddressSaved] = useState(false);
-  const [couponForCheckout, setCouponForCheckout] = useState('');
+  const [couponForCheckout, setCouponForCheckout] = useState("");
   const [totalAfterDiscount, setTotalAfterDiscount] = useState(0);
-  const [discountError, setDiscountError] = useState('');
+  const [discountError, setDiscountError] = useState("");
   const { user, COD, coupon } = useSelector((state) => ({ ...state }));
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleAddressChanged = (e) => {
     setAddress({ ...address, [e.target.name]: e.target.value });
   };
-  console.log('Adress...', address);
   useEffect(() => {
     getUserCart(user.token).then((res) => {
       setProducts(res.data.products);
@@ -37,19 +42,19 @@ const Checkout = () => {
     });
   }, []);
   const emptyCart = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem('cart');
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("cart");
     }
     dispatch({
-      type: 'ADD_TO_CART',
+      type: "ADD_TO_CART",
       payload: [],
     });
     emptyUserCart(user.token).then((res) => {
       setProducts([]);
       setTotal(0);
       setTotalAfterDiscount(0);
-      setCouponForCheckout('');
-      toast.success('Cart is empty');
+      setCouponForCheckout("");
+      toast.success("Cart is empty");
     });
   };
   const saveAddressToDb = (e) => {
@@ -58,40 +63,37 @@ const Checkout = () => {
       if (res.data.ok) {
         setAddress(initialState);
         setAddressSaved(true);
-        toast.success('Address saved');
+        toast.success("Address saved");
       }
     });
   };
   const applyDiscountCoupon = () => {
-    console.log('send coupon to server ', couponForCheckout);
     applyCoupon(couponForCheckout, user.token)
       .then((res) => {
         if (res.data) {
           setTotalAfterDiscount(res.data);
           dispatch({
-            type: 'COUPON_APPLIED',
+            type: "COUPON_APPLIED",
             payload: true,
           });
         }
         if (res.data.err) {
           setDiscountError(res.data.err);
           dispatch({
-            type: 'COUPON_APPLIED',
+            type: "COUPON_APPLIED",
             payload: true,
           });
         }
       })
-      .catch((error) => {
-        console.log(error);
-      });
+      .catch((error) => {});
   };
   const showAddress = () => (
     <div
       className="text-white p-4 shadow-lg bg-body productCard-container"
       style={{
-        backgroundColor: '#2c2c6c',
-        minWidth: 'max-content',
-        height: 'max-content',
+        backgroundColor: "#2c2c6c",
+        minWidth: "max-content",
+        height: "max-content",
       }}
     >
       <form>
@@ -183,7 +185,7 @@ const Checkout = () => {
               name="state"
               id="inputState"
               class="form-control text-white"
-              style={{ backgroundColor: '#2c2c6c' }}
+              style={{ backgroundColor: "#2c2c6c" }}
               required
             >
               <option selected>Choose...</option>
@@ -228,7 +230,7 @@ const Checkout = () => {
         <button
           type="submit"
           onClick={saveAddressToDb}
-          style={{ color: '#2c2c6c', letterSpacing: '1px' }}
+          style={{ color: "#2c2c6c", letterSpacing: "1px" }}
           className="btn mt-3 bg-white font-weight-bold btn-raised"
           disabled={
             !address.name ||
@@ -254,28 +256,31 @@ const Checkout = () => {
     return products.map((p, i) => (
       <div key={i}>
         <p>
-          <span className="font-weight-bold" style={{ letterSpacing: '1px' }}>
+          <span className="font-weight-bold" style={{ letterSpacing: "1px" }}>
             {p.product.title} ({p.color}) x {p.count}
-          </span>{' '}
+          </span>{" "}
           = <span>{p.product.price * p.count}</span>
         </p>
       </div>
     ));
   };
   const showApplyCoupon = () => (
-    <div className="text-white p-4 shadow-lg bg-body productCard-container" style={{ backgroundColor: '#2c2c6c' }}>
+    <div
+      className="text-white p-4 shadow-lg bg-body productCard-container"
+      style={{ backgroundColor: "#2c2c6c" }}
+    >
       <input
         type="text"
         placeholder="Enter Coupon"
         className="form-control text-white"
         onChange={(e) => {
           setCouponForCheckout(e.target.value);
-          setDiscountError('');
+          setDiscountError("");
         }}
       />
       <span
         onClick={applyDiscountCoupon}
-        style={{ color: '#2c2c6c', letterSpacing: '1px' }}
+        style={{ color: "#2c2c6c", letterSpacing: "1px" }}
         className="btn mt-3 bg-white font-weight-bold btn-raised"
       >
         Apply
@@ -284,16 +289,16 @@ const Checkout = () => {
   );
   const createCashOrder = () => {
     createCashOrderForUser(user.token, COD, coupon).then((res) => {
-      console.log('Create cash order response ', res);
+      console.log("Create cash order response ", res);
       // empty cart from redux,local storage,reset coupon,reset COD,redirect to user history
       if (res.data.ok) {
-        if (typeof window !== 'undefined') localStorage.removeItem('cart');
-        dispatch({ type: 'ADD_TO_CART', payload: [] });
-        dispatch({ type: 'COUPON_APPLIED', payload: false });
-        dispatch({ type: 'COD', payload: false });
+        if (typeof window !== "undefined") localStorage.removeItem("cart");
+        dispatch({ type: "ADD_TO_CART", payload: [] });
+        dispatch({ type: "COUPON_APPLIED", payload: false });
+        dispatch({ type: "COD", payload: false });
         emptyUserCart(user.token);
         setTimeout(() => {
-          navigate('/user/history');
+          navigate("/user/history");
         }, 1000);
       }
     });
@@ -304,7 +309,11 @@ const Checkout = () => {
         <div className="col-lg-8 mx-auto">
           <h4
             className="text-white font-weight-bold pb-1"
-            style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+            style={{
+              letterSpacing: "3px",
+              borderBottom: "5px solid #4db5ff",
+              width: "fit-content",
+            }}
           >
             Delivery Address
           </h4>
@@ -314,67 +323,88 @@ const Checkout = () => {
           <div>
             <h4
               className="text-white font-weight-bold pb-1"
-              style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+              style={{
+                letterSpacing: "3px",
+                borderBottom: "5px solid #4db5ff",
+                width: "fit-content",
+              }}
             >
-              Got Coupon ?{' '}
+              Got Coupon ?{" "}
             </h4>
             <hr />
             {showApplyCoupon()}
           </div>
           <br />
-          {discountError && <h6 className="bg-danger text-white text-center p-2">{discountError}</h6>}
+          {discountError && (
+            <h6 className="bg-danger text-white text-center p-2">
+              {discountError}
+            </h6>
+          )}
         </div>
 
         <div
           className="col-lg-4 text-white mx-auto p-4 text-center shadow-lg bg-body productCard-container"
           style={{
-            backgroundColor: '#2c2c6c',
-            marginTop: '3.8rem',
-            minWidth: 'max-content',
-            maxWidth: '20rem',
-            height: 'max-content',
+            backgroundColor: "#2c2c6c",
+            marginTop: "3.8rem",
+            minWidth: "max-content",
+            maxWidth: "20rem",
+            height: "max-content",
           }}
         >
           <h4
             className="text-white  font-weight-bold font-italic mx-auto mb-4 pb-1"
-            style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+            style={{
+              letterSpacing: "3px",
+              borderBottom: "5px solid #4db5ff",
+              width: "fit-content",
+            }}
           >
             Order Summary
           </h4>
-          <h6 className="text-white font-weight-bold" style={{ letterSpacing: '3px' }}>
+          <h6
+            className="text-white font-weight-bold"
+            style={{ letterSpacing: "3px" }}
+          >
             Products {products.length}
           </h6>
           {showProductSummary()}
           <hr />
           <p>
-            <span className="font-weight-bold" style={{ letterSpacing: '2px' }}>
+            <span className="font-weight-bold" style={{ letterSpacing: "2px" }}>
               Cart Total :
-            </span>{' '}
-            <span style={{ letterSpacing: '2px' }}>${total}</span>
+            </span>{" "}
+            <span style={{ letterSpacing: "2px" }}>${total}</span>
           </p>
           {totalAfterDiscount > 0 && (
             <div>
-              <h6 className="bg-white p-2 font-weight-bold" style={{ color: '#2c2c6c' }}>
+              <h6
+                className="bg-white p-2 font-weight-bold"
+                style={{ color: "#2c2c6c" }}
+              >
                 Discount Applied! Payable : ${totalAfterDiscount}
               </h6>
             </div>
           )}
 
-          <div style={{ maxWidth: '20rem', minWidth: '12rem' }} className="mx-auto">
+          <div
+            style={{ maxWidth: "20rem", minWidth: "12rem" }}
+            className="mx-auto"
+          >
             {COD ? (
               <button
                 onClick={createCashOrder}
                 disabled={!addressSaved || !products.length}
-                style={{ color: '#2c2c6c', letterSpacing: '1px' }}
+                style={{ color: "#2c2c6c", letterSpacing: "1px" }}
                 className="btn mt-2 bg-white font-weight-bold btn-raised w-100"
               >
                 Place Order
               </button>
             ) : (
               <button
-                onClick={() => navigate('/payment')}
+                onClick={() => navigate("/payment")}
                 disabled={!addressSaved || !products.length}
-                style={{ color: '#2c2c6c', letterSpacing: '1px' }}
+                style={{ color: "#2c2c6c", letterSpacing: "1px" }}
                 className="btn mt-2 bg-white font-weight-bold btn-raised w-100"
               >
                 Place Order
@@ -384,7 +414,7 @@ const Checkout = () => {
             <button
               disabled={!products.length}
               onClick={emptyCart}
-              style={{ color: '#2c2c6c', letterSpacing: '1px' }}
+              style={{ color: "#2c2c6c", letterSpacing: "1px" }}
               className="btn mt-2 bg-white font-weight-bold btn-raised w-100"
             >
               Empty Cart

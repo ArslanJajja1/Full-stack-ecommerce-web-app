@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import LoadingCard from '../cards/LoadingCard';
-import ProductCard from '../cards/ProductCard';
-import { getProducts, getProductsCount } from '../../functions/product';
-import { Pagination } from 'antd';
+import React, { useEffect, useState } from "react";
+import LoadingCard from "../cards/LoadingCard";
+import ProductCard from "../cards/ProductCard";
+import { getProducts, getProductsCount } from "../../functions/product";
+import { Pagination } from "antd";
 
 const NewArrivals = ({ deviceWidth }) => {
   const [products, setProducts] = useState([]);
@@ -12,13 +12,12 @@ const NewArrivals = ({ deviceWidth }) => {
 
   const loadAllProducts = () => {
     setLoading(true);
-    getProducts('createdAt', 'desc', page)
+    getProducts("createdAt", "desc", page)
       .then((res) => {
         setLoading(false);
         setProducts(res.data);
       })
       .catch((error) => {
-        console.log(error);
         setLoading(false);
       });
   };
@@ -37,9 +36,19 @@ const NewArrivals = ({ deviceWidth }) => {
         {loading === true ? (
           <LoadingCard count={8} />
         ) : (
-          <div className="row" style={deviceWidth > 450 && deviceWidth < 576 ? { marginLeft: '2rem' } : {}}>
+          <div
+            className="row"
+            style={
+              deviceWidth > 450 && deviceWidth < 576
+                ? { marginLeft: "2rem" }
+                : {}
+            }
+          >
             {products.map((product) => (
-              <div key={product._id} className="col-lg-3 col-md-4 col-sm-6 mb-5 d-flex justify-content-center align-items-center">
+              <div
+                key={product._id}
+                className="col-lg-3 col-md-4 col-sm-6 mb-5 d-flex justify-content-center align-items-center"
+              >
                 <ProductCard product={product} />
               </div>
             ))}
@@ -51,7 +60,6 @@ const NewArrivals = ({ deviceWidth }) => {
           <Pagination
             current={page}
             onChange={(page, pageSize) => {
-              console.log('page...', page);
               setPage(page);
             }}
             total={productsCount}

@@ -1,20 +1,18 @@
-import { MenuOutlined } from '@ant-design/icons';
-import { Drawer } from 'antd';
-import React, { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { MenuOutlined } from "@ant-design/icons";
+import { Drawer } from "antd";
+import React, { useState } from "react";
+import { Link, NavLink } from "react-router-dom";
 
 const AdminNav = () => {
   const [open, setOpen] = useState(false);
   const onClose = () => {
     setOpen(false);
   };
-  const activeNavClass = (e) => {
-    console.log('Eee..', e);
-  };
+  const activeNavClass = (e) => {};
   return (
     <>
       <div onClick={() => setOpen(true)} className="d-flex mt-4">
-        <MenuOutlined style={{ color: 'white' }} className="hamburger pr-2" />
+        <MenuOutlined style={{ color: "white" }} className="hamburger pr-2" />
         <p className="pointer text-white font-weight-bold">Menu</p>
       </div>
       <Drawer
@@ -25,7 +23,7 @@ const AdminNav = () => {
         onClose={onClose}
         open={open}
         closable={false}
-        drawerStyle={{ backgroundColor: '#2c2c6c', color: 'white' }}
+        drawerStyle={{ backgroundColor: "#2c2c6c", color: "white" }}
       >
         <nav className="">
           <ul className="nav flex-column">
@@ -33,7 +31,9 @@ const AdminNav = () => {
               <NavLink
                 to="/admin/dashboard"
                 className={({ isActive }) =>
-                  isActive ? 'nav-link text-white font-weight-bold border-bottom' : 'nav-link text-white font-weight-bold '
+                  isActive
+                    ? "nav-link text-white font-weight-bold border-bottom"
+                    : "nav-link text-white font-weight-bold "
                 }
               >
                 Dashboard
@@ -43,7 +43,9 @@ const AdminNav = () => {
               <NavLink
                 to="/admin/product"
                 className={({ isActive }) =>
-                  isActive ? 'nav-link text-white font-weight-bold border-bottom' : 'nav-link text-white font-weight-bold '
+                  isActive
+                    ? "nav-link text-white font-weight-bold border-bottom"
+                    : "nav-link text-white font-weight-bold "
                 }
               >
                 Product
@@ -53,7 +55,9 @@ const AdminNav = () => {
               <NavLink
                 to="/admin/products"
                 className={({ isActive }) =>
-                  isActive ? 'nav-link text-white font-weight-bold border-bottom' : 'nav-link text-white font-weight-bold '
+                  isActive
+                    ? "nav-link text-white font-weight-bold border-bottom"
+                    : "nav-link text-white font-weight-bold "
                 }
               >
                 Products
@@ -63,7 +67,9 @@ const AdminNav = () => {
               <NavLink
                 to="/admin/category"
                 className={({ isActive }) =>
-                  isActive ? 'nav-link text-white font-weight-bold border-bottom' : 'nav-link text-white font-weight-bold '
+                  isActive
+                    ? "nav-link text-white font-weight-bold border-bottom"
+                    : "nav-link text-white font-weight-bold "
                 }
               >
                 Category
@@ -73,7 +79,9 @@ const AdminNav = () => {
               <NavLink
                 to="/admin/subcategory"
                 className={({ isActive }) =>
-                  isActive ? 'nav-link text-white font-weight-bold border-bottom' : 'nav-link text-white font-weight-bold '
+                  isActive
+                    ? "nav-link text-white font-weight-bold border-bottom"
+                    : "nav-link text-white font-weight-bold "
                 }
               >
                 Sub Category
@@ -83,7 +91,9 @@ const AdminNav = () => {
               <NavLink
                 to="/admin/coupon"
                 className={({ isActive }) =>
-                  isActive ? 'nav-link text-white font-weight-bold border-bottom' : 'nav-link text-white font-weight-bold '
+                  isActive
+                    ? "nav-link text-white font-weight-bold border-bottom"
+                    : "nav-link text-white font-weight-bold "
                 }
               >
                 Coupons
@@ -93,7 +103,9 @@ const AdminNav = () => {
               <NavLink
                 to="/user/password"
                 className={({ isActive }) =>
-                  isActive ? 'nav-link text-white font-weight-bold border-bottom' : 'nav-link text-white font-weight-bold '
+                  isActive
+                    ? "nav-link text-white font-weight-bold border-bottom"
+                    : "nav-link text-white font-weight-bold "
                 }
               >
                 Password

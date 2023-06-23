@@ -1,6 +1,6 @@
-import React from 'react';
-import { CheckCircleOutlined, CloseCircleOutlined } from '@ant-design/icons';
-import ShowPaymentInfo from '../cards/ShowPaymentInfo';
+import React from "react";
+import { CheckCircleOutlined, CloseCircleOutlined } from "@ant-design/icons";
+import ShowPaymentInfo from "../cards/ShowPaymentInfo";
 const Orders = ({ orders, handleStatusChange }) => {
   const showOrderInTable = (order) => (
     <table className="table table-bordered">
@@ -14,7 +14,7 @@ const Orders = ({ orders, handleStatusChange }) => {
           <th scope="col">Shipping</th>
         </tr>
       </thead>
-      <tbody style={{ backgroundColor: '#2c2c6c' }} className="text-white">
+      <tbody style={{ backgroundColor: "#2c2c6c" }} className="text-white">
         {order.products.map((p, i) => (
           <tr key={i}>
             <td>
@@ -25,10 +25,10 @@ const Orders = ({ orders, handleStatusChange }) => {
             <td>{p?.product?.color}</td>
             <td>{p?.count}</td>
             <td>
-              {p?.product?.shipping === 'Yes' ? (
-                <CheckCircleOutlined style={{ color: 'green' }} />
+              {p?.product?.shipping === "Yes" ? (
+                <CheckCircleOutlined style={{ color: "green" }} />
               ) : (
-                <CloseCircleOutlined style={{ color: 'red' }} />
+                <CloseCircleOutlined style={{ color: "red" }} />
               )}
             </td>
           </tr>
@@ -39,14 +39,20 @@ const Orders = ({ orders, handleStatusChange }) => {
   return (
     <>
       {orders.map((order, i) => (
-        <div key={order._id} style={{ overflowX: 'auto' }} className=" row py-3 px-2 ">
+        <div
+          key={order._id}
+          style={{ overflowX: "auto" }}
+          className=" row py-3 px-2 "
+        >
           <div className="btn btn-block bg-light ">
             <ShowPaymentInfo order={order} showStatus={false} />
             <div className="row">
               <div className="col-md-4">Delivery Status</div>
               <div className="col-md-8">
                 <select
-                  onChange={(e) => handleStatusChange(order._id, e.target.value)}
+                  onChange={(e) =>
+                    handleStatusChange(order._id, e.target.value)
+                  }
                   className="form-control"
                   defaultValue={order.orderStatus}
                   name="status"

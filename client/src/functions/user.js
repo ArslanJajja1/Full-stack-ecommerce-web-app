@@ -1,7 +1,11 @@
-import axios from 'axios';
-const REACT_APP_API = process.env.REACT_APP_API
+import axios from "axios";
+const REACT_APP_API = process.env.REACT_APP_API;
 export const userCart = async (cart, authtoken) =>
-  await axios.post(`${REACT_APP_API}/user/cart`, { cart }, { headers: { authtoken } });
+  await axios.post(
+    `${REACT_APP_API}/user/cart`,
+    { cart },
+    { headers: { authtoken } }
+  );
 export const getUserCart = async (authtoken) =>
   await axios.get(`${REACT_APP_API}/user/cart`, {
     headers: { authtoken },
@@ -11,11 +15,23 @@ export const emptyUserCart = async (authtoken) =>
     headers: { authtoken },
   });
 export const saveUserAddress = async (address, authtoken) =>
-  await axios.post(`${REACT_APP_API}/user/address`, { address }, { headers: { authtoken } });
+  await axios.post(
+    `${REACT_APP_API}/user/address`,
+    { address },
+    { headers: { authtoken } }
+  );
 export const applyCoupon = async (coupon, authtoken) =>
-  await axios.post(`${REACT_APP_API}/user/cart/coupon`, { coupon }, { headers: { authtoken } });
+  await axios.post(
+    `${REACT_APP_API}/user/cart/coupon`,
+    { coupon },
+    { headers: { authtoken } }
+  );
 export const createOrder = async (stripeResponse, authtoken) =>
-  await axios.post(`${REACT_APP_API}/user/order`, { stripeResponse }, { headers: { authtoken } });
+  await axios.post(
+    `${REACT_APP_API}/user/order`,
+    { stripeResponse },
+    { headers: { authtoken } }
+  );
 export const getUserOrders = async (authtoken) =>
   await axios.get(`${REACT_APP_API}/user/orders`, {
     headers: { authtoken },
@@ -30,7 +46,7 @@ export const removeWishlist = async (productId, authtoken) =>
     {},
     {
       headers: { authtoken },
-    },
+    }
   );
 export const addToWishlist = async (productId, authtoken) =>
   await axios.post(
@@ -38,7 +54,11 @@ export const addToWishlist = async (productId, authtoken) =>
     { productId },
     {
       headers: { authtoken },
-    },
+    }
   );
 export const createCashOrderForUser = async (authtoken, COD, coupon) =>
-  await axios.post(`${process.env.REACT_APP_API}/user/cash-order`, { COD, couponApplied: coupon }, { headers: { authtoken } });
+  await axios.post(
+    `${process.env.REACT_APP_API}/user/cash-order`,
+    { COD, couponApplied: coupon },
+    { headers: { authtoken } }
+  );

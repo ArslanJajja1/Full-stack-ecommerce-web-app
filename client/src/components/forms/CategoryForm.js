@@ -1,7 +1,6 @@
 import React from 'react';
 import FileUpload from './FileUpload';
 const CategoryForm = ({ values, setValues, setImageLoading, loading, handleSubmit, handleChange }) => {
-  console.log('valuesssss', values);
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group text-white">

@@ -7,7 +7,6 @@ import { Avatar, Badge } from 'antd';
 const FileUpload = ({ values, setValues, setImageLoading }) => {
   const { user } = useSelector((state) => ({ ...state }));
   const fileUploadAndResize = (e) => {
-    console.log(e.target.files);
     // resize
     let files = e.target.files;
     let allUploadedFiles = values.images;
@@ -34,7 +33,6 @@ const FileUpload = ({ values, setValues, setImageLoading }) => {
                 },
               )
               .then((res) => {
-                console.log('IMAGE UPLOAD RESPONSE DATA ,', res);
                 setImageLoading(false);
                 allUploadedFiles.push(res.data);
                 setValues({
@@ -42,7 +40,6 @@ const FileUpload = ({ values, setValues, setImageLoading }) => {
                   images: allUploadedFiles,
                 }).catch((error) => {
                   setImageLoading(false);
-                  console.log('Cloudinary upload error ', error);
                 });
               });
           },
@@ -55,7 +52,6 @@ const FileUpload = ({ values, setValues, setImageLoading }) => {
   };
   const handleImageRemove = (public_id) => {
     setImageLoading(true);
-    console.log('image remove id', public_id);
     axios
       .post(
         `${process.env.REACT_APP_API}/removeimage`,

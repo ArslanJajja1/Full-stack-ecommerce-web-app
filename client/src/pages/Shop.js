@@ -1,14 +1,23 @@
-import React, { useState, useEffect } from 'react';
-import { getProductsByCount, fetchProductsByFilter } from '../functions/product';
-import { getCategories } from '../functions/category';
-import { useSelector, useDispatch } from 'react-redux';
-import ProductCard from '../components/cards/ProductCard';
-import { Menu, Slider, Checkbox, Radio, Drawer } from 'antd';
-import { DollarOutlined, DownSquareOutlined, MenuOutlined, MenuUnfoldOutlined, StarOutlined } from '@ant-design/icons';
-import Star from '../components/forms/Star';
-import { getSubCategories } from '../functions/subCategory';
-import useWindowDimensions from '../hooks/useWindowDimensions';
-import RightNav from '../components/nav/RightNav';
+import React, { useState, useEffect } from "react";
+import {
+  getProductsByCount,
+  fetchProductsByFilter,
+} from "../functions/product";
+import { getCategories } from "../functions/category";
+import { useSelector, useDispatch } from "react-redux";
+import ProductCard from "../components/cards/ProductCard";
+import { Menu, Slider, Checkbox, Radio, Drawer } from "antd";
+import {
+  DollarOutlined,
+  DownSquareOutlined,
+  MenuOutlined,
+  MenuUnfoldOutlined,
+  StarOutlined,
+} from "@ant-design/icons";
+import Star from "../components/forms/Star";
+import { getSubCategories } from "../functions/subCategory";
+import useWindowDimensions from "../hooks/useWindowDimensions";
+import RightNav from "../components/nav/RightNav";
 
 const { SubMenu, ItemGroup } = Menu;
 
@@ -19,14 +28,26 @@ const Shop = () => {
   const [ok, setOk] = useState(false);
   const [categories, setCategories] = useState([]);
   const [categoryIds, setCategoryIds] = useState([]);
-  const [star, setStar] = useState('');
+  const [star, setStar] = useState("");
   const [subs, setSubs] = useState([]);
-  const [sub, setSub] = useState('');
-  const [brand, setBrand] = useState('');
-  const [color, setColor] = useState('');
-  const [shipping, setShipping] = useState('');
-  const [brands, setBrands] = useState(['Apple', 'Samsung', 'Microsoft', 'Lenovo', 'ASUS']);
-  const [colors, setColors] = useState(['Black', 'Brown', 'Silver', 'White', 'Blue']);
+  const [sub, setSub] = useState("");
+  const [brand, setBrand] = useState("");
+  const [color, setColor] = useState("");
+  const [shipping, setShipping] = useState("");
+  const [brands, setBrands] = useState([
+    "Apple",
+    "Samsung",
+    "Microsoft",
+    "Lenovo",
+    "ASUS",
+  ]);
+  const [colors, setColors] = useState([
+    "Black",
+    "Brown",
+    "Silver",
+    "White",
+    "Blue",
+  ]);
   const [open, setOpen] = useState(false);
   const dimensions = useWindowDimensions();
   const { search } = useSelector((state) => ({ ...state }));
@@ -71,15 +92,15 @@ const Shop = () => {
   const handleSlider = (value) => {
     setCategoryIds([]);
     dispatch({
-      type: 'SEARCH_QUERY',
-      payload: { text: '' },
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
     });
     setPrice(value);
-    setStar('');
-    setSub('');
-    setBrand('');
-    setColor('');
-    setShipping('');
+    setStar("");
+    setSub("");
+    setBrand("");
+    setColor("");
+    setShipping("");
     setTimeout(() => {
       setOk(!ok);
     }, 300);
@@ -104,15 +125,15 @@ const Shop = () => {
   // handleCheck for categories
   const handleCheck = (e) => {
     dispatch({
-      type: 'SEARCH_QUERY',
-      payload: { text: '' },
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
     });
     setPrice([0, 0]);
-    setStar('');
-    setSub('');
-    setBrand('');
-    setColor('');
-    setShipping('');
+    setStar("");
+    setSub("");
+    setBrand("");
+    setColor("");
+    setShipping("");
     let inTheState = [...categoryIds];
     let justChecked = e.target.value;
     let foundInTheState = inTheState.indexOf(justChecked);
@@ -127,16 +148,16 @@ const Shop = () => {
   // 5. Show products by star rating
   const handleStarClick = (num) => {
     dispatch({
-      type: 'SEARCH_QUERY',
-      payload: { text: '' },
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
     });
     setPrice([0, 0]);
     setCategoryIds([]);
     setStar(num);
-    setSub('');
-    setBrand('');
-    setColor('');
-    setShipping('');
+    setSub("");
+    setBrand("");
+    setColor("");
+    setShipping("");
     fetchProducts({ stars: num });
   };
   const showStars = () => (
@@ -151,88 +172,117 @@ const Shop = () => {
   // 6. show products by sub categories
   const showSubs = () =>
     subs.map((s) => (
-      <div key={s._id} onClick={() => handleSub(s)} className="p-1 m-1 badge badge-secondary" style={{ cursor: 'pointer' }}>
+      <div
+        key={s._id}
+        onClick={() => handleSub(s)}
+        className="p-1 m-1 badge badge-secondary"
+        style={{ cursor: "pointer" }}
+      >
         {s.name}
       </div>
     ));
   const handleSub = (sub) => {
     setSub(sub);
     dispatch({
-      type: 'SEARCH_QUERY',
-      payload: { text: '' },
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
     });
     setPrice([0, 0]);
     setCategoryIds([]);
-    setStar('');
-    setBrand('');
-    setColor('');
-    setShipping('');
+    setStar("");
+    setBrand("");
+    setColor("");
+    setShipping("");
     fetchProducts({ sub });
   };
   // 7. show products based on brands
   const showBrands = () =>
     brands.map((b) => (
-      <Radio key={`${b}#`} value={b} name={b} checked={b === brand} onChange={handleBrand} className="pb-1 pl-4 pr-5">
+      <Radio
+        key={`${b}#`}
+        value={b}
+        name={b}
+        checked={b === brand}
+        onChange={handleBrand}
+        className="pb-1 pl-4 pr-5"
+      >
         {b}
       </Radio>
     ));
   const handleBrand = (e) => {
-    setSub('');
+    setSub("");
     dispatch({
-      type: 'SEARCH_QUERY',
-      payload: { text: '' },
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
     });
     setPrice([0, 0]);
     setCategoryIds([]);
-    setStar('');
-    setColor('');
-    setShipping('');
+    setStar("");
+    setColor("");
+    setShipping("");
     setBrand(e.target.value);
     fetchProducts({ brand: e.target.value });
   };
   //8. show products based on colors
   const showColors = () =>
     colors.map((c) => (
-      <Radio key={`${c}#`} value={c} name={c} checked={c === color} onChange={handleColor} className="pb-1 pl-4 pr-5">
+      <Radio
+        key={`${c}#`}
+        value={c}
+        name={c}
+        checked={c === color}
+        onChange={handleColor}
+        className="pb-1 pl-4 pr-5"
+      >
         {c}
       </Radio>
     ));
   const handleColor = (e) => {
-    setSub('');
+    setSub("");
     dispatch({
-      type: 'SEARCH_QUERY',
-      payload: { text: '' },
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
     });
     setPrice([0, 0]);
     setCategoryIds([]);
-    setStar('');
-    setBrand('');
-    setShipping('');
+    setStar("");
+    setBrand("");
+    setShipping("");
     setColor(e.target.value);
     fetchProducts({ color: e.target.value });
   };
   //9 . show products based on shipping
   const showShipping = () => (
     <>
-      <Checkbox className="pb-2 pl-4 pr-4" onChange={handleShipping} value="Yes" checked={shipping === 'Yes'}>
-        Yes{' '}
+      <Checkbox
+        className="pb-2 pl-4 pr-4"
+        onChange={handleShipping}
+        value="Yes"
+        checked={shipping === "Yes"}
+      >
+        Yes{" "}
       </Checkbox>
-      <Checkbox className="pb-2 pl-4 pr-4" onChange={handleShipping} value="No" checked={shipping === 'No'}>
+      <Checkbox
+        className="pb-2 pl-4 pr-4"
+        onChange={handleShipping}
+        value="No"
+        checked={shipping === "No"}
+      >
         No
       </Checkbox>
     </>
   );
   const handleShipping = (e) => {
-    setSub('');
+    setSub("");
     dispatch({
-      type: 'SEARCH_QUERY',
-      payload: { text: '' },
+      type: "SEARCH_QUERY",
+      payload: { text: "" },
     });
     setPrice([0, 0]);
     setCategoryIds([]);
-    setStar('');
-    setBrand('');
-    setColor('');
+    setStar("");
+    setBrand("");
+    setColor("");
     setShipping(e.target.value);
     fetchProducts({ shipping: e.target.value });
   };
@@ -248,24 +298,33 @@ const Shop = () => {
                 <span className="d-flex text-white">
                   <MenuUnfoldOutlined
                     onClick={() => setOpen(true)}
-                    style={{ color: 'white' }}
+                    style={{ color: "white" }}
                     className="hamburger font-weight-bold pr-2"
                   />
                   <p className="font-weight-bold h6">Filter By</p>
                 </span>
                 <h4
-                  style={{ letterSpacing: '3px', borderBottom: '5px solid #4db5ff', width: 'fit-content' }}
+                  style={{
+                    letterSpacing: "3px",
+                    borderBottom: "5px solid #4db5ff",
+                    width: "fit-content",
+                  }}
                   className="text-white font-weight-bold text-center"
                 >
                   Products
                 </h4>
-                <span>{''}</span>
+                <span>{""}</span>
               </div>
             )}
-            {products.length < 1 && <p className="text-white">No products Found</p>}
+            {products.length < 1 && (
+              <p className="text-white">No products Found</p>
+            )}
             <div className="row pb-5">
               {products.map((p) => (
-                <div key={p._id} className="col-lg-3 col-md-4 col-sm-6  mt-3 d-flex justify-content-center align-items-center">
+                <div
+                  key={p._id}
+                  className="col-lg-3 col-md-4 col-sm-6  mt-3 d-flex justify-content-center align-items-center"
+                >
                   <ProductCard product={p} />
                 </div>
               ))}
@@ -273,17 +332,34 @@ const Shop = () => {
           </div>
         </div>
       </div>
-      <Drawer title="Filter Products" width={280} className="" placement="left" size="default" onClose={onClose} open={open}>
+      <Drawer
+        title="Filter Products"
+        width={280}
+        className=""
+        placement="left"
+        size="default"
+        onClose={onClose}
+        open={open}
+      >
         <div className="">
-          <h4 className="text-center font-italic border-bottom pb-1">Search, What you are thinking...🤔</h4>
-          <MenuOutlined onClick={() => setOpen(true)} style={{ color: 'black' }} className="hamburger" />
-          <Menu mode="inline" defaultOpenKeys={['1', '2', '3', '4', '5', '6', '7']}>
+          <h4 className="text-center font-italic border-bottom pb-1">
+            Search, What you are thinking...🤔
+          </h4>
+          <MenuOutlined
+            onClick={() => setOpen(true)}
+            style={{ color: "black" }}
+            className="hamburger"
+          />
+          <Menu
+            mode="inline"
+            defaultOpenKeys={["1", "2", "3", "4", "5", "6", "7"]}
+          >
             {/* //Price submenu */}
             <SubMenu
               key="1"
               title={
                 <span className="h6 filter-heading-bg">
-                  <DollarOutlined /> <span >Price</span>
+                  <DollarOutlined /> <span>Price</span>
                 </span>
               }
             >
@@ -324,7 +400,7 @@ const Shop = () => {
             <SubMenu
               key="4"
               title={
-                <span className="h6 filter-heading-bg" >
+                <span className="h6 filter-heading-bg">
                   <DownSquareOutlined /> Sub Categories
                 </span>
               }
