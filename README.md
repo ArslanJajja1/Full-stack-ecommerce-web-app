@@ -90,6 +90,10 @@ This MERN stack eCommerce project is a comprehensive web application that provid
 
 ![User Login Page Image](client/public/projectImages/login.png)
 
+### Forgot Password Page
+
+![User Login Page Image](client/public/projectImages/login.png)
+
 
 ## Features
 
