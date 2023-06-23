@@ -35,11 +35,15 @@ This MERN stack eCommerce project is a comprehensive web application that provid
 
 ### Password Update Page
 
-![Wishlist Page Image](client/public/projectImages/password-update.png)
+![Password Page Image](client/public/projectImages/password-update.png)
 
 ### Admin Dashboard
 
-![Wishlist Page Image](client/public/projectImages/admin-dashboard.png)
+![Admin Dashboard Page Image](client/public/projectImages/admin-dashboard.png)
+
+### Admin Order Tracking Page
+
+![Wishlist Page Image](client/public/projectImages/admin-order-tracking.png)
 
 ## Features
 
