@@ -24,9 +24,14 @@ This MERN stack eCommerce project is a comprehensive web application that provid
 
 ![Payment Page Image](client/public/projectImages/payment.png)
 
+
 ### User Order Tracking Page
 
 ![User Order Tracking Page Image](client/public/projectImages/order-tracking.png)
+
+### User Dashboard
+
+![User Dashboard Page Image](client/public/projectImages/user-dashboard.png)
 
 
 ### Wishlist Page
