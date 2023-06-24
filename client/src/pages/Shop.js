@@ -35,18 +35,26 @@ const Shop = () => {
   const [color, setColor] = useState("");
   const [shipping, setShipping] = useState("");
   const [brands, setBrands] = useState([
-    "Apple",
-    "Samsung",
-    "Microsoft",
-    "Lenovo",
-    "ASUS",
+    "Levi's",
+    "Zara",
+    "Gucci",
+    "Armani",
+    "Khadi",
+    "Zelbury",
+    "Hermes",
   ]);
   const [colors, setColors] = useState([
     "Black",
-    "Brown",
-    "Silver",
     "White",
+    "Gray",
     "Blue",
+    "Red",
+    "Green",
+    "Yellow",
+    "Pink",
+    "Purple",
+    "Orange",
+    "Brown",
   ]);
   const [open, setOpen] = useState(false);
   const dimensions = useWindowDimensions();
